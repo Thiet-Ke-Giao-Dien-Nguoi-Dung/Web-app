@@ -1,0 +1,103 @@
+
+.header-register{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+
+}
+.content-register{
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0px;
+    height: 500px;
+
+}
+.footer-register{
+    position: absolute;
+    top: 500px;
+    left: 0;
+    right: 0;
+    height: calc(100% - 500px - 200px);
+
+}
+
+/*register card*/
+.register-card{
+    margin: auto;
+    width: 466px;
+    border: 1px solid rgba(0,0,0,.125);
+    background-color: #fff;
+}
+.register-card .register-card-header{
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+
+}
+.register-card .register-card-header .register-title{
+    font-family: arial;
+    font-weight: 500;
+    font-size: 24px;
+
+}
+.register-card .register-card-body{
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.register-card .register-card-body .row{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.register-card .register-card-body .form-group{
+    margin-bottom: 1rem;
+}
+.register-card .register-card-body .register-form-label{
+    padding: 16px 10px 10px 20px;
+    font-family: Arial;
+    margin-right: 15px;
+    width: 137px;
+    font-size: 14px;
+}
+.register-card .register-card-body .col-md{
+    margin: 5px 5px 5px 5px;
+}
+.register-card .register-card-body .col-md .form-control{
+    height: 27px;
+    width: 235px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    border: 1px solid #2692ff;
+
+
+}
+.register-card .register-card-body .register-help{
+    justify-content: flex-end;
+    display: flex;
+}
+.forgetpassword{
+    padding-left: 10px;
+}
+.register-card .register-card-body .register-help a{
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.register-card-footer{
+    justify-content: flex-end;
+    display: flex;
+    padding: 1rem;
+}
+.button-submit-form{
+    background-color:#28a745;
+    border-radius: 3px;
+    border: none;
+    height: 32px;
+    width: 62px;
+    color: white;
+}

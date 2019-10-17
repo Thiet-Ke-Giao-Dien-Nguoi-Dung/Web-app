@@ -1,0 +1,40 @@
+.card-item{
+    position: relative;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    cursor: pointer;
+    display: block;
+    margin-bottom: 8px;
+    max-width: 300px;
+    padding: 5px 5px 1px 9px;
+}
+.title-card{
+    position: relative;
+    height: 30px;
+    border-bottom: 1px solid gray;
+    padding: 5px 5px 5px 5px;
+}
+.table-number{
+    margin: 0;
+    padding: 0px 5px 5px 5px;
+    padding: 4px;
+    float: left;
+    font-family: cursive;
+}
+.date-order{
+    margin: 0;
+    padding: 6px;
+    float: right;
+    font-family: cursive;
+    color: gray;
+    font-weight: bold;
+    font-style: italic;
+}
+.list-meal{
+    top: 5px;
+}
+ol li{
+    font-family: cursive;
+    padding: 5px 5px 5px 5px;
+}
