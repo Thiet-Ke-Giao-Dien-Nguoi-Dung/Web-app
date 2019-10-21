@@ -1,52 +1,94 @@
 import React from 'react';
 import "./style.css";
-import {Link } from "react-router-dom";
+import {Link , Redirect} from "react-router-dom";
+import axios from 'axios';
+
+const API_LOGIN = "http://18.162.115.131:3001/api/wa/login";
 
 class Login extends React.Component{
-    checkall()
-    {
-        document.getElementById("form-login").submit();
+    constructor(props){
+        super(props);
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        localStorage.removeItem("token");
+        const token = localStorage.getItem("token");
+
+        let loggedIn = true;
+        if(token == null)
+        {
+            loggedIn = false
+        }
+        this.state={
+            user_name:"",
+            password:"",
+            loggedIn
+        }
 
     }
+    handleChange(e){
+        let user = e.target.name;
+        let pass = e.target.value;
+
+        this.setState({[user]: pass})
+
+    }
+    async handleLogin(event){
+        var me= this;
+        event.preventDefault();
+        const username = this.state.user_name;
+        const password = this.state.password;
+        if(username && password)
+        {
+            axios.post(API_LOGIN, {
+                user_name: this.state.user_name,
+                password: this.state.password
+            })
+                .then(function (response) {
+                    if(response.data.success)
+                    {
+                        localStorage.setItem("token",response.data.data.token);
+                        me.setState({loggedIn:true});
+                    }
+                    else
+                    {
+                        alert(response.data.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+        else
+        {
+            alert("Xin hãy điền đủ thông tin !!")
+        }
+
+    }
+
     render() {
+        if(this.state.loggedIn)
+        {
+            return <Redirect to='/dashboard'/>
+        }
+
         return(
             <div>
-                <div className="header-login"></div>
-                <div className="content-login">
-                    <div className="login-card">
-                        <div className="login-card-header">
-                            <div className="login-title">Log in</div>
-                        </div>
-                        <form id={"form-login"}>
-                            <div className="login-card-body">
-                                <div className="row form-group">
-                                    <label className="login-form-label">Email:</label>
-                                    <div className="col-md">
-                                        <input className="form-control" type="email"/>
-                                    </div>
-                                </div>
-                                <div className="row form-group">
-                                    <label className="login-form-label">Password:</label>
-                                    <div className="col-md">
-                                        <input className="form-control" type="password"/>
-                                    </div>
-                                </div>
-                                <div className="login-help">
-                                    <Link to="/register">Register</Link>
-                                    <a href="/#" className="forgetpassword">Forget password?</a>
-                                </div>
-                            </div>
-
-                            <div className="login-card-footer">
-                                <button className="button-submit-form" type="submit" onClick={this.checkall}>
-                                    <span><Link to="/dashboard">Login</Link></span>
-                                </button>
-                            </div>
-
-                        </form>
+                <form className="form-login">
+                    <h1 className="login-title">Đăng nhập </h1>
+                    <div className="form-group">
+                        <label className="label-form-login">Tên sử dụng </label>
+                        <input className="input-login" type="text" required name="user_name" onChange={this.handleChange}/>
                     </div>
-                </div>
-                <div className="footer-login"></div>
+                    <div className="form-group">
+                        <label className="label-form-login">Mật khẩu </label>
+                        <input className="input-login" type="password" required name="password" onChange={this.handleChange}/>
+                    </div>
+                    <div className="group-link-login">
+                        <Link to="/register" className="lin">Đăng kí</Link>
+                        <Link to="/" className="lin link-forget-pass">Quên mật khẩu ?</Link>
+                    </div>
+                    <button className="submit-login" type="button" onClick={this.handleLogin}>Đăng nhập </button>
+                </form>
             </div>
         );
     }

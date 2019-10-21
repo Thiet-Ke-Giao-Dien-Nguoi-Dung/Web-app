@@ -1,0 +1,28 @@
+#header{
+    top:0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    display: flex;
+}
+.logo{
+    height: 70px;
+    width: 240px;
+    color: #172b4d;
+    font-size: 50px;
+}
+.header-bar{
+    width: calc(100% - 240px);
+    display: flex;
+    justify-content: flex-end;
+}
+.header-item{
+    display: flex;
+    list-style: none;
+}
+    .header-item li{
+        margin: 5px 5px;
+
+    }

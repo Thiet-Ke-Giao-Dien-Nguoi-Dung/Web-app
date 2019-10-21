@@ -1,103 +1,88 @@
-
-.header-register{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 150px;
-
+.register{
+    margin: 30px 30px;
 }
-.content-register{
-    position: absolute;
-    top: 150px;
-    left: 0;
-    right: 0px;
-    height: 500px;
-
-}
-.footer-register{
-    position: absolute;
-    top: 500px;
-    left: 0;
-    right: 0;
-    height: calc(100% - 500px - 200px);
-
-}
-
-/*register card*/
-.register-card{
-    margin: auto;
-    width: 466px;
-    border: 1px solid rgba(0,0,0,.125);
-    background-color: #fff;
-}
-.register-card .register-card-header{
-    padding: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-
-}
-.register-card .register-card-header .register-title{
-    font-family: arial;
-    font-weight: 500;
-    font-size: 24px;
-
-}
-.register-card .register-card-body{
-    padding: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,.125);
-}
-.register-card .register-card-body .row{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
-.register-card .register-card-body .form-group{
-    margin-bottom: 1rem;
-}
-.register-card .register-card-body .register-form-label{
-    padding: 16px 10px 10px 20px;
-    font-family: Arial;
-    margin-right: 15px;
-    width: 137px;
-    font-size: 14px;
-}
-.register-card .register-card-body .col-md{
-    margin: 5px 5px 5px 5px;
-}
-.register-card .register-card-body .col-md .form-control{
-    height: 27px;
-    width: 235px;
-    padding: 6px 12px;
+.form-register{
+    box-sizing: border-box;
+    width: 370px;
+    margin: 23px auto 0;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    padding-bottom: 40px;
     border-radius: 3px;
-    border: 1px solid #2692ff;
-
-
 }
-.register-card .register-card-body .register-help{
-    justify-content: flex-end;
-    display: flex;
+.register-title{
+    box-sizing: border-box;
+    padding: 23px 30px;
+    height: 100px;
+    width: 100%;
+    font-size: 35px;
+    background: #18aa8d;
+    color: white;
+    line-height: 150%;
+    border-radius: 3px 3px 0 0;
 }
-.forgetpassword{
-    padding-left: 10px;
+.label-form-register{
+    color: #737373;
+    font-size: 19px;
+    margin: 20px 30px;
 }
-.register-card .register-card-body .register-help a{
-    text-decoration: none;
+.form-group{
+    margin-bottom:25px ;
+}
+.input-register {
+    margin: 5px 30px;
+    width: 312px;
+    display: block;
+    border: none;
+    padding: 10px 0;
+    border-bottom: solid 1px #1abc9c;
+    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+    background-position: -312px 0;
+    background-size: 312px 100%;
+    background-repeat: no-repeat;
     font-size: 15px;
 }
-
-.register-card-footer{
-    justify-content: flex-end;
-    display: flex;
-    padding: 1rem;
+.input-register:focus, .input-register:valid {
+    box-shadow: none;
+    outline: none;
+    background-position: 0 0;
 }
-.button-submit-form{
-    background-color:#28a745;
-    border-radius: 3px;
+.input-register:focus::-webkit-input-placeholder, .input-register:valid::-webkit-input-placeholder {
+    color: #1abc9c;
+    font-size: 11px;
+    transform: translateY(-20px);
+    visibility: visible !important;
+}
+
+.submit-register {
+    font-size: 15px;
     border: none;
-    height: 32px;
-    width: 62px;
+    background: #1abc9c;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 6px;
+    width: 100px;
+    height: 40px;
     color: white;
+    margin-left: 25px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+
+}
+.submit-register:hover {
+    cursor: pointer;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.link-login{
+    /* justify-content: flex-end; */
+    display: flex;
+    /* width: -webkit-fill-available; */
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 206px;
+}
+.lin:hover
+{
+    color: #2692ff;
+    text-decoration: underline;
 }

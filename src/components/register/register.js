@@ -1,63 +1,88 @@
 import React from 'react';
 import "./style.css";
-import {Link } from "react-router-dom";
-import RegisterItem from "../register_item";
+import {Link} from "react-router-dom";
+import axios from "axios";
+
+const API_REGISTER = "http://18.162.115.131:3001/api/wa/register";
 
 class Register extends React.Component{
     constructor(props) {
-        super(props)
-        this.state = {
-            array:[
-                {
-                    title:"Name",
-                    name:"name"
-                },
-                {
-                    title:"User name",
-                    name:"user_name"
-                },
-                {
-                    title:"Password",
-                    name:"password"
-                },
-                {
-                    title:"Confirm Password",
-                    name:"repassword"
-                }
-            ]
+        super(props);
+        this.handleRegister= this.handleRegister.bind(this);
+        this.state={
+            name_register:"",
+            user_name:"",
+            password:"",
+            repassword:"",
+        }
+    }
+
+    handleChange = (event) =>{
+        let nam = event.target.name;
+        let tex = event.target.value;
+        this.setState({[nam]:tex})
+    }
+
+    async handleRegister(event){
+        event.preventDefault();
+        var me=this;
+        const name = this.state.name_register;
+        const username = this.state.user_name;
+        const password = this.state.password;
+        const repassword = this.state.repassword;
+        if(name && username && password && repassword && password === repassword)
+        {
+            axios.post(API_REGISTER, {
+                name:name,
+                user_name: username,
+                password: password
+            })
+                .then(function (response) {
+                    console.log(response.data)
+                    if(response.data.success)
+                        me.props.history.push('/login')
+                    else
+                        alert(response.data.message)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert(error.data.data.message)
+
+                });
+        }
+        else{
+            if(password !== repassword)
+                alert("Mật khẩu không khớp ")
+            alert("Xin hay điền đủ thông tin !!!")
         }
 
     }
 
     render() {
+
         return(
             <div>
-                <div className="header-register"></div>
-                <div className="content-register">
-                    <div className="register-card">
-                        <div className="register-card-header">
-                            <div className="register-title">Register</div>
-                        </div>
-                        <form onSubmit={this.mySubmitHandler}>
-                            <div className="register-card-body">
-                                <RegisterItem {...this.state.array[0]} />
-                                <RegisterItem {...this.state.array[0]} />
-                                <RegisterItem {...this.state.array[0]} />
-                                <RegisterItem {...this.state.array[0]} />
-                                <div className="register-help">
-                                    <Link to="/login">I have an account</Link>
-                                </div>
-                            </div>
-
-                            <div className="register-card-footer">
-                                <button className="button-submit-form" type="submit">
-                                    <span>Register</span>
-                                </button>
-                            </div>
-                        </form>
+                <form className="form-register">
+                    <h1 className="register-title">Đăng kí</h1>
+                    <div className="form-group">
+                        <label className="label-form-register">Họ và tên </label>
+                        <input className="input-register" type="text" name="name_register" onChange={this.handleChange} required/>
                     </div>
-                </div>
-                <div className="footer-register"></div>
+                    <div className="form-group">
+                        <label className="label-form-register">Tên sử dụng </label>
+                        <input className="input-register" type="text" name="user_name" onChange={this.handleChange} required/>
+                    </div>
+                    <div className="form-group">
+                        <label className="label-form-register">Mật khẩu </label>
+                        <input className="input-register" type="password" name="password" onChange={this.handleChange} required/>
+                    </div>
+                    <div className="form-group">
+                        <label className="label-form-register">Nhập lại mật khẩu </label>
+                        <input className="input-register" type="password" name="repassword" onChange={this.handleChange} required/>
+                    </div>
+                    <Link to="/login" className=" lin link-login" >Tôi đã có tài khoản </Link>
+                    <button className="submit-register" type="button" onClick={this.handleRegister}>Đăng kí </button>
+                </form>
             </div>
         );
     }
