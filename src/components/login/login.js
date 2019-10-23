@@ -10,7 +10,7 @@ class Login extends React.Component{
         super(props);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        localStorage.removeItem("token");
+
         const token = localStorage.getItem("token");
 
         let loggedIn = true;
@@ -33,21 +33,22 @@ class Login extends React.Component{
 
     }
     async handleLogin(event){
-        var me= this;
         event.preventDefault();
+
         const username = this.state.user_name;
         const password = this.state.password;
+
         if(username && password)
         {
             axios.post(API_LOGIN, {
-                user_name: this.state.user_name,
-                password: this.state.password
+                user_name: username,
+                password: password
             })
-                .then(function (response) {
+                .then((response) => {
                     if(response.data.success)
                     {
                         localStorage.setItem("token",response.data.data.token);
-                        me.setState({loggedIn:true});
+                        this.setState({loggedIn:true});
                     }
                     else
                     {
@@ -70,7 +71,6 @@ class Login extends React.Component{
         {
             return <Redirect to='/home'/>
         }
-
         return(
             <div>
                 <form className="form-login">

@@ -1,63 +1,30 @@
 import React from 'react';
 import "./style.css";
-import Modal from "../Modal/Modal";
 import axios from 'axios';
 
-const API_CREATE_RESTAURANT = "http://18.162.115.131:3001/api/wa/restaurants";
+const API_GET_RESTAURANT = "http://18.162.115.131:3001/api/wa/restaurants";
 
 class Setting extends React.Component {
     constructor(props) {
         super(props);
-
-        this.handleAddNew = this.handleAddNew.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-
-        this.state = {
-            isOpen: false ,
-            nameRes:"",
-            addressRes:""
-        };
-
+        this.state={
+            restaurants:[],
+        }
     }
-
-    toggleModal = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
-    handleChange(e){
-        var nam = e.target.name;
-        var tex = e.target.value;
-        console.log(this);
-        this.setState({[nam]:tex});
-    }
-    async handleAddNew(e)
+    componentDidMount()
     {
-        e.preventDefault();
-        console.log(this.state.nameRes)
-        axios.post(API_CREATE_RESTAURANT, {
-            name:this.state.nameRes,
-            address:this.state.addressRes
-        },{
+        axios.get(API_GET_RESTAURANT, {
             headers:{
-                'Content-Type': 'application/json',
-                "token":localStorage.getItem("token")
+                'Content-Type':"application/json",
+                "token": localStorage.getItem("token")
             }
+        }).then((response) => {
+            this.setState({restaurants: response.data.data.restaurants});
         })
-            .then(function (response) {
-                console.log(response)
-                if(response.data.success)
-                {
-                    console.log("success")
-                }
-                else
-                {
-                    alert(response.data.message);
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        .catch(function (err) {
+            console.log(err);
+        })
+
     }
     render()
     {
@@ -68,23 +35,6 @@ class Setting extends React.Component {
             </div>
             <div className="content">
                 <div className="header-setting">
-                    <button className="add-new-restaurant" onClick={this.toggleModal}>
-                        +  Thêm mới nhà hàng
-                    </button>
-                    <Modal show={this.state.isOpen}
-                           onClose={this.toggleModal}
-                           title="Thêm mới nhà hàng "
-                           onSubmit={this.handleAddNew}>
-                        <div>
-                            <label>Name</label>
-                            <input type="text" name="nameRes" onChange={this.handleChange}/>
-                        </div>
-                        <div>
-                            <label>Address</label>
-                            <input type="text" name="addressRes" onChange={this.handleChange}/>
-                        </div>
-
-                    </Modal>
                 </div>
 
                 <div className="content-setting">
@@ -96,8 +46,17 @@ class Setting extends React.Component {
                                 <th>Địa chỉ </th>
                             </tr>
                         </thead>
-                        <tbody>
-
+                        <tbody id="body-tbl-res">
+                        {
+                            (this.state.restaurants || []).map(e => {
+                                    return <tr key={e.id_restaurant}>
+                                        <td>{e.id_restaurant}</td>
+                                        <td>{e.name}</td>
+                                        <td>{e.address}</td>
+                                    </tr>;
+                                }
+                            )
+                        }
                         </tbody>
                     </table>
                 </div>

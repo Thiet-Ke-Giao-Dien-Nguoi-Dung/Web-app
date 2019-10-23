@@ -1,11 +1,28 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import "./style.css";
 import noti from "./icons/icons8-notification-24.png";
 import setting from "./icons/icons8-settings-24.png";
 
 class Header extends React.Component{
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            logOut:false
+        }
+
+    }
+    clickLogout = () =>
+    {
+        localStorage.removeItem("token");
+        this.setState({logOut:true})
+    }
     render() {
+        if(this.state.logOut === true)
+        {
+            return <Redirect to='/login'/>
+        }
         return(
             <div id="header">
                 <div className="logo">
@@ -21,14 +38,12 @@ class Header extends React.Component{
                             <Link to="/setting"><img src={setting} alt="setting"/></Link>
                         </li>
                         <li>
-                            <button>
-                                <Link to={'/login'}>Logout</Link>
+                            <button onClick={this.clickLogout}>
+                                Log out
                             </button>
                         </li>
                     </ul>
                 </div>
-
-
             </div>
         );
     }
