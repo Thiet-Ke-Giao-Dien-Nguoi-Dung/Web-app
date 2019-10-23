@@ -11,11 +11,11 @@
     background-color: #fff;
     border-radius: 5px;
     max-width: 500px;
-    min-height: 300px;
+    min-height: 350px;
     margin: 0 auto;
     position: relative;
 }
-.header-modal{
+.header-modal {
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: flex-start;
@@ -53,9 +53,10 @@
     right: 0;
     justify-content: flex-end;
     display: flex;
+
 }
 .content-modal{
-    top:80px;
+    top:90px;
     left: 0;
     right: 0;
     padding: 1rem;
@@ -80,5 +81,24 @@
     }
     .btn-modal.add:hover{
         background-color:  #0080ff;
+
+    }
+
+    /*modal group*/
+.modal-group{
+    margin: 10px 15px;
+
+}
+    .modal-group label{
+        float: left;
+        width: 150px;
+        margin: 10px 10px;
+    }
+    .modal-group input{
+        border-radius: 3px;
+        border: 1px solid gray;
+        height: 30px;
+        padding: 5px;
+        width: 250px;
 
     }

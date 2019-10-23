@@ -2,6 +2,7 @@ import React from 'react';
 import "./style.css";
 import {Link , Redirect} from "react-router-dom";
 import axios from 'axios';
+import Modal from "../Modal/Modal";
 
 const API_LOGIN = "http://18.162.115.131:3001/api/wa/login";
 
@@ -19,11 +20,17 @@ class Login extends React.Component{
             loggedIn = false
         }
         this.state={
+            isOpen:false,
             user_name:"",
             password:"",
             loggedIn
         }
 
+    }
+    toggleModal = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
     handleChange(e){
         let user = e.target.name;
@@ -85,7 +92,19 @@ class Login extends React.Component{
                     </div>
                     <div className="group-link-login">
                         <Link to="/register" className="lin">Đăng kí</Link>
-                        <Link to="/" className="lin link-forget-pass">Quên mật khẩu ?</Link>
+                        <a href="#" className="lin link-forget-pass" onClick={this.toggleModal}>Quên mật khẩu ?</a>
+                        <Modal show={this.state.isOpen}
+                               onClose={this.toggleModal}
+                               title="Quên mật khẩu "
+                            >
+                            <form>
+                                <div className="modal-group">
+                                    <label>Nhập email của bạn: </label>
+                                    <input type="text"/>
+                                </div>
+                            </form>
+
+                        </Modal>
                     </div>
                     <button className="submit-login" type="button" onClick={this.handleLogin}>Đăng nhập </button>
                 </form>
