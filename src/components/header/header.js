@@ -9,7 +9,7 @@ class Header extends React.Component{
         return(
             <div id="header">
                 <div className="logo">
-                    ETO
+                    <Link to="/dashboard">ETO</Link>
                 </div>
                 <div className="header-bar">
                     <ul className="header-item">
@@ -18,7 +18,7 @@ class Header extends React.Component{
                             <img src={noti} alt="noti"/>
                         </li>
                         <li>
-                            <img src={setting} alt="setting"/>
+                            <Link to="/setting"><img src={setting} alt="setting"/></Link>
                         </li>
                         <li>
                             <button>

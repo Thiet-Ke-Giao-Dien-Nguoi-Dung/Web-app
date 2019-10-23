@@ -1,9 +1,10 @@
-import Content from "../content/content";
-import MenuBar from "../menu";
+
 import React from 'react';
-import { BrowserRouter, Redirect} from "react-router-dom";
+import { Route, Redirect, BrowserRouter} from "react-router-dom";
 import "./style.css"
 import Header from "../header/header";
+import Setting from "../setting/setting";
+import Dashboard from "../dashboard/dashboard";
 
 class Home extends React.Component{
     constructor(props){
@@ -28,13 +29,13 @@ class Home extends React.Component{
         }
         return(
             <div>
-                <Header/>
-                <div id="container">
-                    <BrowserRouter>
-                        <MenuBar/>
-                        <Content/>
-                    </BrowserRouter>
-                </div>
+                <BrowserRouter>
+                    <Header/>
+                    <div id="container">
+                        <Route path="/dashboard" component={Dashboard}/>
+                        <Route path="/setting" component={Setting}/>
+                    </div>
+                </BrowserRouter>
             </div>
 
         );
