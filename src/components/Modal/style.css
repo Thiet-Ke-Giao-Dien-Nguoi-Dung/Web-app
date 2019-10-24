@@ -6,6 +6,7 @@
     right: 0;
     background-color: rgba(0,0,0,0.3);
     padding: 50px;
+    z-index: 9999;
 }
 .modal{
     background-color: #fff;
@@ -14,6 +15,7 @@
     min-height: 350px;
     margin: 0 auto;
     position: relative;
+
 }
 .header-modal {
     display: -webkit-flex;

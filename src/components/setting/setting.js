@@ -72,6 +72,21 @@ class Setting extends React.Component {
         })
 
     }
+    componentDidUpdate()
+    {
+        axios.get(API_GET_RESTAURANT, {
+            headers:{
+                'Content-Type':"application/json",
+                "token": localStorage.getItem("token")
+            }
+        }).then((response) => {
+            this.setState({restaurants: response.data.data.restaurants});
+        })
+            .catch(function (err) {
+                console.log(err);
+            })
+
+    }
     render()
     {
         return(
