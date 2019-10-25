@@ -13,12 +13,14 @@ class Login extends React.Component{
 
         this.handleChange = this.handleChange.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.toggleModalPass = this.toggleModalPass.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
 
         this.state={
             username:"",
             password:"",
-            isOpen:false
+            isOpen:true,
+            isOpenPass:false
         }
     }
     handleChange(e){
@@ -64,10 +66,14 @@ class Login extends React.Component{
             isOpen: !this.state.isOpen
         });
     }
+    toggleModalPass() {
+        this.setState({
+            isOpenPass: !this.state.isOpenPass
+        });
+    }
     render() {
         return(
             <div>
-                <button onClick={this.toggleModal}>Đăng nhập</button>
                 <Modal show={this.state.isOpen}
                        onClose={this.toggleModal}
                        title="Đăng nhập"
@@ -86,12 +92,34 @@ class Login extends React.Component{
                        childrenHelp={
                            <div className="group-link">
                                <Link to="/register" className="link-help">Đăng kí</Link>
-                               <Link to="/register" className="link-help space">Quên mật khẩu </Link>
+                               <button className="btn-forgetpass space" onClick={this.toggleModalPass}>Quên mật khẩu </button>
+                               <Modal show={this.state.isOpenPass}
+                                      onClose={this.toggleModalPass}
+                                      title="Đăng nhập"
+                                      childrenContent={
+                                          <form>
+                                              <div className="modal-group">
+                                                  <label>Email của : </label>
+                                                  <input type="email" name="email-user" onChange={this.handleChange}/>
+                                              </div>
+                                          </form>
+                                      }
+                                      childrenFooter={
+                                          <div className="footer-group">
+                                              <button className="btn-modal cancel" onClick={this.toggleModalPass}>
+                                                  Hủy bỏ
+                                              </button>
+                                              <button className="btn-modal add">
+                                                  Gửi
+                                              </button>
+                                          </div>
+
+                                      }/>
                            </div>
                        }
                        childrenFooter={
                             <div className="footer-group">
-                                <button className="btn-modal cancel">
+                                <button className="btn-modal cancel" onClick={this.toggleModal}>
                                     Hủy bỏ
                                 </button>
                                 <button className="btn-modal add" onClick={this.handleLogin}>

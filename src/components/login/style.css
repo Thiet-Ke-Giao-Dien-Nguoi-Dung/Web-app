@@ -1,9 +1,9 @@
 .btn-modal.add{
     margin-left: 5px;
-    background-color: #8cd98c;
+    background-color: #80ccff;
 }
 .btn-modal.add:hover {
-    background-color: #339933;
+    background-color: #007BFF;
 }
 .btn-modal.cancel{
     background-color: #fff;
@@ -12,6 +12,19 @@
     background-color: #dddddd;
 }
 
-.link-help.space{
+.btn-forgetpass.space{
     margin-left: 10px;
 }
+
+.btn-login{
+    border: none;
+    background-color: white;
+    font-size: 15px;
+    color: gray;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+}
+    .btn-login:hover{
+        color: #282c34;
+    }

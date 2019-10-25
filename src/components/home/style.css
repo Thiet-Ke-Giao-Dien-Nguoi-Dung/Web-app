@@ -1,23 +1,56 @@
+/*HEADER*/
 .header{
     width: 100%;
-    height: 10%;
+    height: 8%;
     position: absolute;
     border-bottom: 1px solid #bfbfbf;
 
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
 }
+    .header .header-left{
+        margin-top: 1.5%;
+        margin-left: 30px;
+        display: flex;
+        justify-content: flex-start;
+    }
+        .header .header-left .btn-dashboard{
+            border: none;
+            background-color: white;
+            font-size: 15px;
+            color: gray;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-left:10px;
+        }
+        .header .header-left .btn-dashboard:hover{
+            color: #282c34;
+        }
+    .header .header-right{
+        margin-top: 1.5%;
+        margin-right: 15px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
 .menubar{
-    width: 20%;
+    width: 15%;
     left: 0;
     bottom: 0;
-    top:10%;
+    top:8%;
     position: absolute;
     border-right:1px solid #bfbfbf ;
 }
 .content{
     position: absolute;
-    top: 10%;
-    left: 20%;
-    width: 80%;
+    top: 8%;
+    left: 15%;
+    width: 85%;
     right: 0;
     bottom: 0;
 }

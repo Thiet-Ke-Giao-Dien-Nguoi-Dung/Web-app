@@ -12,7 +12,7 @@
     background-color: #fff;
     border-radius: 5px;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 100px auto;
     position: relative;
 
 }
@@ -93,6 +93,15 @@
     .modal-help .group-link .link-help:hover{
         text-decoration: underline;
     }
+    .modal-help .group-link .btn-forgetpass{
+        cursor: pointer;
+        border: none;
+        background-color: white;
+        color: #007BFF;
+    }
+    .modal-help .group-link .btn-forgetpass:hover{
+        text-decoration: underline;
+    }
 
 
 /*FOOTER MODAL*/
@@ -106,11 +115,9 @@
     margin: 18px 20px;
 }
 .btn-modal{
-
     border: none;
     border-radius: 3px;
     height: 30px;
-    width: 60px;
     cursor: pointer;
 }
 

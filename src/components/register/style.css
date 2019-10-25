@@ -1,0 +1,12 @@
+.btn-register{
+    border: none;
+    background-color: white;
+    font-size: 15px;
+    color: gray;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+}
+    .btn-register:hover{
+        color: #282c34;
+    }

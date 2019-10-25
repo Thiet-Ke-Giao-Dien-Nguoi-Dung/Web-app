@@ -12,7 +12,7 @@ class Register extends React.Component {
         this.handleRegister = this.handleRegister.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.state = {
-            isOpen:false,
+            isOpen:true,
             name_register: "",
             user_name: "",
             password: "",
@@ -64,7 +64,6 @@ class Register extends React.Component {
     }
     render() {
         return(<div>
-            <button onClick={this.toggleModal}>Đăng kí</button>
             <Modal show={this.state.isOpen}
                    onClose={this.toggleModal}
                    title="Đăng kí"
@@ -95,7 +94,7 @@ class Register extends React.Component {
                    }
                    childrenFooter={
                        <div className="footer-group">
-                           <button className="btn-modal cancel">
+                           <button className="btn-modal cancel" onClick={this.toggleModal}>
                                Hủy bỏ
                            </button>
                            <button className="btn-modal add" onClick={this.handleRegister}>

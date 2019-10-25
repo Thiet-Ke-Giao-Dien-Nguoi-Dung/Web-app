@@ -6,15 +6,20 @@ import Order from "../order/order";
 import Meal from "../meal";
 import Employee from "../employee/employee";
 import Revenue from "../revenue/revenue";
-import Login from "../login/login";
-import Register from "../register/register";
-
 class Home extends React.Component{
     render() {
         return(<div>
             <div className="header">
-                <Login/>
-                <Register/>
+                <div className="header-left">
+                    <div>Logo</div>
+                    <button className="btn-dashboard">Trang chủ</button>
+                    <div>Ten cua hang</div>
+                </div>
+                <div className="header-right">
+                </div>
+            </div>
+            <div className="container">
+
             </div>
             <div className="menubar">
                 <MenuBar/>
