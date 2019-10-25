@@ -7,9 +7,9 @@ class MenuItem extends React.Component{
         console.log(this.props);
         return (
             <li className="menu-item">
-                <Link to={this.props.url_route} className="link-text">
-                    <img src={this.props.url_icon} alt="icon menu item" height="24" width="24"/>
-                    {this.props.name_item}
+                <Link to={this.props.route} className="link-text">
+                    <img src={this.props.icon} alt="icon-menuitem" height="32" width="32"/>
+                    {this.props.title}
                 </Link>
             </li>
         );

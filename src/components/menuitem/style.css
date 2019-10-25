@@ -1,0 +1,23 @@
+.menu-item{
+    cursor: pointer;
+}
+    .menu-item:hover{
+        background-color:#66b3ff;
+    }
+    .menu-item .link-text{
+        font-weight: bolder;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        color: #212529;
+        padding: 15px 10px 15px 25px;
+        transition-duration: .15s;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .menu-item img{
+        margin-right: 15px;
+    }

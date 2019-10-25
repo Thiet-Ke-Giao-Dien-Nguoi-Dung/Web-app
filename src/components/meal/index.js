@@ -1,11 +1,11 @@
 import React from 'react';
 import "./style.css";
 
-class Employee extends React.Component{
+class Meal extends React.Component{
     render() {
         return(<div>
-            list employee
+            list meal
         </div>);
     }
 }
-export default Employee;
+export default Meal;
