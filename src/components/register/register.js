@@ -2,6 +2,8 @@ import React from 'react';
 import axios from "axios";
 import "./style.css";
 import {Link} from "react-router-dom";
+import {register} from "../../api/authentication-api";
+
 
 const API_REGISTER = "http://18.162.115.131:3001/api/wa/register";
 
@@ -16,6 +18,9 @@ class Register extends React.Component {
             user_name: "",
             password: "",
             repassword: "",
+            restaurant:"",
+            address:"",
+            count_table:""
         }
     }
     toggleModal() {
@@ -31,28 +36,21 @@ class Register extends React.Component {
 
     async handleRegister(event) {
         event.preventDefault();
-        const name = this.state.name_register;
-        const username = this.state.user_name;
-        const password = this.state.password;
-        const repassword = this.state.repassword;
-        if (name && username && password && repassword && password === repassword) {
-            axios.post(API_REGISTER, {
-                name: name,
-                user_name: username,
-                password: password
-            })
-                .then((response) =>{
-                    console.log(response.data)
-                    if (response.data.success)
-                        this.props.history.push('/register')
-                    else
-                        alert(response.data.message)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error.data.data.message)
+        const {name_register,user_name, password,repassword,restaurant, address, count_table} = this.state;
 
-                });
+        if (name_register && user_name && password && repassword && password === repassword) {
+            let data={
+                name: name_register,
+                user_name: user_name,
+                password: password,
+                restaurant_name:restaurant,
+                restaurant_address: address,
+                count_table: count_table
+
+            }
+            let res = register(data);
+            console.log(res);
+
         } else {
             if (password !== repassword)
                 alert("Mật khẩu không khớp ")
@@ -84,6 +82,19 @@ class Register extends React.Component {
                                 <label>Gõ lại mật khẩu: </label>
                                 <input type="password" name="repassword" onChange={this.handleChange}/>
                             </div>
+                            <div className="register-group">
+                                <label>Tên cửa hàng: </label>
+                                <input type="text" name="restaurant" onChange={this.handleChange}/>
+                            </div>
+                            <div className="register-group">
+                                <label>Địa chỉ:  </label>
+                                <input type="text" name="address" onChange={this.handleChange}/>
+                            </div>
+                            <div className="register-group">
+                                <label>Số bàn : </label>
+                                <input type="text" name="count_table" onChange={this.handleChange}/>
+                            </div>
+
                         </form>
                     </div>
                     <div className="register-card-help">

@@ -3,8 +3,8 @@ import Modal from "../modal/modal";
 import axios from "axios";
 import "./style.css";
 import {Link, Redirect} from "react-router-dom";
+import {login} from "../../api/authentication-api"
 
-const API_LOGIN = "http://18.162.115.131:3001/api/wa/login";
 
 class Login extends React.Component{
 
@@ -37,36 +37,24 @@ class Login extends React.Component{
         });
     }
     handleChange(e){
-        var nam = e.target.name;
-        var tex = e.target.value;
+        let nam = e.target.name;
+        let tex = e.target.value;
         this.setState({[nam]:tex});
     }
     async handleLogin(event){
-        event.preventDefault();
 
         const username = this.state.username;
         const password = this.state.password;
 
         if(username && password)
         {
-            axios.post(API_LOGIN, {
-                user_name: username,
-                password: password
-            })
-                .then((response) => {
-                    if(response.data.success)
-                    {
-                        localStorage.setItem("token",response.data.data.token);
-                        this.setState({loggedIn:true});
-                    }
-                    else
-                    {
-                        alert(response.data.message);
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            let data = {
+                user_name:username,
+                password:password
+            }
+            let response = login(data);
+            console.log(response);
+
         }
         else
         {
