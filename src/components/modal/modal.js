@@ -15,9 +15,10 @@ class Modal extends React.Component {
 
                     <div className="modal-header">
                         <h2 className="modal-title">{this.props.title}</h2>
-                        <button className="btn-close" onClick={this.props.onClose}>
+                        {this.props.childrenButtonClose}
+                        {/*<button className="btn-close" onClick={this.props.onClose}>
                             x
-                        </button>
+                        </button>*/}
                     </div>
 
 
@@ -45,7 +46,8 @@ Modal.propTypes = {
     show: PropTypes.bool,
     childrenContent: PropTypes.node,
     childrenHelp: PropTypes.node,
-    childrenFooter: PropTypes.node
+    childrenFooter: PropTypes.node,
+    childrenButtonClose: PropTypes.node
 };
 
 export default Modal;

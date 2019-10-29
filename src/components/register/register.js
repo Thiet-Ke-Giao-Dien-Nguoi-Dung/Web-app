@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from "../modal/modal";
 import axios from "axios";
 import "./style.css";
 import {Link} from "react-router-dom";
@@ -32,7 +31,6 @@ class Register extends React.Component {
 
     async handleRegister(event) {
         event.preventDefault();
-        var me = this;
         const name = this.state.name_register;
         const username = this.state.user_name;
         const password = this.state.password;
@@ -43,10 +41,10 @@ class Register extends React.Component {
                 user_name: username,
                 password: password
             })
-                .then(function (response) {
+                .then((response) =>{
                     console.log(response.data)
                     if (response.data.success)
-                        me.props.history.push('/login')
+                        this.props.history.push('/register')
                     else
                         alert(response.data.message)
                 })
@@ -63,47 +61,45 @@ class Register extends React.Component {
 
     }
     render() {
-        return(<div>
-            <Modal show={this.state.isOpen}
-                   onClose={this.toggleModal}
-                   title="Đăng kí"
-                   childrenContent={
-                       <form>
-                           <div className="modal-group">
-                               <label>Họ và tên: </label>
-                               <input type="text" name="name_register" onChange={this.handleChange}/>
-                           </div>
-                           <div className="modal-group">
-                               <label>Tên đăng nhập : </label>
-                               <input type="text" name="user_name" onChange={this.handleChange}/>
-                           </div>
-                           <div className="modal-group">
-                               <label>Mật khẩu : </label>
-                               <input type="text" name="password" onChange={this.handleChange}/>
-                           </div>
-                           <div className="modal-group">
-                               <label>Gõ lại mật khẩu: </label>
-                               <input type="text" name="repassword" onChange={this.handleChange}/>
-                           </div>
-                       </form>
-                   }
-                   childrenHelp={
-                       <div className="group-link">
-                           <Link to="/login" className="link-help">Tôi đã có tài khoản </Link>
-                       </div>
-                   }
-                   childrenFooter={
-                       <div className="footer-group">
-                           <button className="btn-modal cancel" onClick={this.toggleModal}>
-                               Hủy bỏ
-                           </button>
-                           <button className="btn-modal add" onClick={this.handleRegister}>
-                               Đăng kí
-                           </button>
-                       </div>
+        return(<div className="register-page">
+                <div className="register-card">
+                    <div className="register-card-header">
+                        <h2 className="register-card-title">Đăng kí </h2>
+                    </div>
+                    <div className="register-card-body">
+                        <form>
+                            <div className="register-group">
+                                <label>Họ và tên: </label>
+                                <input type="text" name="name_register" onChange={this.handleChange}/>
+                            </div>
+                            <div className="register-group">
+                                <label>Tên đăng nhập : </label>
+                                <input type="text" name="user_name" onChange={this.handleChange}/>
+                            </div>
+                            <div className="register-group">
+                                <label>Mật khẩu : </label>
+                                <input type="password" name="password" onChange={this.handleChange}/>
+                            </div>
+                            <div className="register-group">
+                                <label>Gõ lại mật khẩu: </label>
+                                <input type="password" name="repassword" onChange={this.handleChange}/>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="register-card-help">
+                        <div className="group-link">
+                            <Link to="/login" className="link-help">Tôi đã có tài khoản </Link>
+                        </div>
 
-                   }/>
-        </div>
+                    </div>
+                    <div className="register-card-footer">
+                        <button className="btn-register" onClick={this.handleRegister}>
+                            Đăng kí
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         );
 
     }

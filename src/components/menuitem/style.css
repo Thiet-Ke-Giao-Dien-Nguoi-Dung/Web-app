@@ -2,7 +2,7 @@
     cursor: pointer;
 }
     .menu-item:hover{
-        background-color:#66b3ff;
+        background-color:#fff;
     }
     .menu-item .link-text{
         font-weight: bolder;

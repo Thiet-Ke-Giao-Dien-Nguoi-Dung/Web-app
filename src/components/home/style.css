@@ -1,7 +1,7 @@
 /*HEADER*/
 .header{
     width: 100%;
-    height: 8%;
+    height: 10%;
     position: absolute;
     border-bottom: 1px solid #bfbfbf;
 
@@ -12,44 +12,43 @@
     -webkit-justify-content: space-between;
     justify-content: space-between;
 }
-    .header .header-left{
-        margin-top: 1.5%;
-        margin-left: 30px;
-        display: flex;
-        justify-content: flex-start;
-    }
-        .header .header-left .btn-dashboard{
-            border: none;
-            background-color: white;
-            font-size: 15px;
-            color: gray;
-            font-weight: bold;
-            cursor: pointer;
-            margin-right: 10px;
-            margin-left:10px;
-        }
-        .header .header-left .btn-dashboard:hover{
-            color: #282c34;
-        }
-    .header .header-right{
-        margin-top: 1.5%;
-        margin-right: 15px;
-        display: flex;
-        justify-content: flex-end;
-    }
+.header .header-left{
+    display: flex;
+    justify-content: flex-start;
+}
+.header .header-left .btn-dashboard{
+    border: none;
+    background-color: white;
+    font-size: 15px;
+    color: gray;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left:10px;
+}
+.header .header-left .btn-dashboard:hover{
+    color: #282c34;
+}
+.header .header-right{
+    margin-top: 1.5%;
+    margin-right: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
 
 .menubar{
-    width: 15%;
+    width: 20%;
     left: 0;
     bottom: 0;
-    top:8%;
+    top:10%;
     position: absolute;
     border-right:1px solid #bfbfbf ;
+    background-color: #f4f7fe;
 }
 .content{
     position: absolute;
-    top: 8%;
-    left: 15%;
+    top: 15%;
+    left: 20%;
     width: 85%;
     right: 0;
     bottom: 0;

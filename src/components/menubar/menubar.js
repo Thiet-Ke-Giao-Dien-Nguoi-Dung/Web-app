@@ -2,10 +2,15 @@ import React from 'react';
 import MenuItem from '../menuitem/menuitem';
 
 import "./style.css";
-import IconOder from './icons/icons8-bill-32.png';
-import IconMeal from './icons/icons8-meal-32.png';
-import IconEmployee from './icons/icons8-profile-32.png';
-import IconRevenue from './icons/icons8-money-bag-32 (1).png';
+import IconOder from './icons/icons8-purchase-order-24.png';
+import IconMeal from './icons/icons8-meal-26.png';
+import IconEmployee from './icons/icons8-user-24.png';
+import IconRevenue from './icons/icons8-money-bag-24.png';
+
+import iconOrderAct from "./icons/icons8-purchase-order-24 (1).png"
+import iconMealAct from "./icons/icons8-meal-26 (1).png"
+import iconEmployeeAct from "./icons/icons8-user-24 (1).png"
+import iconRevenueAct from "./icons/icons8-money-bag-24 (1).png"
 
 class MenuBar extends React.Component {
     constructor(props) {
@@ -15,21 +20,25 @@ class MenuBar extends React.Component {
                 {
                     title: "Quản lý đặt món  ",
                     icon: IconOder,
+                    iconAct:iconOrderAct,
                     route: "/order"
                 },
                 {
                     title: "Quản lý món ăn ",
                     icon: IconMeal,
+                    iconAct:iconMealAct,
                     route: "/meal"
                 },
                 {
                     title :"Quản lý nhân viên ",
                     icon: IconEmployee,
+                    iconAct:iconEmployeeAct,
                     route: "/employee"
                 },
                 {
                     title: "Quản lý doanh thu ",
                     icon: IconRevenue,
+                    iconAct:iconRevenueAct,
                     route: "/revenue"
                 }]
         }

@@ -10,11 +10,14 @@ import {Route,Switch} from "react-router-dom";
 class App extends React.Component{
   render() {
       return (
-          <Switch>
-              <Route path ="/" exact component={Home}/>
-              <Route path="/login" component={Login}/>
-              <Route path="/register" component={Register}/>
-          </Switch>
+          <div>
+              <Switch>
+                  <Route path ="/home" exact component={Home}/>
+                  <Route path="/login" component={Login}/>
+                  <Route path="/register" component={Register}/>
+              </Switch>
+          </div>
+
 
     )
   }
