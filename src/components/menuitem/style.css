@@ -2,11 +2,10 @@
     cursor: pointer;
 }
     .menu-item:hover{
-        background-color:#fff;
+        background-color:#e8eefd;
     }
     .menu-item .link-text{
         font-weight: bolder;
-        font-size: 15px;
         text-decoration: none;
         cursor: pointer;
         color: #212529;
@@ -18,6 +17,44 @@
         align-items: center;
     }
 
-    .menu-item img{
+    .menu-item span{
         margin-right: 15px;
+        height: 24px;
+        width: 24px;
+
+    }
+    .menu-item .order{
+        background: url("./icons/icons8-purchase-order-24.png") no-repeat ;
+    }
+    .menu-item .meal{
+        background: url("./icons/icons8-meal-24 (1).png") no-repeat;
+    }
+    .menu-item .employee{
+        background: url("./icons/icons8-name-tag-24.png") no-repeat;
+    }
+    .menu-item .revenue{
+        background: url("./icons/icons8-money-bag-24.png") no-repeat;
+    }
+    .checked{
+        color: #000 !important;
+    }
+    .checked span{
+        margin-right: 15px;
+        height: 24px;
+        width: 24px;
+    }
+    .checked{
+        color:#2692ff !important;
+    }
+    .checked .order{
+        background: url("./icons/icons8-purchase-order-24 (1).png") no-repeat;
+    }
+    .checked .meal{
+        background: url("./icons/icons8-meal-24.png") no-repeat;
+    }
+    .checked .employee{
+        background: url("./icons/icons8-name-tag-24 (1).png") no-repeat;
+    }
+    .checked .revenue{
+        background: url("./icons/icons8-money-bag-24 (1).png") no-repeat;
     }

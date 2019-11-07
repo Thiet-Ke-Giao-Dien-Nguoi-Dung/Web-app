@@ -1,0 +1,59 @@
+.content-password{
+    padding: 20px 30px;
+}
+    .content-password .sub-head{
+        border-bottom: 1px solid #bfbfbf;
+    }
+        .content-password .sub-head h2{
+            font-size: 24px;
+            font-weight: 400;
+        }
+    .content-password .body{
+        margin: 20px 0px;
+        border-bottom: 1px solid #bfbfbf;
+        padding-bottom: 20px;
+    }
+    .content-password .body .form-group{
+        margin: 15px 0px;
+    }
+            .content-password .form-group dt{
+                margin: 0 0 6px;
+            }
+            .content-password .form-group dt .brand{
+                font-weight: 600;
+                font-size: 14px;
+                color: #24292e;
+            }
+            .content-password .form-group dd{
+                margin: 0;
+            }
+            .content-password .form-group dd .input-text{
+                width: 440px;
+                background-color: #fafbfc;
+                font-size: 14px;
+                min-height: 25px;
+                padding: 5px 5px;
+                color: #24292e;
+                background-position: right 8px center;
+                border: 1px solid #2692ff;
+                border-radius: 3px;
+            }
+
+        .content-password .footer{
+            margin: 10px 10px;
+            margin: 0;
+        }
+        .content-password .footer .btn-update{
+            color: #ffffff;
+            background-color: #007BFF;
+            height: 35px;
+            font-size: 15px;
+            border-radius: 3px;
+            border: 1px solid #007BFF;
+            padding: 5px 10px;
+        }
+        .content-password .footer .btn-update:hover{
+            background-color: #2692ff;
+            border: 1px solid #2692ff;
+            cursor: pointer;
+        }

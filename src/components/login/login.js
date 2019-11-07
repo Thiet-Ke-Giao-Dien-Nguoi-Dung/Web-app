@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from "../modal/modal";
-import axios from "axios";
 import "./style.css";
+
 import {Link, Redirect} from "react-router-dom";
 import {login} from "../../api/authentication-api"
 
@@ -16,8 +16,10 @@ class Login extends React.Component{
         this.toggleModal = this.toggleModal.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
 
-        const token = localStorage.getItem("token");
+        this.pathRegister="/register";
+        this.pathDashboardOrder = "/dashboard/employee";
 
+        const token = localStorage.getItem("token");
         let loggedIn = true;
         if(token == null)
         {
@@ -41,33 +43,39 @@ class Login extends React.Component{
         let tex = e.target.value;
         this.setState({[nam]:tex});
     }
-    async handleLogin(event){
-
-        const username = this.state.username;
-        const password = this.state.password;
+    async handleLogin(){
+        const {username, password} = this.state;
 
         if(username && password)
         {
             let data = {
                 user_name:username,
                 password:password
-            }
-            let response = login(data);
+            };
+            let response = await login(data);
             console.log(response);
-
+            if(response.success)
+            {
+                localStorage.setItem("token",response.data.token);
+                this.setState({loggedIn:true})
+            }else{
+                alert("fail")
+            }
         }
         else
         {
-            alert("Xin hãy điền đủ thông tin !!")
+           alert("success")
+
         }
 
     }
 
     render() {
-        /*if(this.state.loggedIn)
+        if(this.state.loggedIn === true)
         {
-            return <Redirect to='/home'/>
-        }*/
+            console.log("redirect to home")
+            return <Redirect to={this.pathDashboardOrder}/>
+        }
         return(
             <div className="login-page">
                 <div className="login-card">
@@ -88,16 +96,11 @@ class Login extends React.Component{
                     </div>
                     <div className="login-card-help">
                         <div className="group-link">
-                            <Link to="/register" className="link-help">Đăng kí</Link>
+                            <Link to={this.pathRegister} className="link-help">Đăng kí</Link>
                             <button className="btn-forgetpass space" onClick={this.toggleModal}>Quên mật khẩu? </button>
                             <Modal  show={this.state.isOpen}
                                     onClose={this.toggleModal}
                                     title="Quên mật khẩu "
-                                    childrenButtonClose={
-                                        <button className="btn-close" onClick={this.toggleModal}>
-                                            x
-                                        </button>
-                                    }
                                     childrenContent={
                                         <form>
                                             <div className="modal-group">
@@ -106,17 +109,8 @@ class Login extends React.Component{
                                             </div>
                                         </form>
                                     }
-                                    childrenFooter={
-                                        <div className="footer-group">
-                                            <button className="btn-modal cancel" onClick={this.toggleModal}>
-                                                Hủy bỏ
-                                            </button>
-                                            <button className="btn-modal confirm">
-                                                Xác nhận
-                                            </button>
-                                        </div>
-
-                                    }/>
+                                    brandButton="Xác nhận "
+                                    addNew={this.toggleModal}/>
                         </div>
                     </div>
 

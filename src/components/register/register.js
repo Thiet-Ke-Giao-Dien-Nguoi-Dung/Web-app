@@ -1,11 +1,9 @@
 import React from 'react';
-import axios from "axios";
 import "./style.css";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {register} from "../../api/authentication-api";
 
 
-const API_REGISTER = "http://18.162.115.131:3001/api/wa/register";
 
 class Register extends React.Component {
     constructor(props) {
@@ -20,7 +18,8 @@ class Register extends React.Component {
             repassword: "",
             restaurant:"",
             address:"",
-            count_table:""
+            count_table:"",
+            loggedIn:false
         }
     }
     toggleModal() {
@@ -45,12 +44,17 @@ class Register extends React.Component {
                 password: password,
                 restaurant_name:restaurant,
                 restaurant_address: address,
-                count_table: count_table
+                table_count: count_table
 
             }
-            let res = register(data);
+            let res = await register(data);
+
             console.log(res);
 
+            if(res.success)
+            {
+                this.setState({loggedIn:true});
+            }
         } else {
             if (password !== repassword)
                 alert("Mật khẩu không khớp ")
@@ -59,6 +63,10 @@ class Register extends React.Component {
 
     }
     render() {
+        if(this.state.loggedIn)
+        {
+            return <Redirect to={"/login"}/>
+        }
         return(<div className="register-page">
                 <div className="register-card">
                     <div className="register-card-header">

@@ -1,16 +1,18 @@
 /*HEADER*/
 .header{
-    width: 100%;
-    height: 10%;
+    left: 0;
+    right: 0;
+    top: 0;
     position: absolute;
     border-bottom: 1px solid #bfbfbf;
-
+    height: 38px;
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: flex-start;
     align-items: flex-start;
     -webkit-justify-content: space-between;
     justify-content: space-between;
+    padding: 10px 25px;
 }
 .header .header-left{
     display: flex;
@@ -30,26 +32,58 @@
     color: #282c34;
 }
 .header .header-right{
-    margin-top: 1.5%;
-    margin-right: 15px;
     display: flex;
     justify-content: flex-end;
 }
+    .header-right .name-restaurant{
+        margin-right: 25px;
+        padding-top: 9px;
+        color: #6a6a6a;
+        font-style: italic;
+    }
+    .header-right .btn-logout{
+        cursor: pointer;
+        font-size: 15px;
+        color: #ffffff;
+        border:1px solid #2692ff;
+        background-color: #2692ff;
+        border-radius: 3px;
+        padding: 9px 5px;
+    }
+    .header-right .btn-logout:hover{
+    }
+    .header-right .btn-logout .icon-logout{
+        background:url("./icons/icons8-exit-24 (1).png") no-repeat 1px 1px;
+        padding: 4px 15px;
+    }
+
+    .header-right .icon-setting{
+        margin-right: 25px;
+        padding-top: 11px;
+        filter: opacity(0.5);
+    }
+    .header-right .icon-setting:hover{
+        cursor: pointer;
+        filter:opacity(1);
+    }
 
 .menubar{
-    width: 20%;
+    width: 290px;
     left: 0;
     bottom: 0;
-    top:10%;
+    top:60px;
     position: absolute;
-    border-right:1px solid #bfbfbf ;
+    color: #000;
+    /*background-color:#348BDB;*/
+    /*background-color: #34495E;*/
     background-color: #f4f7fe;
+
 }
 .content{
     position: absolute;
-    top: 15%;
-    left: 20%;
-    width: 85%;
+    top: 60px;
+    left: 290px;
     right: 0;
     bottom: 0;
+    height: calc(100% - 60px);
 }

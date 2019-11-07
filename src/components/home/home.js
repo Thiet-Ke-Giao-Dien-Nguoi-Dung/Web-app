@@ -1,54 +1,94 @@
 import React from 'react';
 import "./style.css";
-import MenuBar from "../menubar/menubar";
-import {Link, Route, Redirect, BrowserRouter} from 'react-router-dom'
-import Order from "../order/order";
-import Meal from "../meal";
-import Employee from "../employee/employee";
-import Revenue from "../revenue/revenue";
-import logo from "./icons/logo-ETO.jpg";
+import {Link, Route, Redirect, BrowserRouter, Switch} from 'react-router-dom'
+import Setting from "../setting/setting";
+import Dashboard from "../dashboard/dashboard";
+import {getInfoRestaurant} from "../../api/authentication-api";
+import set from "./icons/icon-setting.png";
 
 class Home extends React.Component{
     constructor(props){
         super(props);
         const token = localStorage.getItem("token");
+        this.handleLogout = this.handleLogout.bind(this);
+        this.redirectSetting = this.redirectSetting.bind(this);
+
+
+        this.pathLogin="/login";
+        this.pathSetting="/settings";
+        this.pathChangePassword = "/settings/changePassword";
+        this.pathDashboard="/dashboard";
+        this.pathDashboardEmployee = "/dashboard/employee";
+
 
         let loggedIn = true;
         if(token == null)
         {
-            loggedIn = false
+            loggedIn = false;
         }
         this.state={
+            redirectSetting:false,
             loggedIn
         }
 
     }
-    render() {
-        /*if(this.state.loggedIn === false)
+    redirectSetting()
+    {
+        this.setState({redirectSetting:true});
+    }
+    handleLogout()
+    {
+        localStorage.removeItem("token");
+        localStorage.removeItem("id_restaurant");
+        localStorage.removeItem("name_restaurant");
+        this.setState({loggedIn:false});
+
+    }
+    async componentDidMount() {
+        const response = await getInfoRestaurant();
+        console.log(response)
+        if(response.success)
         {
-            return <Redirect to={"/login"}/>
-        }*/
+            const data = response.data.restaurants;
+            localStorage.setItem("id_restaurant", data.id_restaurant);
+            localStorage.setItem("name_restaurant", data.name);
+        }
+    }
+    render() {
+        if(this.state.loggedIn === false)
+        {
+            return <Redirect to={this.pathLogin}/>
+        }
+        if(this.state.redirectSetting === true)
+        {
+            return <Redirect to={this.pathSetting}/>
+        }
         return(
-            <BrowserRouter>
+            <div>
+                <BrowserRouter>
                 <div className="header">
                     <div className="header-left">
-                        <Link to="/home"><img src={logo} alt="logo" width="50px" height="50px"/></Link>
+                        <Link to={this.pathDashboardEmployee}>ETO</Link>
                     </div>
                     <div className="header-right">
+                        <span className="name-restaurant">{localStorage.getItem("name_restaurant")}</span>
+                        <Link to={this.pathChangePassword} className="icon-setting" title="setting" ><img src={set} alt="icon-setting"/></Link>
+                        <button onClick={this.handleLogout} className="btn-logout">
+                            <span className="icon-logout"></span>
+                            Log out
+                        </button>
                     </div>
                 </div>
+
                 <div className="container">
-                    <div className="menubar">
-                        <MenuBar/>
-                    </div>
-                    <div className="content">
-                        <Route path="/order" component={Order}/>
-                        <Route path="/meal" component={Meal}/>
-                        <Route path="/employee" component={Employee}/>
-                        <Route path="/revenue" component={Revenue}/>
-                    </div>
+                    <Switch>
+                        <Route path={this.pathSetting} component={Setting}/>
+                        <Route path={this.pathDashboard} component={Dashboard}/>
+                    </Switch>
                 </div>
-            </BrowserRouter>
+                </BrowserRouter>
+
+            </div>
 
         );
     }

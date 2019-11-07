@@ -15,10 +15,9 @@ class Modal extends React.Component {
 
                     <div className="modal-header">
                         <h2 className="modal-title">{this.props.title}</h2>
-                        {this.props.childrenButtonClose}
-                        {/*<button className="btn-close" onClick={this.props.onClose}>
+                        <button className="btn-close" onClick={this.props.onClose}>
                             x
-                        </button>*/}
+                        </button>
                     </div>
 
 
@@ -32,7 +31,14 @@ class Modal extends React.Component {
                     </div>
 
                     <div className="modal-footer">
-                        {this.props.childrenFooter}
+                        <div className="footer-group">
+                            <button className="btn-modal cancel" onClick={this.props.onClose}>
+                                Hủy bỏ
+                            </button>
+                            <button className="btn-modal confirm" onClick={this.props.addNew}>
+                                {this.props.brandButton}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,12 +48,12 @@ class Modal extends React.Component {
 
 Modal.propTypes = {
     title: PropTypes.string,
+    brandButton: PropTypes.string,
     onClose: PropTypes.func.isRequired,
+    addNew:PropTypes.func.isRequired,
     show: PropTypes.bool,
     childrenContent: PropTypes.node,
-    childrenHelp: PropTypes.node,
-    childrenFooter: PropTypes.node,
-    childrenButtonClose: PropTypes.node
+    childrenHelp: PropTypes.node
 };
 
 export default Modal;

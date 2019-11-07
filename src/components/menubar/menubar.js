@@ -2,44 +2,36 @@ import React from 'react';
 import MenuItem from '../menuitem/menuitem';
 
 import "./style.css";
-import IconOder from './icons/icons8-purchase-order-24.png';
-import IconMeal from './icons/icons8-meal-26.png';
-import IconEmployee from './icons/icons8-user-24.png';
-import IconRevenue from './icons/icons8-money-bag-24.png';
-
-import iconOrderAct from "./icons/icons8-purchase-order-24 (1).png"
-import iconMealAct from "./icons/icons8-meal-26 (1).png"
-import iconEmployeeAct from "./icons/icons8-user-24 (1).png"
-import iconRevenueAct from "./icons/icons8-money-bag-24 (1).png"
 
 class MenuBar extends React.Component {
     constructor(props) {
         super(props);
+        this.pathDashboardOrder = "/dashboard/order";
+        this.pathDashboardMeal = "/dashboard/meal";
+        this.pathDashboardEmployee = "/dashboard/employee";
+        this.pathDashboardRevenue = "/dashboard/revenue";
+
         this.state = {
             menuItems: [
                 {
                     title: "Quản lý đặt món  ",
-                    icon: IconOder,
-                    iconAct:iconOrderAct,
-                    route: "/order"
+                    name:"order",
+                    route: this.pathDashboardOrder
                 },
                 {
                     title: "Quản lý món ăn ",
-                    icon: IconMeal,
-                    iconAct:iconMealAct,
-                    route: "/meal"
+                    name:"meal",
+                    route: this.pathDashboardMeal
                 },
                 {
                     title :"Quản lý nhân viên ",
-                    icon: IconEmployee,
-                    iconAct:iconEmployeeAct,
-                    route: "/employee"
+                    name:"employee",
+                    route: this.pathDashboardEmployee
                 },
                 {
                     title: "Quản lý doanh thu ",
-                    icon: IconRevenue,
-                    iconAct:iconRevenueAct,
-                    route: "/revenue"
+                    name:"revenue",
+                    route: this.pathDashboardRevenue
                 }]
         }
     }

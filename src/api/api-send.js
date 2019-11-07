@@ -1,37 +1,43 @@
 import axios from "axios";
-const URL_BASE=process.env.REACT_APP_API_URL;
-
+const URL_BASE = process.env.REACT_APP_API_URL;
+const accessToken = localStorage.getItem("token")
 function handleResult(res)
 {
-    console.log(res.data)
-    if(res.data.success)
-    {
-        return res.data.data;
-    }
-    else
-        console.log("error")
+   return res.data;
 }
-export function sendGetRequest(route, accessToken)
+export function sendGetRequest(route)
 {
     let url = `${URL_BASE}${route}`;
     let headers={
         token: accessToken
     };
-    return axios.get(url,headers).then(handleResult);
+    return axios.get(url,{headers}).then(handleResult);
 }
-export function sendPostRequest(route, payload, accessToken)
+export function sendPostRequest(route, payload)
 {
     let url = `${URL_BASE}${route}`;
     let headers={
         token: accessToken
     };
-    return axios.post(url,payload,headers).then(handleResult);
+    return axios.post(url,payload,{headers}).then(handleResult);
 }
-
+export function sendPutRequest(route, payload) {
+    let url = `${URL_BASE}${route}`;
+    let headers={
+        token: accessToken
+    };
+    return axios.put(url,payload,{headers}).then(handleResult);
+}
+export function sendDeleteRequest(route) {
+    let url = `${URL_BASE}${route}`;
+    let headers={
+        token: accessToken
+    };
+    return axios.delete(url,{headers}).then(handleResult);
+}
 
 export function sendPostRequestWithoutToken(route, payload)
 {
-    console.log(process.env);
     let url = `${URL_BASE}${route}`;
     return axios.post(url,payload).then(handleResult);
 }
