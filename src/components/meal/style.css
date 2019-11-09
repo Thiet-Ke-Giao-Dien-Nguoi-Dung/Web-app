@@ -1,0 +1,31 @@
+.container-meal{
+    position: relative;
+    margin: 30px 25px;
+}
+.container-meal .title{
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+    /*.container-meal .tab-item{
+        height: 40px;
+        margin-bottom: 20px;
+    }*/
+    /*.container-meal .tab-item button{
+        background-color: #fff;
+        height: 40px;
+        border: none;
+        color: #6c757d;
+        border-bottom: #2692ff;
+        margin-right: 20px;
+        font-size: 15px;
+    }
+    .container-meal .tab-item button:hover{
+        cursor: pointer;
+    }
+    .container-meal .tab-item button:after{
+        color: #212529;
+        border: none;
+        outline: none;
+    }*/

@@ -18,7 +18,7 @@ class Home extends React.Component{
         this.pathSetting="/settings";
         this.pathChangePassword = "/settings/changePassword";
         this.pathDashboard="/dashboard";
-        this.pathDashboardEmployee = "/dashboard/employee";
+        this.pathDashboardMeal = "/dashboard/meal";
 
 
         let loggedIn = true;
@@ -68,7 +68,7 @@ class Home extends React.Component{
                 <BrowserRouter>
                 <div className="header">
                     <div className="header-left">
-                        <Link to={this.pathDashboardEmployee}>ETO</Link>
+                        <Link to={this.pathDashboardMeal}>ETO</Link>
                     </div>
                     <div className="header-right">
                         <span className="name-restaurant">{localStorage.getItem("name_restaurant")}</span>
