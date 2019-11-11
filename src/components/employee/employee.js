@@ -27,7 +27,7 @@ class Employee extends React.Component{
             password:"",
             confirmPassword:"",
             currentPage: 1,
-            recordPerPage: 3
+            recordPerPage: 1
 
         }
     }

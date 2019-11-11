@@ -3,8 +3,6 @@ import "./style.css";
 import {getCategories, createCategory, deleteCategory, editCategory} from "../../api/category-api";
 import iconEdit from "./icons/icons8-edit-26.png";
 import iconBin from "./icons/bin-26.png"
-import Pagination from "../pagination/pagination";
-import GetByNumberPages from "../getByNumberPages/getByNumberPages";
 import Modal from "../modal/modal";
 
 
@@ -12,8 +10,6 @@ class Category extends React.Component{
     constructor(props)
     {
         super(props);
-        this.chosePage = this.chosePage.bind(this);
-        this.select = this.select.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
         this.toggleModalEdit = this.toggleModalEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -23,8 +19,6 @@ class Category extends React.Component{
 
         this.state={
             categories:[],
-            currentPage: 1,
-            recordPerPage: 3,
             nameCategory:"",
             isOpen:false,
             isOpenEdit:false,
@@ -32,17 +26,6 @@ class Category extends React.Component{
             nameCategoryEdit:""
 
         }
-    }
-    chosePage(event){
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-    }
-
-    select(event){
-        this.setState({
-            recordPerPage: event.target.value
-        })
     }
     toggleModal() {
         this.setState({
@@ -65,24 +48,27 @@ class Category extends React.Component{
     async componentDidMount()
     {
         const response = await getCategories();
-        console.log(response);
         if(response.success)
             this.setState({categories:response.data.categories});
         else
             alert(response.message);
 
     }
-    async componentDidUpdate() {
-        const response = await getCategories();
-        if(response.success)
-            this.setState({categories:response.data.categories});
-        else
-            alert(response.message);
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.categories.length !== prevState.categories.length)
+        {
+            const response = await getCategories();
+            console.log(response);
+            if(response.success)
+                this.setState({categories:response.data.categories});
+            else
+                alert(response.message);
+        }
     }
+
     async handleAddNewCategory()
     {
         const {nameCategory} = this.state;
-        console.log(nameCategory);
         let data ={
             category_name:nameCategory
         };
@@ -91,8 +77,15 @@ class Category extends React.Component{
             let response= await createCategory(data);
             if(response.success)
             {
-                alert("success");
-                this.setState({nameCategory:""})
+                const res= await getCategories();
+                if(response.success)
+                {
+                    this.setState({categories:res.data.categories});
+                    this.setState({nameCategoryEdit:""})
+                }
+                else
+                    alert(response.message);
+                this.toggleModal();
             }
 
             else
@@ -107,7 +100,15 @@ class Category extends React.Component{
         const response = await deleteCategory(id_cate);
         if(response.success)
         {
-            console.log("success");
+            const newCategories = this.state.categories;
+            let index = newCategories.find(x => x.id_category = id_cate);
+            console.log(index);
+            if(index !== -1)
+            {
+                newCategories.splice(index, 1);
+            }
+            this.setState({categories: newCategories});
+            this.setState({nameCategoryEdit:""})
         }
         else {
             console.log(response.message);
@@ -135,16 +136,6 @@ class Category extends React.Component{
         }
     }
     render() {
-        const currentPage = this.state.currentPage;
-        const recordPerPage = this.state.recordPerPage;
-        const indexOfLastNews = currentPage * recordPerPage;
-        const indexOfFirstNews = indexOfLastNews - recordPerPage;
-        const currentTodos = this.state.categories.slice(indexOfFirstNews, indexOfLastNews);
-
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(this.state.categories.length / recordPerPage); i++) {
-            pageNumbers.push(i);
-        }
 
         return(
             <div className="container-category">
@@ -189,9 +180,9 @@ class Category extends React.Component{
                         </thead>
                         <tbody>
                         {
-                            (currentTodos || []).map((e, index) => {
+                            (this.state.categories || []).map((e, index) => {
                                     return <tr key={e.id_category}>
-                                        <td>{index + 1 + (currentPage - 1)*recordPerPage}</td>
+                                        <td>{index + 1}</td>
                                         <td>{e.name}</td>
                                         <td className="title-edit"><img src={iconEdit} alt="icon-edit" className="btn-edit" onClick={() => this.toggleModalEdit(e.id_category, e.name)}/></td>
                                         <td className="title-del"><img src={iconBin} alt="icon-bin" className="btn-delete" onClick={() => this.handleDeleteCategory(e.id_category)}/></td>
@@ -201,8 +192,6 @@ class Category extends React.Component{
                         }
                         </tbody>
                     </table>
-                    <Pagination select={this.select}/>
-                    <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
                 </div>
             </div>
         );

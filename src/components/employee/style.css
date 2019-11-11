@@ -25,7 +25,7 @@
     }
     .container-employee .tbl-employee{
         margin: 50px 0px;
-        height: 300px;
+        min-height: 200px;
         overflow: auto;
     }
         .container-employee .tbl-employee table{

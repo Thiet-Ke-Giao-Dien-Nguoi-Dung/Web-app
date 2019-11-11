@@ -1,8 +1,15 @@
-.container-category{
+.container-item{
     margin-top: 20px;
     position: relative;
 }
-.container-category .btn .add-new{
+    .container-item .dropdown{
+        width: 300px;
+    }
+    .container-item .Dropdown-control{
+        border-radius: 3px !important;
+        border-color: #2692ff !important;
+    }
+.container-item .btn .add-new{
     font-size: 15px;
     border: none;
     background-color: #007BFF;
@@ -11,50 +18,50 @@
     height: 40px;
     text-align: center;
     padding: 5px 10px;
-
+    margin-bottom: 20px;
 }
-.container-category .btn .add-new:hover{
+.container-item .btn .add-new:hover{
     cursor: pointer;
     background-color: #2692ff;
 }
-.container-category .tbl-category{
+.container-item .tbl-item{
     margin: 50px 0px;
-    min-height: 200px;
+    min-height: 190px;
     overflow: auto;
 }
-.container-category .tbl-category table{
+.container-item .tbl-item table{
     border-collapse: collapse;
     width: 100%;
     font-family: arial, sans-serif;
     margin-bottom: 20px;
 }
-.container-category .tbl-category td,th{
+.container-item .tbl-item td,th{
     text-align: left;
     padding: 8px;
 }
-.container-category .tbl-category th{
+.container-item .tbl-item th{
     position: sticky;
     background-color: #fff;
     top:-1px;
     height: 30px;
     font-size: 15px;
 }
-.container-category .tbl-category td{
+.container-item .tbl-item td{
     font-size: 14px;
 }
-.container-category .tbl-category tr:nth-child(odd)
+.container-item .tbl-item tr:nth-child(odd)
 {
     background-color: #f4f7fe;
 }
-.container-category .title-del{
+.container-item .title-del{
 
 }
-.container-category .btn-delete:hover{
+.container-item .btn-delete:hover{
     cursor: pointer;
 }
-.container-category .title-edit{
+.container-item .title-edit{
 }
-.container-category .btn-edit:hover{
+.container-item .btn-edit:hover{
     cursor: pointer;
 }
 

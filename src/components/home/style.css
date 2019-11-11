@@ -18,6 +18,9 @@
     display: flex;
     justify-content: flex-start;
 }
+.header-left img{
+    margin:-5px 1px;
+}
 .header .header-left .btn-dashboard{
     border: none;
     background-color: white;
@@ -86,4 +89,8 @@
     right: 0;
     bottom: 0;
     height: calc(100% - 60px);
+}
+
+.rwt__tablist:not([aria-orientation="vertical"]) .rwt__tab[aria-selected="true"]:after {
+    border-bottom: 3px solid #2692ff !important;
 }

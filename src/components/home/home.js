@@ -5,6 +5,7 @@ import Setting from "../setting/setting";
 import Dashboard from "../dashboard/dashboard";
 import {getInfoRestaurant} from "../../api/authentication-api";
 import set from "./icons/icon-setting.png";
+import logo from "./icons/lgweb.jpg";
 
 class Home extends React.Component{
     constructor(props){
@@ -68,7 +69,7 @@ class Home extends React.Component{
                 <BrowserRouter>
                 <div className="header">
                     <div className="header-left">
-                        <Link to={this.pathDashboardMeal}>ETO</Link>
+                        <Link to={this.pathDashboardMeal}><img src={logo} alt={"logo"}/></Link>
                     </div>
                     <div className="header-right">
                         <span className="name-restaurant">{localStorage.getItem("name_restaurant")}</span>
