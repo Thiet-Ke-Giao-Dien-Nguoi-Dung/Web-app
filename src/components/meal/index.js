@@ -14,20 +14,18 @@ class Meal extends Component {
                 <div className="title">
                     Quản lý danh sách món ăn
                 </div>
-                <Tabs
-                    defaultTab="one"
-                >
+                <Tabs defaultTab="one">
                     <TabList>
                         <div className="tab-item">
-                            <Tab tabFor="one">Item</Tab>
-                            <Tab tabFor="two">Category</Tab>
+                            <Tab tabFor="one">Category</Tab>
+                            <Tab tabFor="two">Item</Tab>
                         </div>
                     </TabList>
                     <TabPanel tabId="one">
-                        <Item/>
+                        <Category/>
                     </TabPanel>
                     <TabPanel tabId="two">
-                        <Category/>
+                        <Item/>
                     </TabPanel>
                 </Tabs>
             </div>

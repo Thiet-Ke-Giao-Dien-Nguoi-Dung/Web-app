@@ -27,20 +27,9 @@ class Employee extends React.Component{
             password:"",
             confirmPassword:"",
             currentPage: 1,
-            recordPerPage: 1
+            recordPerPage: 10
 
         }
-    }
-    chosePage(event){
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-    }
-
-    select(event){
-        this.setState({
-            recordPerPage: event.target.value
-        })
     }
     toggleModal() {
         this.setState({
@@ -51,6 +40,16 @@ class Employee extends React.Component{
         let nam = e.target.name;
         let tex = e.target.value;
         this.setState({[nam]:tex});
+    }
+    chosePage(event){
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
+    }
+    select(event){
+        this.setState({
+            recordPerPage: event.target.value
+        })
     }
     async handleAddNewEmployee()
     {
@@ -68,13 +67,23 @@ class Employee extends React.Component{
                 const response = await addNewEmployee(data);
                 if(response.success)
                 {
-                    this.setState({
-                        nameEmployee:"",
-                        phoneNumber:"",
-                        displayName:"",
-                        password:"",
-                        confirmPassword:""
-                    })
+                    const res = await getEmployees();
+                    if(res.success)
+                    {
+                        alert("success")
+                        this.setState({employees:res.data.employees});
+                        this.setState({
+                            nameEmployee:"",
+                            phoneNumber:"",
+                            displayName:"",
+                            password:"",
+                            confirmPassword:""
+                        })
+                        this.toggleModal();
+                    }
+                    else
+                        alert(res.message);
+
                 }
                 else {
                     alert(response.message)
@@ -95,7 +104,14 @@ class Employee extends React.Component{
         const response = await deleteEmployee(id_em);
         if(response.success)
         {
-            console.log("success");
+            alert("success");
+            const newEmployees = this.state.employees;
+            let index = newEmployees.find(x => x.id_employees = id_em);
+            if(index !== -1)
+            {
+               newEmployees.splice(index, 1);
+            }
+            this.setState({employees: newEmployees});
         }
         else {
             console.log(response.message);
@@ -111,12 +127,15 @@ class Employee extends React.Component{
             alert(response.message);
 
     }
-    async componentDidUpdate() {
-        const response = await getEmployees();
-        if(response.success)
-            this.setState({employees:response.data.employees})
-        else
-            alert(response.message);
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.employees.length !== prevState.employees.length)
+        {
+            const response = await getEmployees();
+            if(response.success)
+                this.setState({employees:response.data.employees})
+            else
+                alert(response.message);
+        }
     }
 
     render() {

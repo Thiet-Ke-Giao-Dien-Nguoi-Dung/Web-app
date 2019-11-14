@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import {getInfoRestaurant, editInfoRestaurant} from "../../api/authentication-api";
+import {getInfoRestaurant, editInfoRestaurant} from "../../api/restaurant-api";
 
 class Restaurant extends React.Component{
     constructor(props){
@@ -36,13 +36,12 @@ class Restaurant extends React.Component{
         const {name_restaurant,address_restaurant,count_table} = this.state;
         if(name_restaurant && address_restaurant && count_table)
         {
-            const id_res = localStorage.getItem("id_restaurant")
             const data = {
                 name:name_restaurant,
                 address:address_restaurant,
                 table_count:count_table
             }
-            const response = await editInfoRestaurant(id_res, data);
+            const response = await editInfoRestaurant(data);
             console.log(response)
             if(response.success)
             {

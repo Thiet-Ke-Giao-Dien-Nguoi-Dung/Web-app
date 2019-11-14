@@ -1,61 +1,50 @@
 import React from "react";
 import "./style.css";
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
-/*import Pagination from "../pagination/pagination";
-import GetByNumberPages from "../getByNumberPages/getByNumberPages";*/
 import {getCategories} from "../../api/category-api";
+import {getItems} from "../../api/item-api";
+import iconBin from "../employee/icons/bin-26.png";
 
 class Item extends React.Component{
     constructor(props)
     {
         super(props);
-        this.chosePage = this.chosePage.bind(this);
-        this.select = this.select.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
         this.state={
             categories:[],
-            items:[]
+            items:[],
+            recordCategoryId:""
         }
     }
-    chosePage(event){
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-    }
 
-    select(event){
-        this.setState({
-            recordPerPage: event.target.value
-        })
+    async handleSelect(event){
+        const selectedIndex = event.target.options.selectedIndex;
+        const id_category=event.target.options[selectedIndex].getAttribute('data-key');
+
+        const response = await getItems(id_category);
+        if(response.success)
+        {
+            this.setState({items: response.data.items});
+            console.log(this.state.items);
+        }
+        else {
+            console.log(response.message);
+        }
     }
     async componentDidMount()
     {
         const response = await getCategories();
-        console.log(response);
         if(response.success)
+        {
             this.setState({categories:response.data.categories});
+            console.log(this.state.categories)
+        }
+
         else
-            alert(response.message);
+            alert(response);
 
     }
+
     render() {
-        const options=[];
-        (this.state.categories || []).map((e) =>{
-            return options.push(e.name);
-        });
-        const defaultOption = options[0];
-
-
-        /*const currentPage = this.state.currentPage;
-        const recordPerPage = this.state.recordPerPage;
-        const indexOfLastNews = currentPage * recordPerPage;
-        const indexOfFirstNews = indexOfLastNews - recordPerPage;
-        const currentTodos = this.state.items.slice(indexOfFirstNews, indexOfLastNews);
-
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(this.state.items.length / recordPerPage); i++) {
-            pageNumbers.push(i);
-        }*/
 
         return(
         <div className="container-item">
@@ -63,7 +52,14 @@ class Item extends React.Component{
                 <button className="add-new" onClick={this.toggleModal}>+ Thêm mới sản phẩm  </button>
             </div>
             <div className="dropdown">
-                <Dropdown className="category" options={options} onChange={this._onSelect} value={defaultOption} placeholder="Chọn danh mục sản phẩm " />
+                <select defaultValue="" onChange={this.handleSelect} >
+                    <option key={""} data-key={""}>Chọn tất cả </option>
+                    {
+                        (this.state.categories || []).map((e) => {
+                            return <option key={e.id_category} data-key={e.id_category}>{e.name}</option>
+                        })
+                    }
+                </select>
             </div>
 
             <div className="tbl-item">
@@ -79,14 +75,21 @@ class Item extends React.Component{
                     </tr>
                     </thead>
                     <tbody>
+
+                    {
+                        (this.state.items || []).map((e, index) => {
+                            return <tr key={e.id_item}>
+                                <td>{index + 1}</td>
+                                <td>{e.image}</td>
+                                <td>{e.name}</td>
+                                <td>{e.price}</td>
+                                <td>{e.status}</td>
+                                <td className="title-del"><img src={iconBin} alt="icon-bin" className="btn-delete" onClick={()=>this.handleDeleteEm(e.id_employees)}/></td>
+                            </tr>;
+                        })
+                    }
                     </tbody>
                 </table>
-{/*
-                <Pagination select={this.select}/>
-*/}
-{/*
-                <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
-*/}
             </div>
         </div>
         );

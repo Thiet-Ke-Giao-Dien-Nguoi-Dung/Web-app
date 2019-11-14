@@ -51,7 +51,7 @@ class Category extends React.Component{
         if(response.success)
             this.setState({categories:response.data.categories});
         else
-            alert(response.message);
+            alert(response);
 
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -80,6 +80,7 @@ class Category extends React.Component{
                 const res= await getCategories();
                 if(response.success)
                 {
+                    alert("success");
                     this.setState({categories:res.data.categories});
                     this.setState({nameCategoryEdit:""})
                 }
@@ -87,7 +88,6 @@ class Category extends React.Component{
                     alert(response.message);
                 this.toggleModal();
             }
-
             else
                 alert(response.message);
         }
@@ -100,15 +100,18 @@ class Category extends React.Component{
         const response = await deleteCategory(id_cate);
         if(response.success)
         {
+
             const newCategories = this.state.categories;
             let index = newCategories.find(x => x.id_category = id_cate);
             console.log(index);
             if(index !== -1)
             {
+                alert("success");
                 newCategories.splice(index, 1);
             }
             this.setState({categories: newCategories});
             this.setState({nameCategoryEdit:""})
+
         }
         else {
             console.log(response.message);
@@ -124,7 +127,16 @@ class Category extends React.Component{
             let response = await editCategory(idCategoryEdit, data);
             if(response.success)
             {
-                alert("success");
+
+                const res= await getCategories();
+                if(response.success)
+                {
+                    alert("success");
+                    this.setState({categories:res.data.categories});
+                }
+                else
+                    alert(response.message);
+                this.toggleModalEdit();
             }
             else
             {

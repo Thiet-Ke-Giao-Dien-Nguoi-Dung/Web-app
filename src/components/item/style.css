@@ -3,11 +3,18 @@
     position: relative;
 }
     .container-item .dropdown{
-        width: 300px;
+        margin-bottom: 15px;
     }
-    .container-item .Dropdown-control{
-        border-radius: 3px !important;
-        border-color: #2692ff !important;
+
+    .container-item .dropdown select{
+        border: 1px solid #2692ff;
+        background-color: #ffffff;
+        width: 250px;
+        height: 40px;
+        border-radius: 3px;
+        font-size: 15px;
+        padding: 0px 6px;
+
     }
 .container-item .btn .add-new{
     font-size: 15px;

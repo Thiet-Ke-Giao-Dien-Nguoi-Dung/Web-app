@@ -12,7 +12,6 @@ class Setting extends React.Component {
         this.pathChangePassword = "/settings/changePassword";
         this.pathEditProfile = "/settings/editProfile";
         this.state={
-
             menuItems: [
                 {
                     title: "Thay đổi mật khẩu",

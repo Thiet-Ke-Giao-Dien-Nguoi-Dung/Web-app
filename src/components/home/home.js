@@ -3,7 +3,7 @@ import "./style.css";
 import {Link, Route, Redirect, BrowserRouter, Switch} from 'react-router-dom'
 import Setting from "../setting/setting";
 import Dashboard from "../dashboard/dashboard";
-import {getInfoRestaurant} from "../../api/authentication-api";
+import {getInfoRestaurant} from "../../api/restaurant-api";
 import set from "./icons/icon-setting.png";
 import logo from "./icons/lgweb.jpg";
 
@@ -29,6 +29,7 @@ class Home extends React.Component{
         }
         this.state={
             redirectSetting:false,
+            nameRestaurant:"",
             loggedIn
         }
 
@@ -41,18 +42,15 @@ class Home extends React.Component{
     {
         localStorage.removeItem("token");
         localStorage.removeItem("id_restaurant");
-        localStorage.removeItem("name_restaurant");
         this.setState({loggedIn:false});
 
     }
     async componentDidMount() {
         const response = await getInfoRestaurant();
-        console.log(response)
         if(response.success)
         {
             const data = response.data.restaurants;
-            localStorage.setItem("id_restaurant", data.id_restaurant);
-            localStorage.setItem("name_restaurant", data.name);
+            this.setState({nameRestaurant: data.name});
         }
     }
     render() {
@@ -64,6 +62,7 @@ class Home extends React.Component{
         {
             return <Redirect to={this.pathSetting}/>
         }
+        console.log(1);
         return(
             <div>
                 <BrowserRouter>
@@ -72,7 +71,7 @@ class Home extends React.Component{
                         <Link to={this.pathDashboardMeal}><img src={logo} alt={"logo"}/></Link>
                     </div>
                     <div className="header-right">
-                        <span className="name-restaurant">{localStorage.getItem("name_restaurant")}</span>
+                        <span className="name-restaurant">{this.state.nameRestaurant}</span>
                         <Link to={this.pathChangePassword} className="icon-setting" title="setting" ><img src={set} alt="icon-setting"/></Link>
                         <button onClick={this.handleLogout} className="btn-logout">
                             <span className="icon-logout"></span>

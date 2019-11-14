@@ -17,7 +17,7 @@ class Login extends React.Component{
         this.handleLogin = this.handleLogin.bind(this);
 
         this.pathRegister="/register";
-        this.pathDashboardOrder = "/dashboard/employee";
+        this.pathDashboardOrder = "/dashboard/meal";
 
         const token = localStorage.getItem("token");
         let loggedIn = true;
@@ -53,10 +53,11 @@ class Login extends React.Component{
                 password:password
             };
             let response = await login(data);
-            console.log(response);
             if(response.success)
             {
                 localStorage.setItem("token",response.data.token);
+                localStorage.setItem("id_restaurant", response.data.id_restaurant)
+                console.log(localStorage.getItem("token"));
                 this.setState({loggedIn:true})
             }else{
                 alert("fail")

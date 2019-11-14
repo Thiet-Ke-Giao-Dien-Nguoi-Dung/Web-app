@@ -1,4 +1,4 @@
-import {sendPostRequestWithoutToken, sendPostRequest, sendGetRequest, sendPutRequest} from "./api-send";
+import {sendPostRequestWithoutToken, sendPostRequest} from "./api-send";
 
 export function login(data)
 {
@@ -14,15 +14,5 @@ export function register(data)
 export  function changePassword(data) {
     const route="/users/passwords";
     return sendPostRequest(route, data);
-
-}
-export function getInfoRestaurant() {
-    const route = "/restaurants";
-    return sendGetRequest(route)
-
-}
-export function editInfoRestaurant(id_restaurant, data) {
-    const route = `/restaurants/${id_restaurant}`;
-    return sendPutRequest(route, data);
 
 }
