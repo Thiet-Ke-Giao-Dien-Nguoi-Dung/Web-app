@@ -44,7 +44,6 @@ class Home extends React.Component{
         localStorage.removeItem("token");
         localStorage.removeItem("id_restaurant");
         this.setState({loggedIn:false});
-
     }
     async componentDidMount() {
         /*ePass.on("logout", (newstate) =>{
@@ -57,6 +56,7 @@ class Home extends React.Component{
             this.setState({nameRestaurant:newstate})
         });
         const response = await getInfoRestaurant();
+        console.log(response);
         if(response.success)
         {
             const data = response.data.restaurants;
