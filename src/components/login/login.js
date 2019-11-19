@@ -1,10 +1,10 @@
 import React from 'react';
 import Modal from "../modal/modal";
 import "./style.css";
-
+import 'react-toastify/dist/ReactToastify.css';
 import {Link, Redirect} from "react-router-dom";
 import {login} from "../../api/authentication-api"
-
+import {notification} from "../../util/noti";
 
 class Login extends React.Component{
 
@@ -60,13 +60,12 @@ class Login extends React.Component{
                 console.log(localStorage.getItem("token"));
                 this.setState({loggedIn:true})
             }else{
-                alert("fail")
+                notification("error",response.message);
             }
         }
         else
         {
-           alert("success")
-
+            notification("warning", "Something missing");
         }
 
     }

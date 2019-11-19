@@ -4,6 +4,7 @@ import './App.css';
 import Home from "./components/home/home"
 import Login from "./components/login/login"
 import Register from "./components/register/register"
+import { ToastContainer } from 'react-toastify';
 
 
 import {Route,Switch} from "react-router-dom";
@@ -11,7 +12,7 @@ import Redirect from "react-router-dom/es/Redirect";
 
 
 class App extends React.Component{
-  render() {
+    render() {
       return (
           <div>
               <Switch>
@@ -27,8 +28,8 @@ class App extends React.Component{
                   <Route path="/login" component={Login}/>
                   <Route path="/register" component={Register}/>
               </Switch>
+              <ToastContainer/>
           </div>
-
 
     )
   }
