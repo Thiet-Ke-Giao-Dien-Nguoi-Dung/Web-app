@@ -2,6 +2,10 @@
     margin-top: 20px;
     position: relative;
 }
+.container-category .btn{
+    margin-bottom: 10px;
+    height: 60px;
+}
 .container-category .btn .add-new{
     font-size: 15px;
     border: none;
@@ -18,8 +22,8 @@
     background-color: #2692ff;
 }
 .container-category .tbl-category{
-    margin: 50px 0px;
-    min-height: 200px;
+    margin: 10px 0px;
+    max-height: 300px;
     overflow: auto;
 }
 .container-category .tbl-category table{

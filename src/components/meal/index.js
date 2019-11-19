@@ -6,26 +6,34 @@ import Category from "../category/category"
 import Item from "../item/item";
 
 class Meal extends Component {
+    constructor(props)
+    {
+        super(props);
+        this.state = {
+            idPanel:"item",
+            componentPanel:<Item/>
+        }
 
+    }
+    handleTab = (id, component) =>
+    {
+        this.setState({idPanel: id, componentPanel: component});
+    }
     render() {
-
         return (
             <div className="container-meal">
                 <div className="title">
                     Quản lý danh sách món ăn
                 </div>
-                <Tabs defaultTab="one">
+                <Tabs defaultTab="item">
                     <TabList>
                         <div className="tab-item">
-                            <Tab tabFor="one">Category</Tab>
-                            <Tab tabFor="two">Item</Tab>
+                            <Tab tabFor="item" onClick={() => this.handleTab("item",<Item/>)}>Sản phẩm </Tab>
+                            <Tab tabFor="category" onClick={() => this.handleTab("category",<Category/>)}>Loại sản phẩm </Tab>
                         </div>
                     </TabList>
-                    <TabPanel tabId="one">
-                        <Category/>
-                    </TabPanel>
-                    <TabPanel tabId="two">
-                        <Item/>
+                    <TabPanel tabId={this.state.idPanel}>
+                        {this.state.componentPanel}
                     </TabPanel>
                 </Tabs>
             </div>

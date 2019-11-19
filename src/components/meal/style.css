@@ -8,6 +8,9 @@
     font-size: 16px;
     margin-bottom: 20px;
 }
+.rwt__tablist:not([aria-orientation="vertical"]) .rwt__tab[aria-selected="true"]:after {
+    border-bottom: 3px solid #2692ff !important;
+}
     /*.container-meal .tab-item{
         height: 40px;
         margin-bottom: 20px;

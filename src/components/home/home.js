@@ -6,15 +6,16 @@ import Dashboard from "../dashboard/dashboard";
 import {getInfoRestaurant} from "../../api/restaurant-api";
 import set from "./icons/icon-setting.png";
 import logo from "./icons/lgweb.jpg";
+import ee from "../../util/events"
+
 
 class Home extends React.Component{
+
     constructor(props){
         super(props);
         const token = localStorage.getItem("token");
         this.handleLogout = this.handleLogout.bind(this);
         this.redirectSetting = this.redirectSetting.bind(this);
-
-
         this.pathLogin="/login";
         this.pathSetting="/settings";
         this.pathChangePassword = "/settings/changePassword";
@@ -28,8 +29,8 @@ class Home extends React.Component{
             loggedIn = false;
         }
         this.state={
-            redirectSetting:false,
             nameRestaurant:"",
+            redirectSetting:false,
             loggedIn
         }
 
@@ -46,6 +47,15 @@ class Home extends React.Component{
 
     }
     async componentDidMount() {
+        /*ePass.on("logout", (newstate) =>{
+            this.setState({
+                loggedIn:newstate
+            })
+        })*/
+        ee.on("change-state",(newstate) => {
+            console.log(newstate);
+            this.setState({nameRestaurant:newstate})
+        });
         const response = await getInfoRestaurant();
         if(response.success)
         {
@@ -53,6 +63,8 @@ class Home extends React.Component{
             this.setState({nameRestaurant: data.name});
         }
     }
+
+
     render() {
         if(this.state.loggedIn === false)
         {
@@ -62,7 +74,6 @@ class Home extends React.Component{
         {
             return <Redirect to={this.pathSetting}/>
         }
-        console.log(1);
         return(
             <div>
                 <BrowserRouter>
@@ -75,7 +86,7 @@ class Home extends React.Component{
                         <Link to={this.pathChangePassword} className="icon-setting" title="setting" ><img src={set} alt="icon-setting"/></Link>
                         <button onClick={this.handleLogout} className="btn-logout">
                             <span className="icon-logout"></span>
-                            Log out
+                            Đăng xuất
                         </button>
                     </div>
                 </div>

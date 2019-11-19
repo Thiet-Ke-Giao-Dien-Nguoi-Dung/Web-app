@@ -19,13 +19,17 @@
         padding: 5px 10px;
 
     }
+    .container-employee .btn{
+        height: 60px;
+        margin-bottom: 10px;
+    }
     .container-employee .btn .add-new:hover{
         cursor: pointer;
         background-color: #2692ff;
     }
     .container-employee .tbl-employee{
-        margin: 50px 0px;
-        min-height: 200px;
+        margin: 10px 0px;
+        max-height: 300px;
         overflow: auto;
     }
         .container-employee .tbl-employee table{

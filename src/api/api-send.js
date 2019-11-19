@@ -14,11 +14,8 @@ export function sendGetRequest(route) {
     return axios.get(url, {headers}).then(handleResult);
 }
 
-export function sendPostRequest(route, payload) {
+export function sendPostRequest(route, payload, headers) {
     let url = `${URL_BASE}${route}`;
-    let headers = {
-        token: localStorage.getItem("token")
-    };
     return axios.post(url, payload, {headers}).then(handleResult);
 }
 

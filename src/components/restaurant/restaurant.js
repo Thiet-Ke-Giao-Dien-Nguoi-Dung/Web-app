@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import {getInfoRestaurant, editInfoRestaurant} from "../../api/restaurant-api";
+import ee from "../../util/events"
 
 class Restaurant extends React.Component{
     constructor(props){
@@ -40,12 +41,12 @@ class Restaurant extends React.Component{
                 name:name_restaurant,
                 address:address_restaurant,
                 table_count:count_table
-            }
+            };
             const response = await editInfoRestaurant(data);
-            console.log(response)
             if(response.success)
             {
                 alert("update successful");
+                ee.emit("change-state", name_restaurant);
             }
             else
             {
@@ -56,6 +57,8 @@ class Restaurant extends React.Component{
             alert("Xin hay dien du thong tin")
         }
     }
+
+
     render() {
         return (
             <div className="content-restaurant">

@@ -8,7 +8,8 @@ export function getCategories() {
 export function createCategory(data) {
     let id_res = localStorage.getItem("id_restaurant");
     let route = `/restaurants/${id_res}/categories`;
-    return sendPostRequest(route, data);
+    let token =  localStorage.getItem("token");
+    return sendPostRequest(route, data, {token});
 }
 export function editCategory(id_category, data) {
     let id_res = localStorage.getItem("id_restaurant");

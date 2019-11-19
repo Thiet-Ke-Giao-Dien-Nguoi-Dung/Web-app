@@ -2,10 +2,11 @@
     margin-top: 20px;
     position: relative;
 }
-    .container-item .dropdown{
-        margin-bottom: 15px;
+/*list group: dropdown, btn add new*/
+    .container-item .list-group{
+        display: flex;
+        margin-bottom: 10px;
     }
-
     .container-item .dropdown select{
         border: 1px solid #2692ff;
         background-color: #ffffff;
@@ -14,26 +15,46 @@
         border-radius: 3px;
         font-size: 15px;
         padding: 0px 6px;
+        margin-left: 15px;
+    }
+    .container-item .list-group .add-new{
+        font-size: 15px;
+        border: none;
+        background-color: #007BFF;
+        border-radius: 3px;
+        color: #fff;
+        height: 40px;
+        text-align: center;
+        padding: 5px 10px;
+        margin-bottom: 20px;
+    }
+    .container-item .list-group .add-new:hover{
+        cursor: pointer;
+        background-color: #2692ff;
+    }
+
+    /* dropdown in add new*/
+    .container-item .dropdown-addnew{
+        margin: 10px 20px;
+    }
+
+    .container-item .dropdown-addnew select{
+        background-color: #ffffff;
+        border-radius: 3px;
+        font-size: 14px;
+        height: 40px;
+        padding: 5px;
+        width: 272px;
+        float: right;
+        margin-top: 7px;
+        border: 1px solid #2692ff;
 
     }
-.container-item .btn .add-new{
-    font-size: 15px;
-    border: none;
-    background-color: #007BFF;
-    border-radius: 3px;
-    color: #fff;
-    height: 40px;
-    text-align: center;
-    padding: 5px 10px;
-    margin-bottom: 20px;
-}
-.container-item .btn .add-new:hover{
-    cursor: pointer;
-    background-color: #2692ff;
-}
+
+/* table data*/
 .container-item .tbl-item{
-    margin: 50px 0px;
-    min-height: 190px;
+    margin: 10px 0px;
+    max-height: 300px;
     overflow: auto;
 }
 .container-item .tbl-item table{

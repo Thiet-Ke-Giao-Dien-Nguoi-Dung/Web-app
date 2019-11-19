@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import {changePassword} from "../../api/authentication-api";
 
+
 class Password extends React.Component{
     constructor(props){
         super(props);
@@ -26,8 +27,8 @@ class Password extends React.Component{
             if(new_password === confirm_password)
             {
                 const data ={
-                    old_password:old_password,
-                    new_password:new_password,
+                    password:old_password,
+                    new_password:new_password
                 };
                 const response = await changePassword(data);
                 if(response.success)
@@ -37,6 +38,7 @@ class Password extends React.Component{
                         old_password:"",
                         new_password:"",
                         confirm_password:"" })
+                    /*ePass.emit("logout", false);*/
                 }
                 else
                 {
@@ -63,7 +65,7 @@ class Password extends React.Component{
                             <label className="brand"> Mật khẩu cũ</label>
                         </dt>
                         <dd>
-                            <input type="password" name="old_password" className="input-text" onChange={this.handleChange}/>
+                            <input type="password" name="old_password" className="input-text" onChange={this.handleChange} value={this.state.old_password}/>
                         </dd>
 
                     </dl>
@@ -72,7 +74,7 @@ class Password extends React.Component{
                             <label className="brand"> Mật khẩu mới</label>
                         </dt>
                         <dd>
-                            <input type="password" name="new_password" className="input-text" onChange={this.handleChange}/>
+                            <input type="password" name="new_password" className="input-text" onChange={this.handleChange} value={this.state.new_password}/>
                         </dd>
                     </dl>
                     <dl className="form-group">
@@ -80,12 +82,12 @@ class Password extends React.Component{
                             <label className="brand"> Nhập lại mật khẩu mới </label>
                         </dt>
                         <dd>
-                            <input type="password" name="confirm_password" className="input-text" onChange={this.handleChange}/>
+                            <input type="password" name="confirm_password" className="input-text" onChange={this.handleChange} value={this.state.confirm_password}/>
                         </dd>
                     </dl>
                 </div>
                 <div className="footer">
-                    <button className="btn-update">Thay đổi mật khẩu </button>
+                    <button className="btn-update" onClick={this.handleChangePassword}>Thay đổi mật khẩu </button>
                 </div>
             </div>
         );

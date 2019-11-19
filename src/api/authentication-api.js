@@ -1,4 +1,4 @@
-import {sendPostRequestWithoutToken, sendPostRequest} from "./api-send";
+import {sendPostRequestWithoutToken, sendPutRequest} from "./api-send";
 
 export function login(data)
 {
@@ -13,6 +13,7 @@ export function register(data)
 }
 export  function changePassword(data) {
     const route="/users/passwords";
-    return sendPostRequest(route, data);
+
+    return sendPutRequest(route, data);
 
 }

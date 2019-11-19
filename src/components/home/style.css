@@ -91,6 +91,3 @@
     height: calc(100% - 60px);
 }
 
-.rwt__tablist:not([aria-orientation="vertical"]) .rwt__tab[aria-selected="true"]:after {
-    border-bottom: 3px solid #2692ff !important;
-}
