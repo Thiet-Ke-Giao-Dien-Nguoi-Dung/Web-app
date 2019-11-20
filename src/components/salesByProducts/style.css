@@ -1,0 +1,25 @@
+.container-product{
+    margin-top: 20px;
+    position: relative;
+}
+.container-product .btn{
+    margin-bottom: 10px;
+    height: 60px;
+}
+.container-product .btn label{
+    margin-right: 5px;
+    font-size: 14px;
+}
+.container-product .btn input{
+    height: 38px;
+    border-radius: 3px;
+    border: 1px solid #2692ff;
+    margin-right: 30px;
+    width: 250px;
+    padding: 0px 10px;
+}
+.container-product .tbl-product{
+    margin: 10px 0px;
+    max-height: 300px;
+    overflow:auto;
+}

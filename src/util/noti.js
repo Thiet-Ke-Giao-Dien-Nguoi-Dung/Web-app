@@ -1,6 +1,5 @@
 import {toast } from 'react-toastify';
 
-
 const toast_config = {
     closeButton: true,
     showAnimation: 'animated fadeIn',

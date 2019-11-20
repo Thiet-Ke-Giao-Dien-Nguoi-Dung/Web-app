@@ -6,6 +6,7 @@ import iconEdit from "./icons/icons8-edit-26.png";
 import Modal from "../modal/modal";
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
+import {notification} from "../../util/noti"
 
 
 class Item extends React.Component {
@@ -63,24 +64,24 @@ class Item extends React.Component {
             formData.append('id_category', data.id_category);
             const response = await addNewItem(formData);
             if (response.success) {
-                alert("success");
+                this.toggleAddNew();
+                notification("success", "Thêm mới sản phẩm thành công ")
                 this.setState({
                     nameNewItem:"",
                     imgNewItem:null,
                     priceNewItem:""
                 })
-                this.toggleAddNew();
                 const res = await getItems();
                 if (res.success) {
                     this.setState({items: res.data.items});
                 } else {
-                    console.log(res.message);
+                    notification("error", res.message);
                 }
             } else {
-                console.log(response.message);
+                notification("error", response.message);
             }
         } else {
-            alert("Xin dien du thong tin");
+            notification("warning", "Xin điền đủ thông tin ");
         }
     }
     async handleEditItem() {
@@ -92,22 +93,22 @@ class Item extends React.Component {
         }
         const response = await editItem(idItem,data);
         if (response.success) {
-            alert("success");
             this.toggleEdit();
+            notification("success", "Chỉnh sửa thông tin sản phẩm thành công ")
             this.setState({
                 nameItem: "",
                 priceItem: "",
                 statusItem: ""
             })
             let idCate = this.state.id_category;
-            const response = await getItems(idCate);
-            if (response.success) {
-                this.setState({items: response.data.items});
+            const res = await getItems(idCate);
+            if (res.success) {
+                this.setState({items: res.data.items});
             } else {
-                console.log(response.message);
+                notification("error", res.message);
             }
         } else {
-            console.log(response.message)
+            notification("warning", "Xin điền đủ thông tin ");
         }
     }
     toggleAddNew() {
@@ -181,7 +182,7 @@ class Item extends React.Component {
         if (response.success) {
             this.setState({categories: response.data.categories});
         } else
-            alert(response);
+            console.log(response.message)
 
         const res = await getItems();
         if (res.success) {
@@ -300,7 +301,7 @@ class Item extends React.Component {
                            addNew={this.handleEditItem}
                            brandButton="Chỉnh sửa "/>
                 </div>
-
+                <Pagination select={this.select}/>
                 <div className="tbl-item">
                     <table>
                         <thead>
@@ -334,7 +335,6 @@ class Item extends React.Component {
                     </table>
 
                 </div>
-                <Pagination select={this.select}/>
                 <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
             </div>
         );

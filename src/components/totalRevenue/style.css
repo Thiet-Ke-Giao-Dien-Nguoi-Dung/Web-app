@@ -1,0 +1,25 @@
+.container-total{
+    margin-top: 20px;
+    position: relative;
+}
+.container-total .btn{
+    margin-bottom: 10px;
+    height: 60px;
+}
+.container-total .btn label{
+    margin-right: 5px;
+    font-size: 14px;
+}
+.container-total .btn input{
+    height: 38px;
+    border-radius: 3px;
+    border: 1px solid #2692ff;
+    margin-right: 30px;
+    width: 250px;
+    padding: 0px 10px;
+}
+.container-total .body{
+    border: 1px solid #2692ff;
+    margin: 10px 0px;
+    min-height: 300px;
+}

@@ -27,7 +27,6 @@ class Setting extends React.Component {
     }
     render() {
         return(
-
             <BrowserRouter>
                 <div className="menubar">
                     <ul className="menu-list">

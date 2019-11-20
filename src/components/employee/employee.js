@@ -5,6 +5,7 @@ import Modal from "../modal/modal";
 import iconBin from "./icons/bin-26.png"
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
+import {notification} from "../../util/noti";
 
 class Employee extends React.Component{
     constructor(props)
@@ -70,7 +71,8 @@ class Employee extends React.Component{
                     const res = await getEmployees();
                     if(res.success)
                     {
-                        alert("success")
+                        this.toggleModal();
+                        notification("success", "Thêm mới nhân viên thành công ")
                         this.setState({employees:res.data.employees});
                         this.setState({
                             nameEmployee:"",
@@ -79,42 +81,42 @@ class Employee extends React.Component{
                             password:"",
                             confirmPassword:""
                         })
-                        this.toggleModal();
+
+
                     }
                     else
-                        alert(res.message);
+                        notification("error", res.message)
 
                 }
                 else {
-                    alert(response.message)
+                    notification("error", response.message)
                 }
             }
             else {
-                alert("Nhập lại mật khẩu không đúng !")
+                notification("error", "Nhập lại mật khẩu không đúng ")
             }
 
         }
         else {
-            alert("Xin dien du thong tin");
+            notification("warning", "Xin điền đủ thông tin")
         }
     }
     async handleDeleteEm(id_em)
     {
-        console.log("delete")
         const response = await deleteEmployee(id_em);
         if(response.success)
         {
-            alert("success");
-            const newEmployees = this.state.employees;
-            let index = newEmployees.find(x => x.id_employees = id_em);
-            if(index !== -1)
+            const res = await getEmployees();
+            if(res.success)
             {
-               newEmployees.splice(index, 1);
+                notification("success", "Xóa nhân viên thành công ")
+                this.setState({employees: res.data.employees});
             }
-            this.setState({employees: newEmployees});
+            else
+                notification("error", res.message);
         }
         else {
-            console.log(response.message);
+            notification("error", response.message);
         }
     }
     async componentDidMount()
@@ -124,7 +126,7 @@ class Employee extends React.Component{
         if(response.success)
             this.setState({employees:response.data.employees})
         else
-            alert(response.message);
+            console.log(response.message);
 
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -188,6 +190,7 @@ class Employee extends React.Component{
                         addNew={this.handleAddNewEmployee}
                         brandButton="Thêm mới "/>
             </div>
+            <Pagination select={this.select}/>
             <div className="tbl-employee">
                 <table>
                     <thead>
@@ -212,7 +215,7 @@ class Employee extends React.Component{
                     }
                     </tbody>
                 </table>
-                <Pagination select={this.select}/>
+
                 <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
             </div>
         </div>);

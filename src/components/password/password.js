@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import {changePassword} from "../../api/authentication-api";
 
+import {notification} from "../../util/noti";
 
 class Password extends React.Component{
     constructor(props){
@@ -33,7 +34,7 @@ class Password extends React.Component{
                 const response = await changePassword(data);
                 if(response.success)
                 {
-                    alert("Success");
+                    notification("success", "Thay đổi mật khẩu thành công ")
                     this.setState({
                         old_password:"",
                         new_password:"",
@@ -42,15 +43,15 @@ class Password extends React.Component{
                 }
                 else
                 {
-                    alert("Mật khẩu cũ không đúng ");
+                    notification("error","Mật khẩu cũ không đúng ");
                 }
             }
             else {
-                alert("Nhập lại mật khẩu không đúng ");
+                notification("error","Nhập lại mật khẩu không đúng ");
             }
         }
         else {
-            alert("Xin dien du thong tin");
+            notification("warning","Xin điền đủ thông tin");
         }
     }
     render() {

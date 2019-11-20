@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import {getInfoRestaurant, editInfoRestaurant} from "../../api/restaurant-api";
 import ee from "../../util/events"
+import {notification} from "../../util/noti";
 
 class Restaurant extends React.Component{
     constructor(props){
@@ -45,16 +46,16 @@ class Restaurant extends React.Component{
             const response = await editInfoRestaurant(data);
             if(response.success)
             {
-                alert("update successful");
+                notification("success", "Chỉnh sửa thông tin cửa hàng thành công ")
                 ee.emit("change-state", name_restaurant);
             }
             else
             {
-                alert(response.message);
+                notification("error",response.message);
             }
         }
         else {
-            alert("Xin hay dien du thong tin")
+            notification("warning","Xin điền đủ thông tin")
         }
     }
 

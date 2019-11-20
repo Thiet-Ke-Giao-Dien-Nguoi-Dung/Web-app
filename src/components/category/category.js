@@ -6,7 +6,7 @@ import iconBin from "./icons/bin-26.png"
 import Modal from "../modal/modal";
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
-
+import {notification} from "../../util/noti";
 
 class Category extends React.Component{
     constructor(props)
@@ -91,22 +91,21 @@ class Category extends React.Component{
             if(response.success)
             {
                 const res= await getCategories();
-                console.log("success");
-                if(response.success)
+                if(res.success)
                 {
-                    alert("success");
+                    notification("success", "Thêm mới loại sản phẩm thành công ")
                     this.setState({categories:res.data.categories});
                     this.setState({nameCategoryEdit:""})
                 }
                 else
-                    alert(response.message);
+                    notification("error", res.message)
                 this.toggleModal();
             }
             else
-                console.log(response);
+                notification("error", response.message)
         }
         else {
-            alert("Xin dien du thong tin");
+            notification("warning","Xin điền thông tin đầy đủ " )
         }
     }
     async handleDeleteCategory(id_cate)
@@ -115,13 +114,13 @@ class Category extends React.Component{
         if(response.success)
         {
             const res= await getCategories();
-            if(response.success)
+            if(res.success)
             {
-                alert("success");
+                notification("success","Xóa loại sản phẩm thành công")
                 this.setState({categories:res.data.categories});
             }
             else
-                alert(response.message);
+                notification("error", res.message);
             /*const newCategories = this.state.categories;
             let index = newCategories.find(x => x.id_category = id_cate);
             console.log(index);
@@ -135,7 +134,7 @@ class Category extends React.Component{
 
         }
         else {
-            console.log(response.message);
+            notification("error", response.message)
         }
     }
     async handleEditCategory(){
@@ -150,22 +149,22 @@ class Category extends React.Component{
             {
 
                 const res= await getCategories();
-                if(response.success)
+                if(res.success)
                 {
-                    alert("success");
+                   notification("success", "Chỉnh sửa thông tin loại sản phẩm thành công ")
                     this.setState({categories:res.data.categories});
                 }
                 else
-                    alert(response.message);
+                    notification("error", res.message);
                 this.toggleModalEdit();
             }
             else
             {
-                alert(response.message)
+                notification("error", response.message)
             }
         }
         else {
-            alert("Xin dien du thong tin")
+            notification("warning","Xin điền thông tin đầy đủ " )
         }
     }
     render() {
@@ -210,6 +209,7 @@ class Category extends React.Component{
                             addNew={this.handleEditCategory}
                             brandButton="Chỉnh sửa "/>
                 </div>
+                <Pagination select={this.select}/>
                 <div className="tbl-category">
                     <table>
                         <thead>
@@ -237,7 +237,6 @@ class Category extends React.Component{
                     </table>
 
                 </div>
-                <Pagination select={this.select}/>
                 <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
             </div>
         );

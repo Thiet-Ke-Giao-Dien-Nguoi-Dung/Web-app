@@ -65,7 +65,7 @@ class Login extends React.Component{
         }
         else
         {
-            notification("warning", "Something missing");
+            notification("warning", "Xin điền đủ thông tin");
         }
 
     }

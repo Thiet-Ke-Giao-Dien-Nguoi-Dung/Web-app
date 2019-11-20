@@ -2,6 +2,7 @@ import React from 'react';
 import "./style.css";
 import {Link, Redirect} from "react-router-dom";
 import {register} from "../../api/authentication-api";
+import {notification} from "../../util/noti";
 
 
 
@@ -48,17 +49,17 @@ class Register extends React.Component {
 
             }
             let res = await register(data);
-
-            console.log(res);
-
             if(res.success)
             {
                 this.setState({loggedIn:true});
             }
+            else {
+                notification("error", res.message);
+            }
         } else {
             if (password !== repassword)
-                alert("Mật khẩu không khớp ")
-            alert("Xin hay điền đủ thông tin !!!")
+                notification("error","Nhập lại mật khẩu không đúng")
+            notification("warning","Xin điền đủ thông tin !!!")
         }
 
     }
