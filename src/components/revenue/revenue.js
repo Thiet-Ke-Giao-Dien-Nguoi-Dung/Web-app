@@ -29,7 +29,7 @@ class Revenue extends React.Component{
                     <TabList>
                         <div className="tab-item">
                             <Tab tabFor="one" onClick={() => this.handleTab("one",<TotalRevenue/>)}>Tổng doanh thu </Tab>
-                            <Tab tabFor="two" onClick={() => this.handleTab("two",<SalesByProducts/>)}>Doanh thu từng sản phẩm </Tab>
+                            <Tab tabFor="two" onClick={() => this.handleTab("two",<SalesByProducts/>)}>Thống kê lượt đặt </Tab>
                         </div>
                     </TabList>
                     <TabPanel tabId={this.state.idPanel}>

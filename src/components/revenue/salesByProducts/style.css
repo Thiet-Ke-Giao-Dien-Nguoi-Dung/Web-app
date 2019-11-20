@@ -19,3 +19,28 @@
     overflow:auto;
 }
 
+.container-product .tbl-product table{
+    border-collapse: collapse;
+    width: 100%;
+    font-family: arial, sans-serif;
+    margin-bottom: 20px;
+}
+.container-product .tbl-product td,th{
+    text-align: left;
+    padding: 8px;
+}
+.container-product .tbl-product th{
+    position: sticky;
+    background-color: #fff;
+    top:-1px;
+    height: 30px;
+    font-size: 15px;
+}
+.container-product .tbl-product td{
+    font-size: 14px;
+}
+.container-product .tbl-product tr:nth-child(odd)
+{
+    background-color: #f4f7fe;
+}
+
