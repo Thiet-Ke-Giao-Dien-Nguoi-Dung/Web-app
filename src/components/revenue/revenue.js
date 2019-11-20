@@ -2,8 +2,8 @@ import React from 'react';
 import "./style.css";
 import {Tab, TabList, TabPanel, Tabs} from "react-web-tabs";
 
-import SalesByProducts from "../salesByProducts/salesByProducts";
-import TotalRevenue from "../totalRevenue/totalRevenue"
+import SalesByProducts from "./salesByProducts/salesByProducts";
+import TotalRevenue from "./totalRevenue/totalRevenue"
 
 class Revenue extends React.Component{
     constructor(props)

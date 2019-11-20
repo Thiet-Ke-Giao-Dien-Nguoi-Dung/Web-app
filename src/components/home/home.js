@@ -52,11 +52,9 @@ class Home extends React.Component{
             })
         })*/
         ee.on("change-state",(newstate) => {
-            console.log(newstate);
             this.setState({nameRestaurant:newstate})
         });
         const response = await getInfoRestaurant();
-        console.log(response);
         if(response.success)
         {
             const data = response.data.restaurants;
@@ -85,7 +83,7 @@ class Home extends React.Component{
                         <span className="name-restaurant">{this.state.nameRestaurant}</span>
                         <Link to={this.pathChangePassword} className="icon-setting" title="setting" ><img src={set} alt="icon-setting"/></Link>
                         <button onClick={this.handleLogout} className="btn-logout">
-                            <span className="icon-logout"></span>
+                            <span className="icon-logout"/>
                             Đăng xuất
                         </button>
                     </div>

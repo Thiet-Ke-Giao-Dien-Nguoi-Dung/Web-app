@@ -12,8 +12,6 @@ export function getItems(id_category) {
 }
 export  function editItem(id_item, data) {
     let id_res = localStorage.getItem("id_restaurant");
-    console.log(id_res);
-    console.log(id_item)
     let route = `/restaurants/${id_res}/items/${id_item}`;
     return sendPutRequest(route, data)
 }

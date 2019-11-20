@@ -57,7 +57,6 @@ class Login extends React.Component{
             {
                 localStorage.setItem("token",response.data.token);
                 localStorage.setItem("id_restaurant", response.data.id_restaurant);
-                console.log(localStorage.getItem("token"));
                 this.setState({loggedIn:true})
             }else{
                 notification("error",response.message);

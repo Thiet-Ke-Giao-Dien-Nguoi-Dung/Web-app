@@ -1,21 +1,19 @@
 .container-total{
-    margin-top: 20px;
+    margin-top: 9px;
     position: relative;
 }
-.container-total .btn{
-    margin-bottom: 10px;
-    height: 60px;
-}
+/*.container-total .btn{*/
+/*    height: 30px;*/
+/*}*/
 .container-total .btn label{
     margin-right: 5px;
     font-size: 14px;
 }
 .container-total .btn input{
-    height: 38px;
     border-radius: 3px;
     border: 1px solid #2692ff;
     margin-right: 30px;
-    width: 250px;
+    margin-bottom: 30px;
     padding: 0px 10px;
 }
 .container-total .body{

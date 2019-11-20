@@ -71,7 +71,6 @@ class Category extends React.Component{
         if(this.state.categories.length !== prevState.categories.length)
         {
             const response = await getCategories();
-            console.log(response);
             if(response.success)
                 this.setState({categories:response.data.categories});
             else
