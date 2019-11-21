@@ -12,8 +12,8 @@ class SalesByProducts extends React.Component{
         this.handleChange = this.handleChange.bind(this)
     }
     state = {
-        startDate: null,
-        endDate: null,
+        startDate: moment(Date.now() - 30 * one_day).format("YYYY-MM-DD"),
+        endDate: moment(Date.now()).format("YYYY-MM-DD"),
         items: null
     };
 
@@ -23,15 +23,12 @@ class SalesByProducts extends React.Component{
         this.setState({[nam]:tex});
     };
     async componentDidMount() {
-        let query = {
-            endDate: moment(Date.now()).format("YYYY/MM/DD"),
-            startDate: moment(Date.now() - 30 * one_day).format("YYYY/MM/DD"),
-        };
-        let items = await statisticItems(query);
+        let items = await statisticItems({
+            startDate: this.state.startDate.split("-").join("/"),
+            endDate: this.state.endDate.split("-").join("/")
+        });
         this.setState({
-            items: items.data.items,
-            startDate: query.startDate.split("/").join("-"),
-            endDate: query.endDate.split("/").join("-")
+            items: items.data.items
         })
     }
 

@@ -14,15 +14,15 @@ class TotalRevenue extends React.Component {
     }
 
     state = {
-        startDate: null,
-        endDate: null,
+        startDate: moment(Date.now() - 30 * one_day).format("YYYY-MM-DD"),
+        endDate: moment(Date.now()).format("YYYY-MM-DD"),
         data: null
     };
 
     async componentDidMount() {
         let query = {
-            endDate: moment(Date.now()).format("YYYY/MM/DD"),
-            startDate: moment(Date.now() - 30 * one_day).format("YYYY/MM/DD"),
+            startDate: this.state.startDate.split("-").join("/"),
+            endDate: this.state.endDate.split("-").join("/")
         };
         let result = await getRevenues(query);
         result = result.data.revenues;
@@ -33,9 +33,7 @@ class TotalRevenue extends React.Component {
             }
         });
         this.setState({
-            data: data,
-            startDate: query.startDate.split("/").join("-"),
-            endDate: query.endDate.split("/").join("-")
+            data: data
         })
     }
 
@@ -48,7 +46,7 @@ class TotalRevenue extends React.Component {
     render() {
         const options = {
             animationEnabled: true,
-            // exportEnabled: true,
+            exportEnabled: true,
             theme: "light2", // "light1", "dark1", "dark2", "light2"
             title: {
                 text: "Doanh thu"
