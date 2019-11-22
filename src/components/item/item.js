@@ -6,7 +6,7 @@ import iconEdit from "./icons/icons8-edit-26.png";
 import Modal from "../modal/modal";
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
-import {notification} from "../../util/noti"
+import {notification} from "../../util/noti";
 
 
 class Item extends React.Component {
@@ -22,7 +22,9 @@ class Item extends React.Component {
         this.handleImageChangeInAdd = this.handleImageChangeInAdd.bind(this);
 
         this.handleSelectInAddNew = this.handleSelectInAddNew.bind(this);
-        this.handleSelect = this.handleSelect.bind(this);
+        this.handleSelectCategory = this.handleSelectCategory.bind(this);
+
+        this.reloadWhenChangeCategory = this.reloadWhenChangeCategory.bind(this);
 
         this.state = {
             categories: [],
@@ -41,9 +43,12 @@ class Item extends React.Component {
             priceNewItem: "",
             idCategorySelected: "",
             idCategory:"",
-
-            currentPage: 1,
-            recordPerPage: 10
+            page_size: 5,
+            page_number: 1,
+            page_count: 1,
+            change_category: false,
+            next_page: false,
+            change_page_size: false
         }
     }
 
@@ -70,13 +75,8 @@ class Item extends React.Component {
                     nameNewItem:"",
                     imgNewItem:null,
                     priceNewItem:""
-                })
-                const res = await getItems();
-                if (res.success) {
-                    this.setState({items: res.data.items});
-                } else {
-                    notification("error", res.message);
-                }
+                });
+                this.setState({update_new: true})
             } else {
                 notification("error", response.message);
             }
@@ -90,7 +90,7 @@ class Item extends React.Component {
             name:nameItem,
             price:priceItem,
             status:statusItem
-        }
+        };
         const response = await editItem(idItem,data);
         if (response.success) {
             this.toggleEdit();
@@ -99,7 +99,7 @@ class Item extends React.Component {
                 nameItem: "",
                 priceItem: "",
                 statusItem: ""
-            })
+            });
             let idCate = this.state.id_category;
             const res = await getItems(idCate);
             if (res.success) {
@@ -148,16 +148,10 @@ class Item extends React.Component {
         this.setState({idCategorySelected: id_category});
     }
 
-    async handleSelect(event) {
+    async handleSelectCategory(event) {
         const selectedIndex = event.target.options.selectedIndex;
         const id_category = event.target.options[selectedIndex].getAttribute('data-key');
-        this.setState({id_category: id_category});
-        const response = await getItems(id_category);
-        if (response.success) {
-            this.setState({items: response.data.items});
-        } else {
-            console.log(response.message);
-        }
+        this.setState({id_category: id_category, change_category: true});
     }
 
     handleSelectStatus = (event)=>{
@@ -169,59 +163,111 @@ class Item extends React.Component {
     };
     chosePage = (event) =>{
         this.setState({
-            currentPage: Number(event.target.id)
+            page_number: Number(event.target.id),
+            next_page: true
         });
-    }
-    select = (event) => {
+    };
+    changePageSize = (event) => {
         this.setState({
-            recordPerPage: event.target.value
+            page_size: event.target.value,
+            change_page_size: true,
+            page_number: 1
         })
-    }
+    };
     async componentDidMount() {
         const response = await getCategories();
         if (response.success) {
             this.setState({categories: response.data.categories});
         } else
-            console.log(response.message)
-
-        const res = await getItems();
+            console.log(response.message);
+        let query = {
+            page_size: this.state.page_size,
+            page_number: this.state.page_number - 1,
+            id_category: ""
+        };
+        const res = await getItems(query);
         if (res.success) {
-            this.setState({items: res.data.items});
+            this.setState({items: res.data.items, page_count: Math.ceil(res.data.count / this.state.page_size)});
         } else {
             console.log(res.message);
         }
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.items.length !== prevState.items.length) {
-            let idCate = this.state.id_category;
-            const response = await getItems(idCate);
-            if (response.success) {
-                this.setState({items: response.data.items});
-            } else {
-                console.log(response.message);
-            }
+    reloadWhenChangeCategory = async () => {
+        let query = {
+            page_size: this.state.page_size,
+            page_number: 0,
+            id_category: this.state.id_category
+        };
+        const response = await getItems(query);
+        if (response.success) {
+            this.setState({
+                items: response.data.items,
+                change_category: false,
+                page_count: Math.ceil(response.data.count / this.state.page_size),
+                page_number: 1
+            });
+        } else {
+            console.log(response.message);
+        }
+    };
+
+    reloadWhenNextPage = async () => {
+        let query = {
+            page_size: this.state.page_size,
+            page_number: this.state.page_number - 1,
+            id_category: this.state.id_category
+        };
+        const response = await getItems(query);
+        if (response.success) {
+            this.setState({
+                items: response.data.items,
+                next_page: false,
+            });
+        } else {
+            console.log(response.message);
+        }
+    };
+
+    reloadWhenChangePageSize = async () => {
+        let query = {
+            page_size: this.state.page_size,
+            page_number: 0,
+            id_category: this.state.id_category
+        };
+        const response = await getItems(query);
+        if (response.success) {
+            this.setState({
+                items: response.data.items,
+                change_page_size: false,
+                page_count: Math.ceil(response.data.count / this.state.page_size)
+            });
+        } else {
+            console.log(response.message);
+        }
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.change_category){
+            this.reloadWhenChangeCategory();
+;       }
+        if(this.state.next_page){
+            this.reloadWhenNextPage();
+        }
+        if(this.state.change_page_size){
+            this.reloadWhenChangePageSize();
         }
     }
 
     render() {
-        const currentPage = this.state.currentPage;
-        const recordPerPage = this.state.recordPerPage;
-        const indexOfLastNews = currentPage * recordPerPage;
-        const indexOfFirstNews = indexOfLastNews - recordPerPage;
-        const currentTodos = this.state.items.slice(indexOfFirstNews, indexOfLastNews);
-
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(this.state.items.length / recordPerPage); i++) {
-            pageNumbers.push(i);
-        }
+        const currentTodos = this.state.items;
         return (
             <div className="container-item">
 
                 <div className="list-group">
                     <button className="add-new" onClick={this.toggleAddNew}>+ Thêm mới sản phẩm</button>
                     <div className="dropdown">
-                        <select defaultValue={"Chon tat ca"} onChange={this.handleSelect}>
+                        <select defaultValue={"Chọn tất cả"} onChange={this.handleSelectCategory}>
                             <option key={""} data-key={""}>Chọn tất cả</option>
                             {
                                 (this.state.categories || []).map((e) => {
@@ -301,7 +347,7 @@ class Item extends React.Component {
                            addNew={this.handleEditItem}
                            brandButton="Chỉnh sửa "/>
                 </div>
-                <Pagination select={this.select}/>
+                <Pagination changePageSize={this.changePageSize} page_size={this.state.page_size}/>
                 <div className="tbl-item">
                     <table>
                         <thead>
@@ -320,7 +366,7 @@ class Item extends React.Component {
                             (currentTodos || []).map((e, index) => {
                                 return <tr key={e.id_item}>
                                     {/*<td>{index + 1}</td>*/}
-                                    <td>{index + 1 + (currentPage - 1)* recordPerPage}</td>
+                                    <td>{index + (this.state.page_number - 1) * this.state.page_size + 1}</td>
                                     <td><img src={e.image} alt="food" height={40} width={40}/></td>
                                     <td>{e.name}</td>
                                     <td>{e.price}</td>
@@ -335,7 +381,7 @@ class Item extends React.Component {
                     </table>
 
                 </div>
-                <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
+                <GetByNumberPages chosePage={this.chosePage} pageNumbers={this.state.page_count} currentPage={this.state.page_number}/>
             </div>
         );
     }

@@ -6,6 +6,7 @@
     .container-item .list-group{
         display: flex;
         margin-bottom: 10px;
+        position: absolute;
     }
     .container-item .dropdown select{
         border: 1px solid #2692ff;
@@ -54,8 +55,8 @@
 /* table data*/
 .container-item .tbl-item{
     margin: 10px 0px;
-    max-height: 300px;
     overflow: auto;
+    clear: right;
 }
 .container-item .tbl-item table{
     border-collapse: collapse;
