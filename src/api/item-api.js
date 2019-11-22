@@ -1,13 +1,11 @@
 import {sendGetRequest, sendPutRequest, sendPostRequest} from "./api-send";
-import {stringify} from "query-string";
 
-export function getItems(id_category) {
+export function getItems(query) {
+    console.log(query);
     let id_res = localStorage.getItem("id_restaurant");
-    let route;
-    if(id_category !== "")
-        route = `/restaurants/${id_res}/items?${stringify({id_category})}`;
-    else
-        route = `/restaurants/${id_res}/items`;
+    let route = `/restaurants/${id_res}/items?page_size=${query.page_size}&page_number=${query.page_number}`;
+    if(query.id_category !== "" && query.id_category !== undefined)
+        route = route + `&id_category=${query.id_category}`;
     return sendGetRequest(route);
 }
 export  function editItem(id_item, data) {

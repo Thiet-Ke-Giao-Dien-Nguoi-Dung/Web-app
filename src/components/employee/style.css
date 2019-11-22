@@ -29,8 +29,8 @@
     }
     .container-employee .tbl-employee{
         margin: 10px 0px;
-        max-height: 300px;
         overflow: auto;
+        clear: right;
     }
         .container-employee .tbl-employee table{
             border-collapse: collapse;

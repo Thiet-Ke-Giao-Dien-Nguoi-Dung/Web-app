@@ -7,11 +7,11 @@ class Pagination extends React.Component{
         return (
             <div className="news-per-page">
                 Đang hiển thị: &nbsp; &nbsp;
-                <select defaultValue={this.props.page_size} onChange={this.props.select} >
+                <select defaultValue={this.props.page_size} onChange={this.props.changePageSize} >
+                    <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
-                    <option value="40">40</option>
 
 
                 </select>
@@ -21,6 +21,6 @@ class Pagination extends React.Component{
     }
 }
 Pagination.propTypes = {
-    select: PropTypes.func.isRequired
+    changePageSize: PropTypes.func.isRequired
 };
 export default Pagination;

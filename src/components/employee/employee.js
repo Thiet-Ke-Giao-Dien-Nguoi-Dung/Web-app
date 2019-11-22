@@ -3,8 +3,6 @@ import "./style.css";
 import {getEmployees, addNewEmployee, deleteEmployee} from "../../api/employee-api";
 import Modal from "../modal/modal";
 import iconBin from "./icons/bin-26.png"
-import Pagination from "../pagination/pagination";
-import GetByNumberPages from "../getByNumberPages/getByNumberPages";
 import {notification} from "../../util/noti";
 
 class Employee extends React.Component{
@@ -190,7 +188,7 @@ class Employee extends React.Component{
                         addNew={this.handleAddNewEmployee}
                         brandButton="Thêm mới "/>
             </div>
-            <Pagination select={this.select}/>
+            {/*<Pagination select={this.select}/>*/}
             <div className="tbl-employee">
                 <table>
                     <thead>
@@ -216,7 +214,7 @@ class Employee extends React.Component{
                     </tbody>
                 </table>
 
-                <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
+                {/*<GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>*/}
             </div>
         </div>);
     }

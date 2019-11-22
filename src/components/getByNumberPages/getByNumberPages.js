@@ -6,7 +6,6 @@ class GetByNumberPages extends React.Component{
     render() {
         let arr = [];
         for(let i=1; i<=this.props.pageNumbers; i++){
-            console.log(i);
             arr.push(i);
         }
         return(
@@ -37,7 +36,7 @@ class GetByNumberPages extends React.Component{
 }
 GetByNumberPages.propTypes = {
     chosePage: PropTypes.func.isRequired,
-    pageNumbers:PropTypes.array,
+    pageNumbers:PropTypes.number,
     currentPage:PropTypes.number
 };
 export default GetByNumberPages;
