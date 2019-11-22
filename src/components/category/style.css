@@ -1,10 +1,10 @@
 .container-category{
     margin-top: 20px;
-    position: relative;
 }
 .container-category .btn{
     margin-bottom: 10px;
     height: 60px;
+    position: absolute;
 }
 .container-category .btn .add-new{
     font-size: 15px;
@@ -25,6 +25,7 @@
     margin: 10px 0px;
     max-height: 300px;
     overflow: auto;
+    clear: right;
 }
 .container-category .tbl-category table{
     border-collapse: collapse;
