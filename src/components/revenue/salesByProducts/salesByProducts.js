@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import moment from "moment";
 import {statisticItems} from "../../../api/revenue-api";
+import DatePicker from "react-datepicker";
 const one_day = 24 * 60 * 60 * 1000;
 
 
@@ -44,13 +45,22 @@ class SalesByProducts extends React.Component{
         }
     }
 
+    handleChangeDate = (date, column_state) => {
+        const valueOfInput = moment(date).format("YYYY/MM/DD");
+        console.log(column_state);
+        this.setState({[column_state]: valueOfInput})
+    };
+
     render() {
         return( <div className="container-product">
             <div className="btn">
                 <label>Từ: </label>
-                <input type="date" name="startDate" onChange={this.handleChange} value={this.state.startDate}/>
+                {/*<input type="date" name="startDate" onChange={this.handleChange} value={this.state.startDate}/>*/}
+                <DatePicker selected={moment(this.state.startDate).valueOf()} onChange={(value) => this.handleChangeDate(value, "startDate")}/>
                 <label>Đến: </label>
-                <input type="date" name="endDate" onChange={this.handleChange} value={this.state.endDate}/>
+                {/*<input type="date" name="endDate" onChange={this.handleChange} value={this.state.endDate}/>*/}
+                <DatePicker selected={moment(this.state.endDate).valueOf()} onChange={(value) => this.handleChangeDate(value, "endDate")} />
+
             </div>
             <div className="tbl-product">
                <table>
