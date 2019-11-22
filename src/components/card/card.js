@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import "./style.css";
 
 class Card extends React.Component {
-    constructor(props)
-    {
-        super(props);
-    }
+
     render() {
         return(
             <div className="container-card">
