@@ -7,8 +7,8 @@ import Register from "./components/register/register"
 import { ToastContainer } from 'react-toastify';
 
 
-import {Route,Switch} from "react-router-dom";
-import Redirect from "react-router-dom/es/Redirect";
+import {Route,Switch, Redirect} from "react-router-dom";
+
 
 
 class App extends React.Component{
