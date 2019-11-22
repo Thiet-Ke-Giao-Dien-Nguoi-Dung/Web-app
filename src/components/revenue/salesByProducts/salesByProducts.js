@@ -31,6 +31,18 @@ class SalesByProducts extends React.Component{
             items: items.data.items
         })
     }
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.startDate !== this.state.startDate || prevState.endDate !== this.state.endDate){
+            let query = {
+                startDate: this.state.startDate.split("-").join("/"),
+                endDate: this.state.endDate.split("-").join("/")
+            };
+            let result = await statisticItems(query);
+            this.setState({
+                items: result.data.items
+            })
+        }
+    }
 
     render() {
         return( <div className="container-product">

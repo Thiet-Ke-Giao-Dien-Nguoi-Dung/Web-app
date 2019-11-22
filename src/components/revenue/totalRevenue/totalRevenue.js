@@ -37,6 +37,26 @@ class TotalRevenue extends React.Component {
         })
     }
 
+    async componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.startDate !== this.state.startDate || prevState.endDate !== this.state.endDate){
+            let query = {
+                startDate: this.state.startDate.split("-").join("/"),
+                endDate: this.state.endDate.split("-").join("/")
+            };
+            let result = await getRevenues(query);
+            result = result.data.revenues;
+            let data = result.map(e => {
+                return {
+                    label: e.create_time,
+                    y: parseInt(e.revenue)
+                }
+            });
+            this.setState({
+                data: data
+            })
+        }
+    }
+
     handleChange(e) {
         let nam = e.target.name;
         let tex = e.target.value;
