@@ -4,11 +4,16 @@ import PropTypes from "prop-types";
 
 class GetByNumberPages extends React.Component{
     render() {
+        let arr = [];
+        for(let i=1; i<=this.props.pageNumbers; i++){
+            console.log(i);
+            arr.push(i);
+        }
         return(
             <div className="pagination-custom">
                 <ul id="page-numbers">
                     {
-                        this.props.pageNumbers.map(number => {
+                        arr.map(number => {
                             if (this.props.currentPage === number) {
                                 return (
                                     <li key={number} id={number} className="active">

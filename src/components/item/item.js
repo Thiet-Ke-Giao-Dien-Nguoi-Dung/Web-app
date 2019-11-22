@@ -6,7 +6,8 @@ import iconEdit from "./icons/icons8-edit-26.png";
 import Modal from "../modal/modal";
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
-import {notification} from "../../util/noti"
+import {notification} from "../../util/noti";
+
 
 
 class Item extends React.Component {
@@ -41,7 +42,9 @@ class Item extends React.Component {
             priceNewItem: "",
             idCategorySelected: "",
             idCategory:"",
-
+            page_size: 20,
+            page_number: 0,
+            page_count: 0,
             currentPage: 1,
             recordPerPage: 10
         }
@@ -90,7 +93,7 @@ class Item extends React.Component {
             name:nameItem,
             price:priceItem,
             status:statusItem
-        }
+        };
         const response = await editItem(idItem,data);
         if (response.success) {
             this.toggleEdit();
@@ -99,7 +102,7 @@ class Item extends React.Component {
                 nameItem: "",
                 priceItem: "",
                 statusItem: ""
-            })
+            });
             let idCate = this.state.id_category;
             const res = await getItems(idCate);
             if (res.success) {
@@ -171,22 +174,23 @@ class Item extends React.Component {
         this.setState({
             currentPage: Number(event.target.id)
         });
-    }
+    };
     select = (event) => {
         this.setState({
-            recordPerPage: event.target.value
+            page_size: event.target.value
         })
-    }
+    };
     async componentDidMount() {
         const response = await getCategories();
         if (response.success) {
             this.setState({categories: response.data.categories});
         } else
-            console.log(response.message)
+            console.log(response.message);
 
         const res = await getItems();
         if (res.success) {
-            this.setState({items: res.data.items});
+            console.log(res.data.count / this.state.page_size);
+            this.setState({items: res.data.items, page_count: parseInt(res.data.count / this.state.page_size)});
         } else {
             console.log(res.message);
         }
@@ -205,23 +209,14 @@ class Item extends React.Component {
     }
 
     render() {
-        const currentPage = this.state.currentPage;
-        const recordPerPage = this.state.recordPerPage;
-        const indexOfLastNews = currentPage * recordPerPage;
-        const indexOfFirstNews = indexOfLastNews - recordPerPage;
-        const currentTodos = this.state.items.slice(indexOfFirstNews, indexOfLastNews);
-
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(this.state.items.length / recordPerPage); i++) {
-            pageNumbers.push(i);
-        }
+        const currentTodos = this.state.items;
         return (
             <div className="container-item">
 
                 <div className="list-group">
                     <button className="add-new" onClick={this.toggleAddNew}>+ Thêm mới sản phẩm</button>
                     <div className="dropdown">
-                        <select defaultValue={"Chon tat ca"} onChange={this.handleSelect}>
+                        <select defaultValue={"Chọn tất cả"} onChange={this.handleSelect}>
                             <option key={""} data-key={""}>Chọn tất cả</option>
                             {
                                 (this.state.categories || []).map((e) => {
@@ -301,7 +296,7 @@ class Item extends React.Component {
                            addNew={this.handleEditItem}
                            brandButton="Chỉnh sửa "/>
                 </div>
-                <Pagination select={this.select}/>
+                <Pagination select={this.select} page_size={this.state.page_size}/>
                 <div className="tbl-item">
                     <table>
                         <thead>
@@ -320,7 +315,7 @@ class Item extends React.Component {
                             (currentTodos || []).map((e, index) => {
                                 return <tr key={e.id_item}>
                                     {/*<td>{index + 1}</td>*/}
-                                    <td>{index + 1 + (currentPage - 1)* recordPerPage}</td>
+                                    {/*<td>{index + 1 + (currentPage - 1)* recordPerPage}</td>*/}
                                     <td><img src={e.image} alt="food" height={40} width={40}/></td>
                                     <td>{e.name}</td>
                                     <td>{e.price}</td>
@@ -335,7 +330,7 @@ class Item extends React.Component {
                     </table>
 
                 </div>
-                <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
+                <GetByNumberPages chosePage={this.chosePage} pageNumbers={this.state.page_count} currentPage={this.state.page_number}/>
             </div>
         );
     }
