@@ -20,7 +20,7 @@ class Home extends React.Component{
         this.pathSetting="/settings";
         this.pathChangePassword = "/settings/changePassword";
         this.pathDashboard="/dashboard";
-        this.pathDashboardMeal = "/dashboard/meal";
+        this.pathDashboardOrder = "/dashboard/order";
 
 
         let loggedIn = true;
@@ -77,7 +77,7 @@ class Home extends React.Component{
                 <BrowserRouter>
                 <div className="header">
                     <div className="header-left">
-                        <Link to={this.pathDashboardMeal}><img src={logo} alt={"logo"}/></Link>
+                        <Link to={this.pathDashboardOrder}><img src={logo} alt={"logo"}/></Link>
                     </div>
                     <div className="header-right">
                         <span className="name-restaurant">{this.state.nameRestaurant}</span>

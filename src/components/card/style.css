@@ -1,0 +1,26 @@
+.container-card{
+    background-color: #fff;
+    border-radius: 3px;
+    margin: 20px 0px;
+    padding: 10px 10px;
+    border: 1px solid #bfbfbf;
+}
+.container-card .header-card{
+    left: 0;
+    right: 0;
+    top: 0;
+    border-bottom: 1px solid #bfbfbf;
+    height: 38px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.container-card .header-card .number-table{
+    font-weight: bold;
+}
+.container-card .header-card .date-order{
+    font-style: italic;
+}
+.container-card .content-card ul li {
+    word-wrap: break-word;
+}
