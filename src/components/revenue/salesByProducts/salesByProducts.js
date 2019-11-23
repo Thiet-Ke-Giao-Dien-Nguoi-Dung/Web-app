@@ -2,9 +2,8 @@ import React from "react";
 import "./style.css";
 import moment from "moment";
 import {statisticItems} from "../../../api/revenue-api";
-import DatePicker from "react-datepicker";
+import DatePickerCustom from "../../datepicker/datepicker";
 const one_day = 24 * 60 * 60 * 1000;
-
 
 class SalesByProducts extends React.Component{
 
@@ -47,20 +46,16 @@ class SalesByProducts extends React.Component{
 
     handleChangeDate = (date, column_state) => {
         const valueOfInput = moment(date).format("YYYY/MM/DD");
-        console.log(column_state);
         this.setState({[column_state]: valueOfInput})
     };
 
     render() {
         return( <div className="container-product">
             <div className="btn">
-                <label>Từ: </label>
-                {/*<input type="date" name="startDate" onChange={this.handleChange} value={this.state.startDate}/>*/}
-                <DatePicker selected={moment(this.state.startDate).valueOf()} onChange={(value) => this.handleChangeDate(value, "startDate")}/>
-                <label>Đến: </label>
-                {/*<input type="date" name="endDate" onChange={this.handleChange} value={this.state.endDate}/>*/}
-                <DatePicker selected={moment(this.state.endDate).valueOf()} onChange={(value) => this.handleChangeDate(value, "endDate")} />
-
+                <label>Từ: &nbsp;</label>
+                <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
+                <label>Đến: &nbsp;</label>
+                <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
             </div>
             <div className="tbl-product">
                <table>

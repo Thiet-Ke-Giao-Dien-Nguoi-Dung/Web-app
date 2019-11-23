@@ -3,10 +3,7 @@ import "./style.css";
 import moment from 'moment'
 import CanvasJSReact from "../../../util/canvas/canvasjs.react";
 import {getRevenues} from "../../../api/revenue-api";
-
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
+import DatePickerCustom from "../../datepicker/datepicker";
 
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -79,7 +76,7 @@ class TotalRevenue extends React.Component {
             exportEnabled: true,
             theme: "light2", // "light1", "dark1", "dark2", "light2"
             title: {
-                text: "Doanh thu"
+                text: "Doanh thu nhà hàng theo ngày"
             },
             axisY: {
                 //includeZero: true
@@ -97,12 +94,10 @@ class TotalRevenue extends React.Component {
         return (
             <div className="container-total">
                 <div className="btn">
-                    <label>Từ: </label>
-                    {/*<input type="date" onChange={this.handleChange} name="startDate" value={this.state.startDate}/>*/}
-                    <DatePicker selected={moment(this.state.startDate).valueOf()} onChange={(value) => this.handleChangeDate(value, "startDate")}/>
-                    <label>Đến: </label>
-                    {/*<input type="date" onChange={this.handleChange} name="endDate" value={this.state.endDate}/>*/}
-                    <DatePicker selected={moment(this.state.endDate).valueOf()} onChange={(value) => this.handleChangeDate(value, "endDate")} />
+                    <label>Từ: &nbsp;</label>
+                    <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
+                    <label>Đến: &nbsp;</label>
+                    <DatePickerCustom startDate={this.state.endDate} handleChangeDate={this.handleChangeDate} name={"endDate"}/>
                 </div>
                 <div className="body">
                     <CanvasJSChart options={options}/>

@@ -2,21 +2,12 @@
     margin-top: 9px;
     position: relative;
 }
-/*.container-total .btn{*/
-/*    height: 30px;*/
-/*}*/
+
 .container-total .btn label{
     margin-right: 5px;
     font-size: 14px;
 }
-.container-total .btn input{
-    border-radius: 3px;
-    border: 1px solid #2692ff;
-    margin-right: 30px;
-    margin-bottom: 30px;
-    padding: 0px 10px;
-}
 .container-total .body{
-    margin: 10px 0px;
+    margin: 10px 0;
     min-height: 300px;
 }
