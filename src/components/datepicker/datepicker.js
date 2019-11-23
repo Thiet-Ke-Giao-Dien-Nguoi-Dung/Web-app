@@ -6,8 +6,9 @@ import moment from "moment";
 
 class DatePickerCustom extends React.Component{
     render() {
+        let selected = this.props[this.props.name];
         return(
-            <DatePicker selected={moment(this.props.startDate).valueOf()} onChange={(value) => this.props.handleChangeDate(value, this.props.name)}/>
+            <DatePicker selected={moment(selected).valueOf()} onChange={(value) => this.props.handleChangeDate(value, this.props.name)}/>
         )
     }
 }

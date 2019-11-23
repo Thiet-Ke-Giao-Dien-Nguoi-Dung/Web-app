@@ -12,8 +12,8 @@ class SalesByProducts extends React.Component{
         this.handleChange = this.handleChange.bind(this)
     }
     state = {
-        startDate: moment(Date.now() - 30 * one_day).format("YYYY-MM-DD"),
-        endDate: moment(Date.now()).format("YYYY-MM-DD"),
+        startDate: moment(Date.now() - 30 * one_day).format("YYYY/MM/DD"),
+        endDate: moment(Date.now()).format("YYYY/MM/DD"),
         items: null
     };
 
@@ -24,18 +24,19 @@ class SalesByProducts extends React.Component{
     };
     async componentDidMount() {
         let items = await statisticItems({
-            startDate: this.state.startDate.split("-").join("/"),
-            endDate: this.state.endDate.split("-").join("/")
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
         });
         this.setState({
             items: items.data.items
         })
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.state)
         if(prevState.startDate !== this.state.startDate || prevState.endDate !== this.state.endDate){
             let query = {
-                startDate: this.state.startDate.split("-").join("/"),
-                endDate: this.state.endDate.split("-").join("/")
+                startDate: this.state.startDate,
+                endDate: this.state.endDate
             };
             let result = await statisticItems(query);
             this.setState({
@@ -55,7 +56,7 @@ class SalesByProducts extends React.Component{
                 <label>Từ: &nbsp;</label>
                 <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
                 <label>Đến: &nbsp;</label>
-                <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
+                <DatePickerCustom endDate={this.state.endDate} handleChangeDate={this.handleChangeDate} name={"endDate"}/>
             </div>
             <div className="tbl-product">
                <table>

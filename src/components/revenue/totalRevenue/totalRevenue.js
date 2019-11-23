@@ -66,7 +66,6 @@ class TotalRevenue extends React.Component {
 
     handleChangeDate = (date, column_state) => {
         const valueOfInput = moment(date).format("YYYY/MM/DD");
-        console.log(column_state);
         this.setState({[column_state]: valueOfInput})
     };
 
@@ -97,7 +96,7 @@ class TotalRevenue extends React.Component {
                     <label>Từ: &nbsp;</label>
                     <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
                     <label>Đến: &nbsp;</label>
-                    <DatePickerCustom startDate={this.state.endDate} handleChangeDate={this.handleChangeDate} name={"endDate"}/>
+                    <DatePickerCustom endDate={this.state.endDate} handleChangeDate={this.handleChangeDate} name={"endDate"}/>
                 </div>
                 <div className="body">
                     <CanvasJSChart options={options}/>

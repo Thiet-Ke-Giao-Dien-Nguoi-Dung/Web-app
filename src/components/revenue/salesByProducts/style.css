@@ -10,7 +10,6 @@
 
 .container-product .tbl-product{
     margin: 10px 0;
-    max-height: 300px;
     overflow:auto;
 }
 
