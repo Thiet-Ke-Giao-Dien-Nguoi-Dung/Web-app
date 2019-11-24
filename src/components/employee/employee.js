@@ -66,6 +66,7 @@ class Employee extends React.Component{
                 const response = await addNewEmployee(data);
                 if(response.success)
                 {
+                    console.log(response)
                     const res = await getEmployees();
                     if(res.success)
                     {
