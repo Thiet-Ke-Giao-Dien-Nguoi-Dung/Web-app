@@ -7,15 +7,9 @@
     margin-right: 5px;
     font-size: 14px;
 }
-.container-product .btn input{
-    border-radius: 3px;
-    border: 1px solid #2692ff;
-    margin-right: 30px;
-    padding: 0px 10px;
-}
+
 .container-product .tbl-product{
-    margin: 10px 0px;
-    max-height: 300px;
+    margin: 10px 0;
     overflow:auto;
 }
 
@@ -43,4 +37,3 @@
 {
     background-color: #f4f7fe;
 }
-

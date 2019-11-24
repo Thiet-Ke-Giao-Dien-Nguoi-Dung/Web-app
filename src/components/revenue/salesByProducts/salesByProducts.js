@@ -2,8 +2,8 @@ import React from "react";
 import "./style.css";
 import moment from "moment";
 import {statisticItems} from "../../../api/revenue-api";
+import DatePickerCustom from "../../datepicker/datepicker";
 const one_day = 24 * 60 * 60 * 1000;
-
 
 class SalesByProducts extends React.Component{
 
@@ -12,8 +12,8 @@ class SalesByProducts extends React.Component{
         this.handleChange = this.handleChange.bind(this)
     }
     state = {
-        startDate: moment(Date.now() - 30 * one_day).format("YYYY-MM-DD"),
-        endDate: moment(Date.now()).format("YYYY-MM-DD"),
+        startDate: moment(Date.now() - 30 * one_day).format("YYYY/MM/DD"),
+        endDate: moment(Date.now()).format("YYYY/MM/DD"),
         items: null
     };
 
@@ -24,18 +24,19 @@ class SalesByProducts extends React.Component{
     };
     async componentDidMount() {
         let items = await statisticItems({
-            startDate: this.state.startDate.split("-").join("/"),
-            endDate: this.state.endDate.split("-").join("/")
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
         });
         this.setState({
             items: items.data.items
         })
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(this.state)
         if(prevState.startDate !== this.state.startDate || prevState.endDate !== this.state.endDate){
             let query = {
-                startDate: this.state.startDate.split("-").join("/"),
-                endDate: this.state.endDate.split("-").join("/")
+                startDate: this.state.startDate,
+                endDate: this.state.endDate
             };
             let result = await statisticItems(query);
             this.setState({
@@ -44,13 +45,18 @@ class SalesByProducts extends React.Component{
         }
     }
 
+    handleChangeDate = (date, column_state) => {
+        const valueOfInput = moment(date).format("YYYY/MM/DD");
+        this.setState({[column_state]: valueOfInput})
+    };
+
     render() {
         return( <div className="container-product">
             <div className="btn">
-                <label>Từ: </label>
-                <input type="date" name="startDate" onChange={this.handleChange} value={this.state.startDate}/>
-                <label>Đến: </label>
-                <input type="date" name="endDate" onChange={this.handleChange} value={this.state.endDate}/>
+                <label>Từ: &nbsp;</label>
+                <DatePickerCustom startDate={this.state.startDate} handleChangeDate={this.handleChangeDate} name={"startDate"}/>
+                <label>Đến: &nbsp;</label>
+                <DatePickerCustom endDate={this.state.endDate} handleChangeDate={this.handleChangeDate} name={"endDate"}/>
             </div>
             <div className="tbl-product">
                <table>
