@@ -1,6 +1,6 @@
 .container-employee{
     position: relative;
-    margin: 30px 25px;
+    margin: 20px 25px;
 }
     .container-employee .title{
         color: black;
@@ -20,8 +20,8 @@
 
     }
     .container-employee .btn{
-        height: 60px;
-        margin-bottom: 10px;
+        height: 40px;
+        margin-bottom: 20px;
     }
     .container-employee .btn .add-new:hover{
         cursor: pointer;

@@ -108,7 +108,7 @@ class Register extends React.Component {
                     </div>
                     <div className="register-card-help">
                         <div className="group-link">
-                            <Link to="/login" className="link-help">Tôi đã có tài khoản </Link>
+                            <Link to="/login" className="link-help"> Bạn đã có tài khoản </Link>
                         </div>
 
                     </div>

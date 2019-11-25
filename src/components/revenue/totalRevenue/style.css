@@ -1,8 +1,10 @@
 .container-total{
-    margin-top: 9px;
+    margin-top: 20px;
     position: relative;
 }
-
+.container-total .btn{
+    margin-bottom: 20px;
+}
 .container-total .btn label{
     margin-right: 5px;
     font-size: 14px;

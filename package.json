@@ -40,6 +40,7 @@
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react-cool-tabs": "^1.1.6",
+    "react-draggable": "^4.1.0",
     "react-dropdown": "^1.6.4",
     "react-dropzone": "^10.1.10",
     "react-router-dom": "^5.1.2",

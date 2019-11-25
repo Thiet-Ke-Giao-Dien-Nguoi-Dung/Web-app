@@ -1,0 +1,138 @@
+.container-order .pending{
+    width: calc(94%/3);
+    background-color: #f4f7fe;
+    margin: 0 1%;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+}
+.container-order .title{
+    height: 20px;
+    border-bottom: 2px solid #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: #2692ff;
+    font-weight: bold;
+}
+.container-order .title > label{
+    font-weight: bold;
+}
+
+.container-order  .list-card{
+    position: absolute;
+    top: 42px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+/*doing*/
+.container-order .doing{
+    width: calc(94%/3);
+    background-color: #f4f7fe;
+    margin: 0 1%;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left:calc((94%/3) + 2%) ;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+}
+/*.container-order .doing .title{
+    height: 20px;
+    border-bottom: 2px solid #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: #2692ff;
+    font-weight: bold;
+}
+.container-order .doing .title > label{
+    font-weight: bold;
+}
+
+.container-order .doing .list-card{
+    position: absolute;
+    top: 42px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}*/
+/*done*/
+.container-order .done{
+    width: calc(94%/3);
+    background-color: #f4f7fe;
+    margin: 0 1%;
+    height: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    white-space: nowrap;
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    left:calc((94%/3 + 2%)*2);
+    right: 0;
+    bottom: 0;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+}
+/*
+.container-order .done .title{
+    height: 20px;
+    border-bottom: 2px solid #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    color: #2692ff;
+    font-weight: bold;
+
+}
+.container-order .done .title > label{
+    font-weight: bold;
+}
+
+.container-order .done .list-card{
+    position: absolute;
+    top: 42px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+*/
+/*scroll bar*/
+
+/* width */
+.container-order ::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.container-order ::-webkit-scrollbar-track {
+    border: 1px solid #fff;
+    border-radius: 10px;
+    background-color: #fff
+}
+
+/* Handle */
+.container-order ::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 10px;
+}

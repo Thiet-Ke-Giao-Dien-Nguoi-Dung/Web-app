@@ -1,34 +1,24 @@
 .container-order{
-    margin: 30px 15px;
     position: absolute;
+    margin: 20px 15px;
     top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+
 }
-.container-order .panel{
-    width: calc(94%/3);
-    background-color: #f4f7fe;
-    margin: 0 1%;
-    height: 100%;
-    box-sizing: border-box;
-    display: inline-block;
-    vertical-align: top;
-    white-space: nowrap;
-    border-radius: 3px;
-    position: relative;
-}
-.container-order .panel .title{
-    height: 20px;
-    border-bottom: 2px solid #fff;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
-.container-order .panel .title > label{
-    font-weight: bold;
-}
-.container-order .panel .body{
-    margin: 20px 10px;
-    position: relative;
-}
+    .container-order .title-container{
+        color: black;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding-left: 10px;
+    }
+    .container-order .body-status{
+        position: absolute;
+        top: 34px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+

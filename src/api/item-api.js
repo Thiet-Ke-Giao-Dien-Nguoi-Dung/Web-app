@@ -1,7 +1,6 @@
 import {sendGetRequest, sendPutRequest, sendPostRequest} from "./api-send";
 
 export function getItems(query) {
-    console.log(query);
     let id_res = localStorage.getItem("id_restaurant");
     let route = `/restaurants/${id_res}/items?page_size=${query.page_size}&page_number=${query.page_number}`;
     if(query.id_category !== "" && query.id_category !== undefined)

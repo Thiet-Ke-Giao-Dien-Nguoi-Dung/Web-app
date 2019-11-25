@@ -4,9 +4,8 @@ import {getCategories, createCategory, deleteCategory, editCategory} from "../..
 import iconEdit from "./icons/icons8-edit-26.png";
 import iconBin from "./icons/bin-26.png"
 import Modal from "../modal/modal";
-import Pagination from "../pagination/pagination";
-import GetByNumberPages from "../getByNumberPages/getByNumberPages";
 import {notification} from "../../util/noti";
+
 
 class Category extends React.Component{
     constructor(props)
@@ -19,27 +18,18 @@ class Category extends React.Component{
         this.handleDeleteCategory=this.handleDeleteCategory.bind(this);
         this.handleEditCategory = this.handleEditCategory.bind(this);
 
+
         this.state={
             categories:[],
             nameCategory:"",
             isOpen:false,
             isOpenEdit:false,
             idCategoryEdit:"",
-            nameCategoryEdit:"",
-            currentPage: 1,
-            recordPerPage: 10
+            nameCategoryEdit:""
+
         }
     }
-    chosePage = (event) =>{
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-    }
-    select = (event) => {
-        this.setState({
-            recordPerPage: event.target.value
-        })
-    }
+
     toggleModal() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -166,19 +156,11 @@ class Category extends React.Component{
             notification("warning","Xin điền thông tin đầy đủ " )
         }
     }
-    render() {
-        const currentPage = this.state.currentPage;
-        const recordPerPage = this.state.recordPerPage;
-        const indexOfLastNews = currentPage * recordPerPage;
-        const indexOfFirstNews = indexOfLastNews - recordPerPage;
-        const currentTodos = this.state.categories.slice(indexOfFirstNews, indexOfLastNews);
 
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(this.state.categories.length / recordPerPage); i++) {
-            pageNumbers.push(i);
-        }
+    render() {
         return(
             <div className="container-category">
+                <div className="big-group">
                 <div className="btn">
                     <button className="add-new" onClick={this.toggleModal}>+ Thêm mới loại sản phẩm  </button>
                     <Modal  show={this.state.isOpen}
@@ -208,7 +190,7 @@ class Category extends React.Component{
                             addNew={this.handleEditCategory}
                             brandButton="Chỉnh sửa "/>
                 </div>
-                <Pagination select={this.select}/>
+                </div>
                 <div className="tbl-category">
                     <table>
                         <thead>
@@ -221,10 +203,9 @@ class Category extends React.Component{
                         </thead>
                         <tbody>
                         {
-                            (currentTodos || []).map((e, index) => {
+                            (this.state.categories || []).map((e, index) => {
                                     return <tr key={e.id_category}>
-                                        {/*<td>{index + 1}</td>*/}
-                                        <td>{index + 1 + (currentPage - 1)*recordPerPage}</td>
+                                        <td>{index + 1}</td>
                                         <td>{e.name}</td>
                                         <td className="title-edit"><img src={iconEdit} alt="icon-edit" className="btn-edit" onClick={() => this.toggleModalEdit(e.id_category, e.name)}/></td>
                                         <td className="title-del"><img src={iconBin} alt="icon-bin" className="btn-delete" onClick={() => this.handleDeleteCategory(e.id_category)}/></td>
@@ -236,7 +217,6 @@ class Category extends React.Component{
                     </table>
 
                 </div>
-                <GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>
             </div>
         );
     }

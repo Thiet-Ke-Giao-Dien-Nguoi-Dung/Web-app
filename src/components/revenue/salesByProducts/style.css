@@ -1,8 +1,10 @@
 .container-product{
-    margin-top: 9px;
+    margin-top: 20px;
     position: relative;
 }
-
+.container-product .btn{
+    margin-bottom: 20px;
+}
 .container-product .btn label{
     margin-right: 5px;
     font-size: 14px;
