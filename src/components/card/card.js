@@ -10,12 +10,18 @@ class Card extends React.Component {
     }
 
     dragStart(event) {
-        event.dataTransfer.setData("text", event.target.id);
+        let data = {
+            id: event.target.id,
+            status: this.props.statusOrder
+        }
+        let j = JSON.stringify(data);
+        event.dataTransfer.setData("text", j);
+        //event.dataTransfer.setData("text", event.target.id);
     }
 
     render() {
         return (
-            <div className="container-card" id={this.props.idCard} draggable={true} onDragStart={this.dragStart}>
+            <div className="container-card" id={this.props.idCard} draggable={true} onDragStart={this.dragStart} >
                 <div className="header-card">
                     <label className="number-table">{this.props.numberTable}</label>
                     <label className="date-order">Ngày: {this.props.dateOrder}</label>
@@ -36,6 +42,7 @@ class Card extends React.Component {
 
 Card.protoTypes = {
     idCard: PropTypes.string,
+    statusOrder:PropTypes.string,
     numberTable: PropTypes.string,
     dateOrder: PropTypes.string,
     listCard: PropTypes.array

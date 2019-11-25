@@ -1,5 +1,5 @@
 body {
-  font-size: 15px;
+  font-size: 15px !important;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

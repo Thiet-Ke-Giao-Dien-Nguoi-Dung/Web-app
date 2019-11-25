@@ -43,6 +43,7 @@ class Item extends React.Component {
             priceNewItem: "",
             idCategorySelected: "",
             idCategory:"",
+
             page_size: 5,
             page_number: 1,
             page_count: 1,
@@ -161,6 +162,7 @@ class Item extends React.Component {
             statusItem:valueStatus
         });
     };
+
     chosePage = (event) =>{
         this.setState({
             page_number: Number(event.target.id),
@@ -263,91 +265,93 @@ class Item extends React.Component {
         const currentTodos = this.state.items;
         return (
             <div className="container-item">
+                <div className="big-group">
+                    <div className="list-group">
+                        <button className="add-new" onClick={this.toggleAddNew}>+ Thêm mới sản phẩm</button>
+                        <div className="dropdown">
+                            <select defaultValue={"Chọn tất cả"} onChange={this.handleSelectCategory}>
+                                <option key={""} data-key={""}>Chọn tất cả</option>
+                                {
+                                    (this.state.categories || []).map((e) => {
+                                        return <option key={e.id_category} data-key={e.id_category}>{e.name}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                        <Modal onClose={this.toggleAddNew}
+                               show={this.state.isOpenAddNew}
+                               title="Thêm mới sản phẩm "
+                               childrenContent={
+                                   <form>
+                                       <div className="modal-group">
+                                           <label>Tên sản phẩm : </label>
+                                           <input type="text" name="nameNewItem" onChange={this.handleChange}/>
+                                       </div>
+                                       <div className="modal-group">
+                                           <label>Ảnh sản phẩm : </label>
+                                           <input style = { {border:"none"}}type="file" onChange={this.handleImageChangeInAdd}/>
+                                       </div>
 
-                <div className="list-group">
-                    <button className="add-new" onClick={this.toggleAddNew}>+ Thêm mới sản phẩm</button>
-                    <div className="dropdown">
-                        <select defaultValue={"Chọn tất cả"} onChange={this.handleSelectCategory}>
-                            <option key={""} data-key={""}>Chọn tất cả</option>
-                            {
-                                (this.state.categories || []).map((e) => {
-                                    return <option key={e.id_category} data-key={e.id_category}>{e.name}</option>
-                                })
-                            }
-                        </select>
+                                       <div className="modal-group">
+                                           <label>Giá sản phẩm : </label>
+                                           <input type="text" name="priceNewItem" onChange={this.handleChange}/>
+                                       </div>
+                                       <div className="modal-group">
+                                           <label>Loại : </label>
+                                           <div className="dropdown-addnew">
+                                               <select defaultValue="---" onChange={this.handleSelectInAddNew}>
+                                                   <option disabled>---</option>
+                                                   {
+                                                       (this.state.categories || []).map((e) => {
+                                                           return <option key={e.id_category}
+                                                                          data-key={e.id_category}>{e.name}</option>
+                                                       })
+                                                   }
+                                               </select>
+                                           </div>
+                                       </div>
+                                   </form>
+
+                               }
+                               addNew={this.handleAddNew}
+                               brandButton="Thêm mới "/>
+                        <Modal onClose={this.toggleEdit}
+                               show={this.state.isOpenEdit}
+                               title="Chỉnh sửa sản phẩm "
+                               childrenContent={
+                                   <form>
+                                       <div className="modal-group">
+                                           <label>Tên sản phẩm : </label>
+                                           <input type="text" name="nameItem" onChange={this.handleChange}
+                                                  value={this.state.nameItem}/>
+                                       </div>
+                                      {/*  <div className="modal-group">
+                                           <label>Ảnh sản phẩm : </label>
+                                           <input type="file" onChange={async  (e) => await this.setState({imgItem: e.target.files[0]})}/>
+                                         </div>*/}
+
+                                       <div className="modal-group">
+                                           <label>Giá sản phẩm : </label>
+                                           <input type="text" name="priceItem" onChange={this.handleChange}
+                                                  value={this.state.priceItem}/>
+                                       </div>
+                                       <div className="modal-group">
+                                           <label>Tình trạng sản phẩm : </label>
+                                           <div className="dropdown-addnew">
+                                               <select defaultValue={this.state.statusItem} onChange={this.handleSelectStatus}>
+                                                   <option value= "in_stock">Còn hàng</option>
+                                                   <option value="out_of_stock">Hết hàng </option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                   </form>
+                               }
+                               addNew={this.handleEditItem}
+                               brandButton="Chỉnh sửa "/>
+
                     </div>
-                    <Modal onClose={this.toggleAddNew}
-                           show={this.state.isOpenAddNew}
-                           title="Thêm mới sản phẩm "
-                           childrenContent={
-                               <form>
-                                   <div className="modal-group">
-                                       <label>Tên sản phẩm : </label>
-                                       <input type="text" name="nameNewItem" onChange={this.handleChange}/>
-                                   </div>
-                                   <div className="modal-group">
-                                       <label>Ảnh sản phẩm : </label>
-                                       <input style = { {border:"none"}}type="file" onChange={this.handleImageChangeInAdd}/>
-                                   </div>
-
-                                   <div className="modal-group">
-                                       <label>Giá sản phẩm : </label>
-                                       <input type="text" name="priceNewItem" onChange={this.handleChange}/>
-                                   </div>
-                                   <div className="modal-group">
-                                       <label>Loại : </label>
-                                       <div className="dropdown-addnew">
-                                           <select defaultValue="---" onChange={this.handleSelectInAddNew}>
-                                               <option disabled>---</option>
-                                               {
-                                                   (this.state.categories || []).map((e) => {
-                                                       return <option key={e.id_category}
-                                                                      data-key={e.id_category}>{e.name}</option>
-                                                   })
-                                               }
-                                           </select>
-                                       </div>
-                                   </div>
-                               </form>
-
-                           }
-                           addNew={this.handleAddNew}
-                           brandButton="Thêm mới "/>
-                    <Modal onClose={this.toggleEdit}
-                           show={this.state.isOpenEdit}
-                           title="Chỉnh sửa sản phẩm "
-                           childrenContent={
-                               <form>
-                                   <div className="modal-group">
-                                       <label>Tên sản phẩm : </label>
-                                       <input type="text" name="nameItem" onChange={this.handleChange}
-                                              value={this.state.nameItem}/>
-                                   </div>
-                                  {/*  <div className="modal-group">
-                                       <label>Ảnh sản phẩm : </label>
-                                       <input type="file" onChange={async  (e) => await this.setState({imgItem: e.target.files[0]})}/>
-                                     </div>*/}
-
-                                   <div className="modal-group">
-                                       <label>Giá sản phẩm : </label>
-                                       <input type="text" name="priceItem" onChange={this.handleChange}
-                                              value={this.state.priceItem}/>
-                                   </div>
-                                   <div className="modal-group">
-                                       <label>Tình trạng sản phẩm : </label>
-                                       <div className="dropdown-addnew">
-                                           <select defaultValue={this.state.statusItem} onChange={this.handleSelectStatus}>
-                                               <option value= "in_stock">Còn hàng</option>
-                                               <option value="out_of_stock">Hết hàng </option>
-                                           </select>
-                                       </div>
-                                   </div>
-                               </form>
-                           }
-                           addNew={this.handleEditItem}
-                           brandButton="Chỉnh sửa "/>
+                    <Pagination changePageSize={this.changePageSize} page_size={this.state.page_size}/>
                 </div>
-                <Pagination changePageSize={this.changePageSize} page_size={this.state.page_size}/>
                 <div className="tbl-item">
                     <table>
                         <thead>

@@ -2,9 +2,11 @@
     margin-top: 20px;
 }
 .container-category .btn{
-    margin-bottom: 10px;
-    height: 60px;
     position: absolute;
+}
+.container-category .big-group{
+    height: 40px;
+    margin-bottom: 20px;
 }
 .container-category .btn .add-new{
     font-size: 15px;

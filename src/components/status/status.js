@@ -21,16 +21,28 @@ class Status extends React.Component{
     }
     async drop(event){
         event.preventDefault();
-        let id_order = event.dataTransfer.getData("text");
-        const res = await updateStatusOrder({status:this.state.nStatus}, id_order);
-        if(res.success)
-        {
-            let data = document.getElementById(id_order);
-            document.getElementById(this.props.idStatus).appendChild(data);
-        }
+        let cardText = event.dataTransfer.getData("text");
+        let card = JSON.parse(cardText);
+        let id_order= card.id;
+        let statusCard = card.status;
+
+       if(statusCard !== this.state.nStatus)
+       {
+           const res = await updateStatusOrder({status:this.state.nStatus}, id_order);
+           if(res.success)
+           {
+               let data = document.getElementById(id_order);
+               document.getElementById(this.props.idStatus).appendChild(data);
+           }
+           else {
+               notification("error", res.message);
+           }
+       }
         else {
-            notification("error", res.message);
-        }
+
+           let data = document.getElementById(id_order);
+           document.getElementById(this.props.idStatus).appendChild(data);
+       }
     }
     async reloadWhenListStatusChange()
     {
@@ -68,6 +80,7 @@ class Status extends React.Component{
                                          numberTable = {e.Table.location}
                                          dateOrder = {e.create_time}
                                          listCard = {e.items}
+                                         statusOrder = {e.status}
                             />
                         })
                     }

@@ -52,6 +52,7 @@
     left:calc((94%/3) + 2%) ;
     right: 0;
     bottom: 0;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
 }
 /*.container-order .doing .title{
     height: 20px;
@@ -90,6 +91,7 @@
     left:calc((94%/3 + 2%)*2);
     right: 0;
     bottom: 0;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
 }
 /*
 .container-order .done .title{
