@@ -36,6 +36,7 @@ class Item extends React.Component {
             nameItem: "",
             priceItem: "",
             statusItem: "",
+            change_items:false,
 
             isOpenAddNew: false,
             nameNewItem: "",
@@ -99,15 +100,10 @@ class Item extends React.Component {
             this.setState({
                 nameItem: "",
                 priceItem: "",
-                statusItem: ""
+                statusItem: "",
+                change_items:true
             });
-            let idCate = this.state.id_category;
-            const res = await getItems(idCate);
-            if (res.success) {
-                this.setState({items: res.data.items});
-            } else {
-                notification("error", res.message);
-            }
+
         } else {
             notification("warning", "Xin điền đủ thông tin ");
         }
@@ -248,7 +244,20 @@ class Item extends React.Component {
             console.log(response.message);
         }
     };
-
+    reloadwhenItemsChange = async () =>{
+        let query = {
+            page_size: this.state.page_size,
+            page_number: this.state.page_number - 1,
+            id_category: this.state.id_category
+        }
+        const res = await getItems(query);
+        if (res.success) {
+            this.setState({change_items:false});
+            this.setState({items: res.data.items});
+        } else {
+            notification("error", res.message);
+        }
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.state.change_category){
             this.reloadWhenChangeCategory();
@@ -259,6 +268,8 @@ class Item extends React.Component {
         if(this.state.change_page_size){
             this.reloadWhenChangePageSize();
         }
+        if(this.state.change_items)
+            this.reloadwhenItemsChange();
     }
 
     render() {
