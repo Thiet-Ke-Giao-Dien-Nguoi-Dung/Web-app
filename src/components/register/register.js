@@ -58,7 +58,7 @@ class Register extends React.Component {
             }
         } else {
             if (password !== repassword)
-                notification("error","Nhập lại mật khẩu không đúng")
+                notification("error","Nhập lại mật khẩu không đúng");
             notification("warning","Xin điền đủ thông tin !!!")
         }
 
