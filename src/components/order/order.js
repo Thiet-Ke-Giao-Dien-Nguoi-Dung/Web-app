@@ -1,8 +1,7 @@
 import React from 'react';
 import "./style.css";
-import Pending from "../pending/pending";
-import Doing from "../doing/doing"
-import Done from "../done/done";
+import Status from "../status/status";
+
 class Order extends React.Component{
     render()
     {
@@ -12,9 +11,9 @@ class Order extends React.Component{
                    Quản lý đặt món ăn
                </div>
                <div className="body-status">
-                   <Pending/>
-                   <Doing/>
-                   <Done/>
+                  <Status nameStatus={"pending"} titleStatus={"Đang chờ xỷ lý "} idStatus={"list-pending"}/>
+                  <Status nameStatus={"doing"} titleStatus={"Đang thực hiện "} idStatus={"list-doing"}/>
+                  <Status nameStatus={"done"} titleStatus={"Đã hoàn thành "} idStatus={"list-done"}/>
                </div>
            </div>
         );
