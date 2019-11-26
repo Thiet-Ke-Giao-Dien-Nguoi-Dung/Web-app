@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import "../../util/initSocketIO"
 import {getCategories} from "../../api/category-api";
 import {getItems, editItem, addNewItem} from "../../api/item-api";
 import iconEdit from "./icons/icons8-edit-26.png";
@@ -7,6 +8,7 @@ import Modal from "../modal/modal";
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
 import {notification} from "../../util/noti";
+import initSocket from "../../util/initSocketIO";
 
 
 class Item extends React.Component {
@@ -189,6 +191,8 @@ class Item extends React.Component {
         } else {
             console.log(res.message);
         }
+        let id_restaurant = await localStorage.getItem("id_restaurant");
+        initSocket("create_order_" + id_restaurant, () =>{});
     }
 
     reloadWhenChangeCategory = async () => {
@@ -249,7 +253,7 @@ class Item extends React.Component {
             page_size: this.state.page_size,
             page_number: this.state.page_number - 1,
             id_category: this.state.id_category
-        }
+        };
         const res = await getItems(query);
         if (res.success) {
             this.setState({change_items:false});
@@ -257,7 +261,7 @@ class Item extends React.Component {
         } else {
             notification("error", res.message);
         }
-    }
+    };
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.state.change_category){
             this.reloadWhenChangeCategory();
