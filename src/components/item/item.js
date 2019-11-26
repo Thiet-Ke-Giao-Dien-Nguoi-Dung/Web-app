@@ -79,7 +79,6 @@ class Item extends React.Component {
                     priceNewItem:"",
                     change_items:true
                 });
-                this.setState({update_new: true})
             } else {
                 notification("error", response.message);
             }
