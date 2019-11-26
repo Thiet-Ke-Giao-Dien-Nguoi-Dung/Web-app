@@ -4,6 +4,7 @@ import {getEmployees, addNewEmployee, deleteEmployee} from "../../api/employee-a
 import Modal from "../modal/modal";
 import iconBin from "./icons/bin-26.png"
 import {notification} from "../../util/noti";
+import Confirm from "../confirm-alert/confirm";
 
 class Employee extends React.Component{
     constructor(props)
@@ -16,6 +17,9 @@ class Employee extends React.Component{
         this.chosePage = this.chosePage.bind(this);
         this.select = this.select.bind(this);
 
+        this.toggleDelete = this.toggleDelete.bind(this);
+        this.toggleConfirmDelete = this.toggleConfirmDelete.bind(this);
+
         this.state={
             incrementNumber:0,
             employees:[],
@@ -25,14 +29,33 @@ class Employee extends React.Component{
             displayName:"",
             password:"",
             confirmPassword:"",
-            currentPage: 1,
-            recordPerPage: 10
 
+            changeEmployees:false,
+            confirmDelete:false,
+            idEmployeeEdit:""
         }
+    }
+    toggleDelete(){
+        this.setState({
+            confirmDelete: !this.state.confirmDelete
+        })
+    };
+    toggleConfirmDelete(id_em)
+    {
+        this.setState({
+            confirmDelete: true,
+            idEmployeeEdit:id_em,
+
+        })
     }
     toggleModal() {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen,
+            nameEmployee:"",
+            phoneNumber:"",
+            displayName:"",
+            password:"",
+            confirmPassword:""
         });
     }
     handleChange(e){
@@ -66,25 +89,16 @@ class Employee extends React.Component{
                 const response = await addNewEmployee(data);
                 if(response.success)
                 {
-                    console.log(response)
-                    const res = await getEmployees();
-                    if(res.success)
-                    {
-                        this.toggleModal();
-                        notification("success", "Thêm mới nhân viên thành công ")
-                        this.setState({employees:res.data.employees});
-                        this.setState({
-                            nameEmployee:"",
-                            phoneNumber:"",
-                            displayName:"",
-                            password:"",
-                            confirmPassword:""
-                        })
-
-
-                    }
-                    else
-                        notification("error", res.message)
+                    this.toggleModal();
+                    notification("success", "Thêm mới nhân viên thành công ");
+                    this.setState({
+                        nameEmployee:"",
+                        phoneNumber:"",
+                        displayName:"",
+                        password:"",
+                        confirmPassword:"",
+                        changeEmployees:true
+                    })
 
                 }
                 else {
@@ -100,57 +114,42 @@ class Employee extends React.Component{
             notification("warning", "Xin điền đủ thông tin")
         }
     }
-    async handleDeleteEm(id_em)
+    async handleDeleteEm()
     {
+        let id_em = this.state.idEmployeeEdit;
         const response = await deleteEmployee(id_em);
         if(response.success)
         {
-            const res = await getEmployees();
-            if(res.success)
-            {
-                notification("success", "Xóa nhân viên thành công ")
-                this.setState({employees: res.data.employees});
-            }
-            else
-                notification("error", res.message);
+            this.toggleDelete();
+            notification("success", "Xóa nhân viên thành công ");
+            this.setState({changeEmployees:true})
         }
         else {
             notification("error", response.message);
         }
     }
-    async componentDidMount()
+    async reloadWhenEmployeesChange()
     {
         const response = await getEmployees();
-        console.log(response);
         if(response.success)
-            this.setState({employees:response.data.employees})
+            this.setState({employees:response.data.employees});
         else
-            console.log(response.message);
+            alert(response.message);
+    }
+    componentDidMount()
+    {
+        this.reloadWhenEmployeesChange();
 
     }
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.state.employees.length !== prevState.employees.length)
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.changeEmployees)
         {
-            const response = await getEmployees();
-            if(response.success)
-                this.setState({employees:response.data.employees})
-            else
-                alert(response.message);
+            this.reloadWhenEmployeesChange();
+            this.setState({changeEmployees:false})
         }
     }
 
     render() {
-        const currentPage = this.state.currentPage;
-        const recordPerPage = this.state.recordPerPage;
-        const indexOfLastNews = currentPage * recordPerPage;
-        const indexOfFirstNews = indexOfLastNews - recordPerPage;
-        const currentTodos = this.state.employees.slice(indexOfFirstNews, indexOfLastNews);
-
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(this.state.employees.length / recordPerPage); i++) {
-            pageNumbers.push(i);
-        }
-
         return(
 
         <div className="container-employee">
@@ -188,8 +187,15 @@ class Employee extends React.Component{
                         }
                         addNew={this.handleAddNewEmployee}
                         brandButton="Thêm mới "/>
+                <Confirm show={this.state.confirmDelete}
+                         onClose={this.toggleDelete}
+                         addNew={this.handleDeleteEm}
+                         brandButton={"Có "}
+                         childrenContent={
+                             <div>Bạn có chắc chắn muốn xóa? </div>
+                         }/>
             </div>
-            {/*<Pagination select={this.select}/>*/}
+
             <div className="tbl-employee">
                 <table>
                     <thead>
@@ -202,12 +208,12 @@ class Employee extends React.Component{
                     </thead>
                     <tbody>
                     {
-                        (currentTodos || []).map((e, index) => {
+                        (this.state.employees || []).map((e, index) => {
                                 return <tr key={e.id_employees}>
-                                    <td>{index + 1 + (currentPage - 1)*recordPerPage}</td>
+                                    <td>{index + 1}</td>
                                     <td>{e.name}</td>
                                     <td>{e.phone_number}</td>
-                                    <td className="title-del"><img src={iconBin} alt="icon-bin" className="btn-delete" onClick={()=>this.handleDeleteEm(e.id_employees)}/></td>
+                                    <td className="title-del"><img src={iconBin} alt="icon-bin" className="btn-delete" onClick={()=>this.toggleConfirmDelete(e.id_employees)}/></td>
                                 </tr>;
                             }
                         )
@@ -215,7 +221,6 @@ class Employee extends React.Component{
                     </tbody>
                 </table>
 
-                {/*<GetByNumberPages chosePage={this.chosePage} pageNumbers={pageNumbers} currentPage={this.state.currentPage}/>*/}
             </div>
         </div>);
     }

@@ -1,0 +1,54 @@
+.backdrop-confirm {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    z-index: 9999;
+    position: fixed;
+}
+.backdrop-confirm .modal {
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 350px;
+    margin: 200px auto;
+    position: relative;
+}
+
+/*CONTENT*/
+
+.backdrop-confirm .modal .modal-contentt {
+    padding: 20px 20px;
+    border-bottom:1px solid #bfbfbf;
+    display:flex;
+}
+.backdrop-confirm .message{
+    padding:13px 10px;
+}
+/*FOOTER MODAL*/
+.backdrop-confirm .modal-footerr {
+    height: 40px;
+    justify-content: flex-end;
+    display: flex;
+    margin: 10px 20px;
+}
+.backdrop-confirm .btn-modall {
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    cursor: pointer;
+}
+/*button*/
+.backdrop-confirm .btn-modall.cancel:hover {
+    background-color: #bfbfbf;
+}
+.backdrop-confirm .btn-modall.confirm {
+    width: 40px;
+    margin-left: 10px;
+    color: #fff;
+    background-color: #348bdb;
+}
+.backdrop-confirm .btn-modall.confirm:hover {
+    background-color: #007bff;
+}
