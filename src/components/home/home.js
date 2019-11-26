@@ -22,7 +22,6 @@ class Home extends React.Component{
         this.pathDashboard="/dashboard";
         this.pathDashboardOrder = "/dashboard/order";
 
-        console.log(token)
         let loggedIn = true;
         if(token == null)
         {

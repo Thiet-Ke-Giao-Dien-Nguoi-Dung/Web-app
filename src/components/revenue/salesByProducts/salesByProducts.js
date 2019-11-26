@@ -32,7 +32,6 @@ class SalesByProducts extends React.Component{
         })
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(this.state)
         if(prevState.startDate !== this.state.startDate || prevState.endDate !== this.state.endDate){
             let query = {
                 startDate: this.state.startDate,

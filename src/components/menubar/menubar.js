@@ -37,7 +37,6 @@ class MenuBar extends React.Component {
     }
 
     render() {
-        console.log()
         return (
             <ul className="menu-list">
                 <MenuItem {...this.state.menuItems[0]}/>

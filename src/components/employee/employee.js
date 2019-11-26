@@ -203,6 +203,7 @@ class Employee extends React.Component{
                             <th>STT</th>
                             <th>Họ và tên</th>
                             <th>Số điện thoại</th>
+                            <th>Tên đăng nhập</th>
                             <th className="title-del">Xoá </th>
                         </tr>
                     </thead>
@@ -213,6 +214,7 @@ class Employee extends React.Component{
                                     <td>{index + 1}</td>
                                     <td>{e.name}</td>
                                     <td>{e.phone_number}</td>
+                                    <td>{e.user_name}</td>
                                     <td className="title-del"><img src={iconBin} alt="icon-bin" className="btn-delete" onClick={()=>this.toggleConfirmDelete(e.id_employees)}/></td>
                                 </tr>;
                             }

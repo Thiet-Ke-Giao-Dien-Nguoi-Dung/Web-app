@@ -8,7 +8,6 @@ import Modal from "../modal/modal";
 import Pagination from "../pagination/pagination";
 import GetByNumberPages from "../getByNumberPages/getByNumberPages";
 import {notification} from "../../util/noti";
-import initSocket from "../../util/initSocketIO";
 
 
 class Item extends React.Component {
@@ -81,7 +80,7 @@ class Item extends React.Component {
                     priceNewItem:"",
                     change_items:true
                 });
-                this.setState({update_new: true})
+                this.setState({change_items: true})
             } else {
                 notification("error", response.message);
             }
@@ -99,7 +98,7 @@ class Item extends React.Component {
         const response = await editItem(idItem,data);
         if (response.success) {
             this.toggleEdit();
-            notification("success", "Chỉnh sửa thông tin sản phẩm thành công ")
+            notification("success", "Chỉnh sửa thông tin sản phẩm thành công ");
             this.setState({
                 nameItem: "",
                 priceItem: "",
@@ -192,8 +191,6 @@ class Item extends React.Component {
         } else {
             console.log(res.message);
         }
-        let id_restaurant = await localStorage.getItem("id_restaurant");
-        initSocket("create_order_" + id_restaurant, () =>{});
     }
 
     reloadWhenChangeCategory = async () => {
@@ -266,7 +263,7 @@ class Item extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.state.change_category){
             this.reloadWhenChangeCategory();
-;       }
+        }
         if(this.state.next_page){
             this.reloadWhenNextPage();
         }

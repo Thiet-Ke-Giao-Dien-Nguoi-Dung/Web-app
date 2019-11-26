@@ -13,7 +13,7 @@ class Card extends React.Component {
         let data = {
             id: event.target.id,
             status: this.props.statusOrder
-        }
+        };
         let j = JSON.stringify(data);
         event.dataTransfer.setData("text", j);
         //event.dataTransfer.setData("text", event.target.id);
