@@ -66,3 +66,54 @@
 }
 
 
+/*
+.react-confirm-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background:rgba(0,0,0,0.3) !important; ;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+    opacity: 0;
+    animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;
+}
+.react-confirm-alert-body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 325px;
+    padding: 30px;
+    text-align: left;
+    background: #fff;
+    border-radius: 5px !important;
+    box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
+    color: #24292e !important;
+    font-size: 15px !important;
+}
+.react-confirm-alert-button-group > button {
+    outline: none;
+    background: #2692ff !important;
+    border: none;
+    display: inline-block;
+    padding: 6px 18px;
+    color: #eee;
+    margin-right: 10px;
+    border-radius: 3px;
+    font-size: 15px !important;
+    cursor: pointer;
+    height: 30px;
+}
+.react-confirm-alert-button-group {
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}*/

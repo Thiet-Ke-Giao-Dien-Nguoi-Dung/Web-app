@@ -76,7 +76,8 @@ class Item extends React.Component {
                 this.setState({
                     nameNewItem:"",
                     imgNewItem:null,
-                    priceNewItem:""
+                    priceNewItem:"",
+                    change_items:true
                 });
                 this.setState({update_new: true})
             } else {

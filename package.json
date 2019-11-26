@@ -6,6 +6,7 @@
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "react": "^16.9.0",
+    "react-confirm-alert": "^2.4.1",
     "react-datepicker": "^2.10.1",
     "react-dom": "^16.9.0",
     "react-paginate": "^6.3.2",
