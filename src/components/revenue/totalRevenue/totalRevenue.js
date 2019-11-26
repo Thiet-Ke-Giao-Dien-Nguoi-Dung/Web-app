@@ -58,7 +58,6 @@ class TotalRevenue extends React.Component {
     }
 
     handleChange(e) {
-        console.log(e);
         let nam = e.target.name;
         let tex = e.target.value;
         this.setState({[nam]: tex});

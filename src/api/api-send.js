@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const URL_BASE = process.env.REACT_APP_API_URL;
-
+const URL_BASE = process.env.REACT_APP_API_URL + "/api/wa";
+//const URL_BASE = process.env.REACT_APP_API_URL_LOCAL + "/api/wa";
 function handleResult(res) {
     return res.data;
 }

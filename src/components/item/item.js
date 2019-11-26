@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import "../../util/initSocketIO"
 import {getCategories} from "../../api/category-api";
 import {getItems, editItem, addNewItem} from "../../api/item-api";
 import iconEdit from "./icons/icons8-edit-26.png";
@@ -79,6 +80,10 @@ class Item extends React.Component {
                     priceNewItem:"",
                     change_items:true
                 });
+<<<<<<< HEAD
+=======
+                this.setState({change_items: true})
+>>>>>>> a1a8e033d60391be36cc4400866a5d251d71ca9e
             } else {
                 notification("error", response.message);
             }
@@ -96,7 +101,7 @@ class Item extends React.Component {
         const response = await editItem(idItem,data);
         if (response.success) {
             this.toggleEdit();
-            notification("success", "Chỉnh sửa thông tin sản phẩm thành công ")
+            notification("success", "Chỉnh sửa thông tin sản phẩm thành công ");
             this.setState({
                 nameItem: "",
                 priceItem: "",
@@ -249,7 +254,7 @@ class Item extends React.Component {
             page_size: this.state.page_size,
             page_number: this.state.page_number - 1,
             id_category: this.state.id_category
-        }
+        };
         const res = await getItems(query);
         if (res.success) {
             this.setState({change_items:false});
@@ -257,11 +262,11 @@ class Item extends React.Component {
         } else {
             notification("error", res.message);
         }
-    }
+    };
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(this.state.change_category){
             this.reloadWhenChangeCategory();
-;       }
+        }
         if(this.state.next_page){
             this.reloadWhenNextPage();
         }
