@@ -92,6 +92,7 @@ class Status extends React.Component {
                                          dateOrder={e.create_time}
                                          listCard={e.items}
                                          statusOrder={e.status}
+                                         onShowCard={this.props.onShow}
                             />
                         })
                     }
@@ -104,6 +105,7 @@ class Status extends React.Component {
 Status.propTypes = {
     nameStatus: PropTypes.string,
     titleStatus: PropTypes.string,
-    idStatus: PropTypes.string
+    idStatus: PropTypes.string,
+    onShow: PropTypes.func.isRequired
 };
 export default Status;

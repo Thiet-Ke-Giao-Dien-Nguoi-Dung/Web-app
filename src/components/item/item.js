@@ -80,10 +80,6 @@ class Item extends React.Component {
                     priceNewItem:"",
                     change_items:true
                 });
-<<<<<<< HEAD
-=======
-                this.setState({change_items: true})
->>>>>>> a1a8e033d60391be36cc4400866a5d251d71ca9e
             } else {
                 notification("error", response.message);
             }

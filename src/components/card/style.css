@@ -16,19 +16,27 @@
     right: 0;
     top: 0;
     border-bottom: 1px solid #2692ff;
-    height: 25px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    min-height: 25px;
+    display: block;
+    padding: 5px 5px;
 }
 .container-card .header-card .number-table{
+    display: flex;
+    justify-content: flex-start;
     font-weight: bold;
+    margin-bottom: 5px;
 }
 .container-card .header-card .date-order{
     font-style: italic;
+    display: flex;
+    justify-content: flex-end;
     color: #a6a6a6;
+    font-size: 14px !important;
 }
-.container-card .content-card ul li {
-    word-wrap: break-word;
+.container-card .content-card ol{
+    padding-inline-start: 20px !important;
+}
+.container-card .content-card ol li {
+    padding: 0px 10px;
     margin-bottom: 5px;
 }

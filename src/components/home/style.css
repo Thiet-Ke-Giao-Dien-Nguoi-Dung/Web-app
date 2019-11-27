@@ -71,7 +71,7 @@
     }
 
 .menubar{
-    width: 290px;
+    width: 20%;
     left: 0;
     bottom: 0;
     top:60px;
@@ -85,7 +85,7 @@
 .content{
     position: absolute;
     top: 60px;
-    left: 290px;
+    left: 20%;
     right: 0;
     bottom: 0;
     height: calc(100% - 60px);

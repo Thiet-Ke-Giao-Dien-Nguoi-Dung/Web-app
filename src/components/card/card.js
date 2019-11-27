@@ -21,19 +21,19 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className="container-card" id={this.props.idCard} draggable={true} onDragStart={this.dragStart} >
+            <div className="container-card" id={this.props.idCard} draggable={true} onDragStart={this.dragStart} onClick={() => this.props.onShowCard(this.props.idCard)}>
                 <div className="header-card">
                     <label className="number-table">{this.props.numberTable}</label>
-                    <label className="date-order">Ngày: {this.props.dateOrder}</label>
+                    {/*<label className="date-order">Ngày: {this.props.dateOrder}</label>*/}
                 </div>
                 <div className="content-card">
-                    <ul>
+                    <ol>
                         {
                             (this.props.listCard || []).map((e, index) => {
                                 return <li key={e.OrderItem.id_item}>{e.name}</li>
                             })
                         }
-                    </ul>
+                    </ol>
                 </div>
             </div>
         );
@@ -45,6 +45,7 @@ Card.protoTypes = {
     statusOrder:PropTypes.string,
     numberTable: PropTypes.string,
     dateOrder: PropTypes.string,
-    listCard: PropTypes.array
+    listCard: PropTypes.array,
+    onShowCard: PropTypes.func.isRequired
 };
 export default Card;
