@@ -64,7 +64,7 @@ class SalesByProducts extends React.Component{
                         <th>STT</th>
                         <th>Ảnh sản phẩm </th>
                         <th>Tên sản phẩm</th>
-                        <th>Giá sản phẩm</th>
+                        <th>Giá(vnđ)</th>
                         <th>Số lượt đặt</th>
                     </tr>
                    </thead>

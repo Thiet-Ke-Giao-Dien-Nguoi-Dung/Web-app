@@ -15,3 +15,8 @@ export function getOderById(id_order) {
     let route = `/restaurants/${id_res}/orders/${id_order}`;
     return sendGetRequest(route);
 }
+export function getPrintBill(id_order) {
+    let id_res = localStorage.getItem("id_restaurant");
+    let route = `/restaurants/${id_res}/orders/${id_order}/print`;
+    return sendGetRequest(route);
+}

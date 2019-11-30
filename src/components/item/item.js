@@ -306,7 +306,7 @@ class Item extends React.Component {
 
                                        <div className="modal-group">
                                            <label>Giá sản phẩm : </label>
-                                           <input type="text" name="priceNewItem" onChange={this.handleChange}/>
+                                           <input type="text" name="priceNewItem" placeholder="Nhập giá theo đơn vị đồng " onChange={this.handleChange}/>
                                        </div>
                                        <div className="modal-group">
                                            <label>Loại : </label>
@@ -371,7 +371,7 @@ class Item extends React.Component {
                             <th>STT</th>
                             <th>Ảnh sản phẩm</th>
                             <th>Tên sản phẩm</th>
-                            <th>Giá</th>
+                            <th>Giá(vnđ)</th>
                             <th>Trạng thái</th>
                             <th className="title-edit">Sửa</th>
                         </tr>

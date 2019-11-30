@@ -30,7 +30,7 @@ class Setting extends React.Component {
             <BrowserRouter>
                 <div className="menubar">
                     <ul className="menu-list">
-                        <li className="title">Settings</li>
+                        <li className="title">Cài đặt </li>
                         <MenuItem {...this.state.menuItems[0]}/>
                         <MenuItem {...this.state.menuItems[1]}/>
                     </ul>

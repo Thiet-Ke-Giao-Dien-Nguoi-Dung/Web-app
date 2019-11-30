@@ -29,6 +29,7 @@ class Status extends React.Component {
         let cardText = event.dataTransfer.getData("text");
         let card = JSON.parse(cardText);
         let id_order = card.id;
+        console.log(id_order)
         let statusCard = card.status;
         if (statusCard !== this.state.nStatus) {
             const res = await updateStatusOrder({status: this.state.nStatus}, id_order);
@@ -38,6 +39,7 @@ class Status extends React.Component {
                 const result = await getListOrder(this.state.nStatus);
                 if (result.success) {
                     ee.emit("change_order_in_" + statusCard, {});
+                    ee.emit("change_status", true);
                     this.setState({listStatus: result.data.orders});
                 } else {
                     notification("error", result.message);

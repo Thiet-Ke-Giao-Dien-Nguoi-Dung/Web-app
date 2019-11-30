@@ -1,8 +1,11 @@
 import React from 'react';
 import "./style.css";
 import Status from "../status/status";
-import {getOderById} from "../../api/order-api";
+import {getOderById, getPrintBill} from "../../api/order-api";
+import ee from "../../util/events"
 import {notification} from "../../util/noti";
+import Confirm from "../confirm-alert/confirm";
+import renderHTML from 'react-render-html';
 
 class Order extends React.Component{
     constructor(props)
@@ -16,44 +19,102 @@ class Order extends React.Component{
             dateOrder:"",
             service:"",
             items:"",
-            sumOrder:""
+            sumOrder:"",
+
+            changeStatus:false,
+            idOrder:"",
+
+            openBill:false
 
         }
+        this.reloadWhenStatusOrderChange = this.reloadWhenStatusOrderChange.bind(this);
+        this.printBill = this.printBill.bind(this);
+
+    }
+    toggleOpenBill = () =>{
+        this.setState({
+            openBill: !this.state.openBill
+        })
+    }
+
+    async printBill()
+    {
+        let id_order = this.state.idOrder;
+        let res = await getPrintBill(id_order);
+        if(res.success)
+        {
+            //code load html file in new tab
+            this.toggleOpenBill();
+        }
+        else
+        {
+            notification("error", res.message);
+        }
+
     }
     showDetailCard = async (id_order) =>
     {
         this.setState({
-            showDetail:true
+            showDetail:true,
+            idOrder:id_order
         })
         let res = await getOderById(id_order);
-        if(res.success)
-        {
+        if (res.success) {
             let result = res.data.order;
             let status;
-            if(result.status === "pending")
-            {
+            if (result.status === "pending") {
                 status = "Đang chờ xỷ lý";
-            }
-            else if(result.status === "doing")
-            {
-                status= "Đang thực hiện";
-            }
-            else {
-                status="Đã hoàn thành";
+            } else if (result.status === "doing") {
+                status = "Đang thực hiện";
+            } else {
+                status = "Đã hoàn thành";
             }
             this.setState({
-                numberTable:result.Table.location,
-                statusOrder:status,
-                dateOrder:result.create_time,
-                service:"",
-                items:result.items,
-                sumOrder:result.revenue
+                numberTable: result.Table.location,
+                statusOrder: status,
+                dateOrder: result.create_time,
+                service: "",
+                items: result.items,
+                sumOrder: result.revenue
             })
         }
-        else {
-            notification("error", res.message);
-        }
     };
+    async reloadWhenStatusOrderChange() {
+        let id_order = this.state.idOrder;
+        let res = await getOderById(id_order);
+        if (res.success) {
+            let result = res.data.order;
+            let status;
+            if (result.status === "pending") {
+                status = "Đang chờ xỷ lý";
+            } else if (result.status === "doing") {
+                status = "Đang thực hiện";
+            } else {
+                status = "Đã hoàn thành";
+            }
+            this.setState({
+                numberTable: result.Table.location,
+                statusOrder: status,
+                dateOrder: result.create_time,
+                service: "",
+                items: result.items,
+                sumOrder: result.revenue
+            })
+        }
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        ee.on("change_status",(newStatus) =>{
+            this.setState({changeStatus: newStatus})
+            console.log("change status");
+        });
+        if(this.state.changeStatus)
+        {
+            this.setState({changeStatus:false})
+            this.reloadWhenStatusOrderChange();
+        }
+
+    }
+
     render()
     {
         return(
@@ -116,6 +177,20 @@ class Order extends React.Component{
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div className="group-detail">
+                                <label>In hóa đơn: </label>
+                                <button className="btn-print" onClick={this.toggleOpenBill}>
+                                    <span className="icon-print"></span>
+                                    Log out
+                                </button>
+                                <Confirm show={this.state.openBill}
+                                         onClose={this.toggleOpenBill}
+                                         addNew={this.printBill}
+                                         brandButton={"Có "}
+                                         childrenContent={
+                                             <div>Bạn có muốn xuất hóa đơn không? </div>
+                                         }/>
                             </div>
                         </div>
                    </div>

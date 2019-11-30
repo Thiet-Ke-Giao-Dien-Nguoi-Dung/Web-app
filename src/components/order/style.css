@@ -34,7 +34,7 @@
             height: 100%;
             vertical-align: top;
             position: relative;
-            width: 60%;
+            width: 65%;
         }
         .container-order .body-status .detail-card{
             height: 100%;
@@ -130,4 +130,22 @@
 .detail-card::-webkit-scrollbar-thumb {
     background: #d9d9d9;
     border-radius: 10px;
+}
+
+
+.btn-print{
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+    padding: 9px 5px;
+    background-color: #fff;
+}
+.btn-print .icon-print{
+    padding: 4px 15px;
+    background: url("./icons/icons8-print-24.png") no-repeat 1px 1px;
+}
+.btn-print:hover{
+    background-color: #dddddd;
 }
