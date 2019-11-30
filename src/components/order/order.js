@@ -5,6 +5,7 @@ import {getOderById, getPrintBill} from "../../api/order-api";
 import ee from "../../util/events"
 import {notification} from "../../util/noti";
 import Confirm from "../confirm-alert/confirm";
+const URL_BASE = process.env.REACT_APP_API_URL;
 
 
 class Order extends React.Component{
@@ -26,7 +27,7 @@ class Order extends React.Component{
 
             openBill:false
 
-        }
+        };
         this.reloadWhenStatusOrderChange = this.reloadWhenStatusOrderChange.bind(this);
         this.printBill = this.printBill.bind(this);
 
@@ -42,7 +43,7 @@ class Order extends React.Component{
         else
             notification("warning", "Đơn hàng này chưa xong nên không thể xuất hóa đơn ")
 
-    }
+    };
 
     async printBill()
     {
@@ -50,8 +51,14 @@ class Order extends React.Component{
         let res = await getPrintBill(id_order);
         if(res.success)
         {
-            //code load html file in new tab
-            this.toggleOpenBill();
+            this.setState({
+                openBill: !this.state.openBill
+            });
+            let a_tag = document.createElement('a');
+            let href = URL_BASE + "/static/" + res.data.file_name;
+            a_tag.setAttribute('target', '_blank');
+            a_tag.setAttribute('href', href);
+            a_tag.click();
         }
         else
         {
