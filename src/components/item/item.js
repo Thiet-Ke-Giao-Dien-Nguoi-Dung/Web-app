@@ -305,8 +305,8 @@ class Item extends React.Component {
                                        </div>
 
                                        <div className="modal-group">
-                                           <label>Giá sản phẩm : </label>
-                                           <input type="text" name="priceNewItem" placeholder="Nhập giá theo đơn vị đồng " onChange={this.handleChange}/>
+                                           <label>Giá sản phẩm(vnđ) : </label>
+                                           <input type="text" name="priceNewItem" onChange={this.handleChange}/>
                                        </div>
                                        <div className="modal-group">
                                            <label>Loại : </label>
@@ -343,7 +343,7 @@ class Item extends React.Component {
                                          </div>*/}
 
                                        <div className="modal-group">
-                                           <label>Giá sản phẩm : </label>
+                                           <label>Giá sản phẩm(vnđ) : </label>
                                            <input type="text" name="priceItem" onChange={this.handleChange}
                                                   value={this.state.priceItem}/>
                                        </div>

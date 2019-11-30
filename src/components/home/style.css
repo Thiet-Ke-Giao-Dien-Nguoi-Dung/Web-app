@@ -48,12 +48,14 @@
         cursor: pointer;
         font-size: 15px;
         color: #ffffff;
-        border:1px solid #2692ff;
-        background-color: #2692ff;
+        border: 1px solid #007bff;
+        background-color: #007bff;
         border-radius: 3px;
         padding: 9px 5px;
     }
     .header-right .btn-logout:hover{
+        background-color: #2692ff;
+        border: 1px solid #2692ff;
     }
     .header-right .btn-logout .icon-logout{
         background:url("./icons/icons8-exit-24 (1).png") no-repeat 1px 1px;

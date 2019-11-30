@@ -137,15 +137,17 @@
     margin-left: 20px;
     cursor: pointer;
     font-size: 15px;
-    border: 1px solid #bfbfbf;
+    border: 1px solid #007bff;
     border-radius: 3px;
     padding: 9px 5px;
-    background-color: #fff;
+    background-color: #007bff;
+    color: #fff;
 }
 .btn-print .icon-print{
     padding: 4px 15px;
-    background: url("./icons/icons8-print-24.png") no-repeat 1px 1px;
+    background: url("./icons/icons8-us-dollar-circled-24 (1).png") no-repeat 1px 1px;
 }
 .btn-print:hover{
-    background-color: #dddddd;
+    background-color: #2692ff;
+    border: 1px solid #2692ff;
 }

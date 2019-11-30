@@ -5,7 +5,7 @@ import {getOderById, getPrintBill} from "../../api/order-api";
 import ee from "../../util/events"
 import {notification} from "../../util/noti";
 import Confirm from "../confirm-alert/confirm";
-import renderHTML from 'react-render-html';
+
 
 class Order extends React.Component{
     constructor(props)
@@ -32,9 +32,16 @@ class Order extends React.Component{
 
     }
     toggleOpenBill = () =>{
-        this.setState({
-            openBill: !this.state.openBill
-        })
+
+        if(this.state.statusOrder === "Đã hoàn thành")
+        {
+            this.setState({
+                openBill: !this.state.openBill
+            })
+        }
+        else
+            notification("warning", "Đơn hàng này chưa xong nên không thể xuất hóa đơn ")
+
     }
 
     async printBill()
@@ -179,10 +186,11 @@ class Order extends React.Component{
                                 </table>
                             </div>
                             <div className="group-detail">
-                                <label>In hóa đơn: </label>
+                                <label>Thanh toán hóa đơn : </label>
                                 <button className="btn-print" onClick={this.toggleOpenBill}>
                                     <span className="icon-print"></span>
-                                    Log out
+                                    Thanh toán
+
                                 </button>
                                 <Confirm show={this.state.openBill}
                                          onClose={this.toggleOpenBill}
