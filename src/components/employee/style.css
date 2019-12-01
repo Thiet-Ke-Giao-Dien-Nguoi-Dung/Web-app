@@ -1,0 +1,67 @@
+.container-employee{
+    position: relative;
+    margin: 20px 25px;
+}
+    .container-employee .title{
+        color: black;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .container-employee .btn .add-new{
+        font-size: 15px;
+        border: none;
+        background-color: #007BFF;
+        border-radius: 3px;
+        color: #fff;
+        height: 40px;
+        text-align: center;
+        padding: 5px 10px;
+
+    }
+    .container-employee .btn{
+        height: 40px;
+        margin-bottom: 20px;
+    }
+    .container-employee .btn .add-new:hover{
+        cursor: pointer;
+        background-color: #2692ff;
+    }
+    .container-employee .tbl-employee{
+        margin: 10px 0px;
+        overflow: auto;
+        clear: right;
+    }
+        .container-employee .tbl-employee table{
+            border-collapse: collapse;
+            width: 100%;
+            font-family: arial, sans-serif;
+            margin-bottom: 20px;
+        }
+        .container-employee .tbl-employee td,th{
+            text-align: left;
+            padding: 8px;
+        }
+        .container-employee .tbl-employee th{
+            position: sticky;
+            background-color: #fff;
+            top:-1px;
+            height: 30px;
+            font-size: 15px;
+        }
+        .container-employee .tbl-employee td{
+            font-size: 14px;
+        }
+        .container-employee .tbl-employee tr:nth-child(odd)
+        {
+            background-color: #f4f7fe;
+        }
+        .container-employee .title-del{
+            justify-content: center;
+            display: flex;
+        }
+        .container-employee .btn-delete:hover{
+            cursor: pointer;
+        }
+
+

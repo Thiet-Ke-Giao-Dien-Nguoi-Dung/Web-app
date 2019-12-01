@@ -1,0 +1,103 @@
+.container-item{
+    margin-top: 20px;
+    position: relative;
+}
+/*list group: dropdown, btn add new*/
+.container-item .big-group
+{
+    height: 40px;
+    margin-bottom: 20px;
+}
+    .container-item .list-group{
+
+        display: flex;
+
+        position: absolute;
+    }
+    .container-item .dropdown select{
+        border: 1px solid #2692ff;
+        background-color: #ffffff;
+        width: 250px;
+        height: 40px;
+        border-radius: 3px;
+        font-size: 15px;
+        padding: 0px 6px;
+        margin-left: 15px;
+    }
+    .container-item .list-group .add-new{
+        font-size: 15px;
+        border: none;
+        background-color: #007BFF;
+        border-radius: 3px;
+        color: #fff;
+        height: 40px;
+        text-align: center;
+        padding: 5px 10px;
+        margin-bottom: 20px;
+    }
+    .container-item .list-group .add-new:hover{
+        cursor: pointer;
+        background-color: #2692ff;
+    }
+
+    /* dropdown in add new*/
+    .container-item .dropdown-addnew{
+        margin: 10px 0px;
+    }
+
+    .container-item .dropdown-addnew select{
+        background-color: #ffffff;
+        border-radius: 3px;
+        font-size: 14px;
+        height: 40px;
+        padding: 5px;
+        width: 272px;
+        float: right;
+        margin-top: 7px;
+        border: 1px solid #2692ff;
+
+    }
+
+/* table data*/
+.container-item .tbl-item{
+    margin: 10px 0px;
+    overflow: auto;
+    clear: right;
+}
+.container-item .tbl-item table{
+    border-collapse: collapse;
+    width: 100%;
+    font-family: arial, sans-serif;
+    margin-bottom: 20px;
+}
+.container-item .tbl-item td,th{
+    text-align: left;
+    padding: 8px;
+}
+.container-item .tbl-item th{
+    position: sticky;
+    background-color: #fff;
+    top:-1px;
+    height: 30px;
+    font-size: 15px;
+}
+.container-item .tbl-item td{
+    font-size: 14px;
+}
+.container-item .tbl-item tr:nth-child(odd)
+{
+    background-color: #f4f7fe;
+}
+.container-item .title-del{
+
+}
+.container-item .btn-delete:hover{
+    cursor: pointer;
+}
+.container-item .title-edit{
+}
+.container-item .btn-edit:hover{
+    cursor: pointer;
+}
+
+

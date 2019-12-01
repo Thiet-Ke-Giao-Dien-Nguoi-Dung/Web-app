@@ -1,0 +1,19 @@
+.menu-list .title{
+    color: #212529;
+    font-size: 22px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-bottom: 15px;
+}
+    .menu-item .re-password{
+        background: url("icons/icons8-password-1-24.png") no-repeat;
+    }
+    .menu-item .edit-info{
+        background: url("icons/icons8-edit-24.png") no-repeat;
+    }
+    .checked .re-password{
+        background: url("icons/icons8-password-1-24 (1).png") no-repeat;
+    }
+    .checked .edit-info{
+        background: url("icons/icons8-edit-24 (1).png") no-repeat;
+    }

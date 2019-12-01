@@ -1,0 +1,13 @@
+.container-revenue{
+    position: relative;
+    margin: 20px 25px;
+}
+.container-revenue .title{
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.rwt__tablist:not([aria-orientation="vertical"]) .rwt__tab[aria-selected="true"]:after {
+    border-bottom: 3px solid #2692ff !important;
+}
