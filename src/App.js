@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 
 
 import {Route,Switch, Redirect} from "react-router-dom";
+import Setting from "./components/setting/setting";
 
 
 
@@ -25,6 +26,7 @@ class App extends React.Component{
                       )
                   )}/>
                   <Route path ="/dashboard" component={Home}/>
+                  <Route path="/setting" component={Setting}/>
                   <Route path="/login" component={Login}/>
                   <Route path="/register" component={Register}/>
               </Switch>
